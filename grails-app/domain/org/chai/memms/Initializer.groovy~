@@ -285,8 +285,8 @@ public class Initializer {
 		
 		if (!Location.count()) {
 			//Add Location types
-			def hc = newDataLocationType(['en':HEALTH_CENTER_GROUP], HEALTH_CENTER_GROUP);
-			def dh = newDataLocationType(['en':DISTRICT_HOSPITAL_GROUP], DISTRICT_HOSPITAL_GROUP);
+			//def hc = newDataLocationType(['en':HEALTH_CENTER_GROUP], HEALTH_CENTER_GROUP);
+			//def dh = newDataLocationType(['en':DISTRICT_HOSPITAL_GROUP], DISTRICT_HOSPITAL_GROUP);
 			//Add Location Level
 			def country = newLocationLevel(['en':NATIONAL], NATIONAL,1)
 			def province = newLocationLevel(['en':PROVINCE], PROVINCE,2)
@@ -1177,13 +1177,13 @@ public class Initializer {
 	}
 	
 	//Location
-
+/*
 	public static def newDataLocationType(def names, def code) {
 		def dataLocationType = new DataLocationType(code: code, defaultSelected: true)
 		Utils.setLocaleValueInMap(dataLocationType,names,"Names")
 		return dataLocationType.save(failOnError: true)
 	}
-	
+	*/
 	public static def newLocationLevel(def names, def code, def order) {
 		def locationLevel = new LocationLevel(code: code, order:order)
 		Utils.setLocaleValueInMap(locationLevel,names,"Names")
