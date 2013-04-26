@@ -25,7 +25,7 @@
       <li><a id="#monitoring">Monitoring Of MEMMS Use</a></li>
     </ul>
     <div class="v-tabs-content right">
-    	<a id="showhide" class="right" href="#">Show / Hide filters</a>
+    	<a id="showhide" class="right" href="#">Show / Hide filters </a>
       <ul class="v-tabs-filters">
         <li><input type="checkbox" /><label>option 1</label></li>
         <li><input type="checkbox" /><label>option 2</label></li>
@@ -214,17 +214,17 @@
             <p>
               <a class="v-tabs-name v-tabs-fold-toggle">
                 <span class="v-tabs-switch"><img src="${resource(dir:'images',file:'arrow.png')}"/></span>
-                Lorem ipsum dolor sit amet
+                Lorem ipsum dolor sit amet donatiennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn inv
               </a>
               <span class="tooltip v-tabs-formula " original-title="Enter text here!">Something</span>
-              <span class="v-tabs-value">53%</span>
+              <span class="v-tabs-value">53% okok</span>
             </p>
             <div class="v-tabs-fold-container">
               <ul class="v-tabs-nested-nav">
-                      <li><a id='historic_trend' class='active' href="#">Historic Trend</a></li>
-                      <li><a id='comparison' href="#">Comparison To Other Facilities</a></li>
-                      <li><a id='geo_trend' href="#">Geographic Trend</a></li>
-                      <li><a id='info_facility' href="#">Information By Facility</a></li>
+                      <li><a id='historic_trend' class='active' href="#">Historic Trend  xxxx</a></li>
+                      <li><a id='comparison' href="#">Comparison To Other Facilities xxxx</a></li>
+                      <li><a id='geo_trend' href="#">Geographic Trend xxxx</a></li>
+                      <li><a id='info_facility' href="#">Information By Facility xxxx</a></li>
               </ul>
               <div id="historic_trend" class='toggled_tab'>
                 <g:render template="/entity/reports/nested_tabs" />
