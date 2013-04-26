@@ -8,8 +8,8 @@ class IndicatorType {
 	Double minYellowValue
 	Double maxYellowValue
 	Boolean increasing
-	static belongsTo = [categoryType:CategoryType]
-	static hasMany = [internediateValues:InternediateValues,indicatorValues:IndicatorValue]
+	static belongsTo = [categoryType:CategoryType,indicatorValue:IndicatorValue]
+	static hasMany = [internediateValuess:IntermediateValues,indicatorValues:IndicatorValue]
 	static mapping ={
 		table "memms_indicator_type"
 		version false

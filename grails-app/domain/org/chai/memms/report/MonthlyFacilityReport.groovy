@@ -1,6 +1,6 @@
 package org.chai.memms.report
 
-class MonthlyReport {
+class MonthlyFacilityReport {
 	String code
 	Date time
 	FacilityReport report
@@ -14,7 +14,7 @@ class MonthlyReport {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		month code (blank:false, nullable:false)
+		month (blank:false, nullable:false)
 		
 		
 	}

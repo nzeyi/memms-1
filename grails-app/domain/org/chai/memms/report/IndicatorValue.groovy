@@ -8,8 +8,9 @@ class IndicatorValue {
 	Double value
 	FacilityReport report
 	IndicatorType type
+	
 	static mapping ={
-		table "memms_indicator_values"
+		table "memms_indicator_value"
 		version false
 		content type:"text"
 		

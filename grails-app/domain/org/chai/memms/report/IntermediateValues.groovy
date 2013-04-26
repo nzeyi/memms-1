@@ -1,10 +1,11 @@
 package org.chai.memms.report;
 
-public class InternediateValues {
+public class IntermediateValues {
 	String name
 	String formula
 	String code
-	static hasMany = [internediateValues:InternediateValues,indicatorTypes:IndicatorType]
+	static belongsTo =IndicatorType
+	static hasMany = [indicatorTypes:IndicatorType]
 	static mapping ={
 		table "memms_intermidiate_values"
 		version false
