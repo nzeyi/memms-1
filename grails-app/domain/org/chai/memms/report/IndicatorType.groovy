@@ -5,11 +5,10 @@ class IndicatorType {
 	CategoryType categoryType
 	String name
 	String formula
-	Double minYellowValue
-	Double maxYellowValue
 	Boolean increasing
-	static belongsTo = [categoryType:CategoryType,indicatorValue:IndicatorValue]
-	static hasMany = [internediateValuess:IntermediateValues,indicatorValues:IndicatorValue]
+	String finder
+	static belongsTo = [categoryType:CategoryType]
+	static hasMany = [internediateValuess:IntermediateValues,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerFacilityType]
 	static mapping ={
 		table "memms_indicator_type"
 		version false
@@ -18,8 +17,14 @@ class IndicatorType {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		name (blank:false, nullable:false,unique: true, size:3..10, matches:"[a-zA-Z1-9_]+")
+		name (blank:false, nullable:false,unique: true, size:3..100)
+	    formula(blank:false, nullable:false,size:3..1000)
+		finder(blank:true, nullable:true,size:3..100)
 		
 		
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 }

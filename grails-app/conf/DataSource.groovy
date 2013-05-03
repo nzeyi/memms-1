@@ -42,21 +42,21 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
           //  url = "jdbc:h2:mem:devDb;MVCC=TRUE"
 			 url="jdbc:mysql://localhost/memms_db"
         }
     }
     test {
         dataSource {
-            dbCreate = "create-drop"
+            dbCreate = "update"
            // url = "jdbc:h2:mem:testDb;MVCC=TRUE"
 			 url="jdbc:mysql://localhost/memms_db"
         }
     }
     production {
         dataSource {
-			dbCreate = "create-drop"
+			dbCreate = "update"
 			driverClassName = "com.mysql.jdbc.Driver"
 			//dialect = "org.hibernate.dialect.MySQLMyISAMDialect"
             //url = "jdbc:h2:prodDb;MVCC=TRUE"

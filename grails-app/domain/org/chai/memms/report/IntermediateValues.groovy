@@ -3,7 +3,9 @@ package org.chai.memms.report;
 public class IntermediateValues {
 	String name
 	String formula
-	String code
+	String  code
+	Double value
+	IntermediateValues intermediateValues
 	static belongsTo =IndicatorType
 	static hasMany = [indicatorTypes:IndicatorType]
 	static mapping ={
@@ -14,8 +16,12 @@ public class IntermediateValues {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		name (blank:false, nullable:false,unique: true, size:3..100, matches:"[a-zA-Z1-9_]+")
-		formula(blank:false, nullable:false)
+		name (blank:false, nullable:false,size:3..100)
+		formula(blank:false, nullable:false,size:3..500)
 		
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 }

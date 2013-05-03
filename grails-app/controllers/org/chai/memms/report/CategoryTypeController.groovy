@@ -5,11 +5,12 @@ import org.springframework.dao.DataIntegrityViolationException
 class CategoryTypeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+/**
     def index() {
         redirect(action: "list", params: params)
-    }
-
+    }*/
+	
+def scaffold = true
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [categoryTypeInstanceList: CategoryType.list(params), categoryTypeInstanceTotal: CategoryType.count()]
@@ -27,7 +28,7 @@ class CategoryTypeController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), categoryTypeInstance.id])
-        redirect(action: "show", id: categoryTypeInstance.id)
+        redirect(action: "list", id: categoryTypeInstance.id)
     }
 
     def show(Long id) {
@@ -78,7 +79,7 @@ class CategoryTypeController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), categoryTypeInstance.id])
-        redirect(action: "show", id: categoryTypeInstance.id)
+        redirect(action: "list", id: categoryTypeInstance.id)
     }
 
     def delete(Long id) {

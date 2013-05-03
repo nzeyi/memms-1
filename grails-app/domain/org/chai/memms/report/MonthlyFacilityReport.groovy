@@ -18,4 +18,8 @@ class MonthlyFacilityReport {
 		
 		
 	}
+	@Override
+	public String toString() {
+		return code;
+	}
 }

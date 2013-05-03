@@ -7,8 +7,8 @@ class IndicatorValue {
 	Date time
 	Double value
 	FacilityReport report
-	IndicatorType type
-	
+	//IndicatorType type
+	static belongsTo = [indicatorType:IndicatorType]
 	static mapping ={
 		table "memms_indicator_value"
 		version false
@@ -20,5 +20,9 @@ class IndicatorValue {
 		value (blank:false, nullable:false)
 		
 		
+	}
+	@Override
+	public String toString() {
+		return code;
 	}
 }

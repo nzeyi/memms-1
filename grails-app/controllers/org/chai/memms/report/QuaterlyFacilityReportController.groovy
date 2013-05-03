@@ -27,7 +27,7 @@ class QuaterlyFacilityReportController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'quaterlyFacilityReport.label', default: 'QuaterlyFacilityReport'), quaterlyFacilityReportInstance.id])
-        redirect(action: "show", id: quaterlyFacilityReportInstance.id)
+        redirect(action: "list", id: quaterlyFacilityReportInstance.id)
     }
 
     def show(Long id) {
@@ -78,7 +78,7 @@ class QuaterlyFacilityReportController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'quaterlyFacilityReport.label', default: 'QuaterlyFacilityReport'), quaterlyFacilityReportInstance.id])
-        redirect(action: "show", id: quaterlyFacilityReportInstance.id)
+        redirect(action: "list", id: quaterlyFacilityReportInstance.id)
     }
 
     def delete(Long id) {
@@ -96,7 +96,7 @@ class QuaterlyFacilityReportController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'quaterlyFacilityReport.label', default: 'QuaterlyFacilityReport'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "list", id: id)
         }
     }
 }

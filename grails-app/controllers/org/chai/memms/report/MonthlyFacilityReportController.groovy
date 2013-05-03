@@ -27,7 +27,7 @@ class MonthlyFacilityReportController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'monthlyFacilityReport.label', default: 'MonthlyFacilityReport'), monthlyFacilityReportInstance.id])
-        redirect(action: "show", id: monthlyFacilityReportInstance.id)
+        redirect(action: "list", id: monthlyFacilityReportInstance.id)
     }
 
     def show(Long id) {
@@ -78,7 +78,7 @@ class MonthlyFacilityReportController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'monthlyFacilityReport.label', default: 'MonthlyFacilityReport'), monthlyFacilityReportInstance.id])
-        redirect(action: "show", id: monthlyFacilityReportInstance.id)
+        redirect(action: "list", id: monthlyFacilityReportInstance.id)
     }
 
     def delete(Long id) {
@@ -96,7 +96,7 @@ class MonthlyFacilityReportController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'monthlyFacilityReport.label', default: 'MonthlyFacilityReport'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "list", id: id)
         }
     }
 }

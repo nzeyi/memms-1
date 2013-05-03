@@ -16,4 +16,8 @@ class QuaterlyFacilityReport {
 		code (blank:false, nullable:false)
 		quarter (blank:false, nullable:false)
 	}
+	@Override
+	public String toString() {
+		return code;
+	}
 }

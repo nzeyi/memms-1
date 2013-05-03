@@ -41,6 +41,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${indicatorValueInstance?.indicatorType}">
+				<li class="fieldcontain">
+					<span id="indicatorType-label" class="property-label"><g:message code="indicatorValue.indicatorType.label" default="Indicator Type" /></span>
+					
+						<span class="property-value" aria-labelledby="indicatorType-label"><g:link controller="indicatorType" action="show" id="${indicatorValueInstance?.indicatorType?.id}">${indicatorValueInstance?.indicatorType?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${indicatorValueInstance?.report}">
 				<li class="fieldcontain">
 					<span id="report-label" class="property-label"><g:message code="indicatorValue.report.label" default="Report" /></span>
@@ -55,15 +64,6 @@
 					<span id="time-label" class="property-label"><g:message code="indicatorValue.time.label" default="Time" /></span>
 					
 						<span class="property-value" aria-labelledby="time-label"><g:formatDate date="${indicatorValueInstance?.time}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${indicatorValueInstance?.type}">
-				<li class="fieldcontain">
-					<span id="type-label" class="property-label"><g:message code="indicatorValue.type.label" default="Type" /></span>
-					
-						<span class="property-value" aria-labelledby="type-label"><g:link controller="indicatorType" action="show" id="${indicatorValueInstance?.type?.id}">${indicatorValueInstance?.type?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

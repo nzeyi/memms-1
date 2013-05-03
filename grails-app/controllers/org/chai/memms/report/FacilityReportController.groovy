@@ -1,14 +1,20 @@
 package org.chai.memms.report
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException
 
 class FacilityReportController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	@Autowired
+	IndicatorTypeService indicatorTypeService
+/*
     def index() {
         redirect(action: "list", params: params)
-    }
+    }*/
+	def scaffold = true
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -16,7 +22,12 @@ class FacilityReportController {
     }
 
     def create() {
-        [facilityReportInstance: new FacilityReport(params)]
+		List<Object> indicators=indicatorTypeService.getIndicatorTypes("select category_type_id from memms_indicator_type");
+		println"==================================== list of indicators :"+indicators
+		println"Total number of indicators is ok:"+indicators.size();
+		int thenumber=indicatorTypeService.getIndicatorTypeValue("select count(category_type_id) from memms_indicator_type group by category_type_id")
+		println"The returned number is :"+thenumber;
+		 [facilityReportInstance: new FacilityReport(params)]
     }
 
     def save() {
@@ -26,8 +37,11 @@ class FacilityReportController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'facilityReport.label', default: 'FacilityReport'), facilityReportInstance.id])
-        redirect(action: "show", id: facilityReportInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'facilityReport.label', default: 'FacilityReport'), facilityReportInstance.code])
+       
+		
+		indicatorTypeService.getIndicatorTypes()
+		 redirect(action: "list", id: facilityReportInstance.id, model: [facilityReportInstance: facilityReportInstance])
     }
 
     def show(Long id) {
@@ -78,7 +92,7 @@ class FacilityReportController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'facilityReport.label', default: 'FacilityReport'), facilityReportInstance.id])
-        redirect(action: "show", id: facilityReportInstance.id)
+        redirect(action: "list", id: facilityReportInstance.id)
     }
 
     def delete(Long id) {
@@ -96,7 +110,7 @@ class FacilityReportController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'facilityReport.label', default: 'FacilityReport'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "list", id: id)
         }
     }
 }
