@@ -10,26 +10,17 @@ class IndicatorTypeService {
 
 
 	def dataSource  //Auto Injected
+	
+	// Not yet
 
 	public  List<Object> getIndicatorTypes(String sqlQuery){
 
-		def sql = Sql.newInstance(dataSource)
-
-		def rows = sql.rows(""+sqlQuery+"")
-
-		//rows.collect{ new IndicatorType(it) }
-		return rows
+		
+		return null
 	}
 	public  int getIndicatorTypeValue(String sqlQuery){
 		
-				def sql = Sql.newInstance(dataSource)
-		
-			def rows = sql.rows(""+sqlQuery+"")
-		
-				" -----------------------------returned an list of meny records"
-					
-					return rows.size()
-				
+
 			
 				return 0
 			}

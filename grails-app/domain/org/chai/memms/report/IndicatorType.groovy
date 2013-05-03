@@ -1,5 +1,8 @@
 package org.chai.memms.report
-
+import groovy.transform.EqualsAndHashCode;
+import i18nfields.I18nFields
+@i18nfields.I18nFields
+@EqualsAndHashCode(includes="code")
 class IndicatorType {
 	String code
 	CategoryType categoryType
