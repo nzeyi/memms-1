@@ -8,7 +8,7 @@ class IndicatorColorCriteriaPerFacilityType {
 	DataLocationType facilityType
 	IndicatorType indicatorType
 	static mapping ={
-		table "memms_indicator_color_criteria"
+		table "memms_report_indicator_color_criteria"
 		version false
 		content type:"text"
 		

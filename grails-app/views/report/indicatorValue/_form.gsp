@@ -39,7 +39,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	
-</div></td><td><g:select id="report" name="report.id" from="${org.chai.memms.report.FacilityReport.list()}" optionKey="id" required="" value="${indicatorValueInstance?.report?.id}" class="many-to-one"/></td></tr>
+</div></td><td><g:select id="report" name="report.id" from="${org.chai.memms.report.DataLocationReport.list()}" optionKey="id" required="" value="${indicatorValueInstance?.report?.id}" class="many-to-one"/></td></tr>
 
 <tr><td><div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'time', 'error')} required">
 	<label for="time">

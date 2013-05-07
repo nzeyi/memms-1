@@ -11,7 +11,7 @@ class CategoryType {
 	
 	static hasMany = [indicatorTypes:IndicatorType]
 	static mapping ={
-		table "memms_category_type"
+		table "memms_report_category_type"
 		version false
 		content type:"text"
 		

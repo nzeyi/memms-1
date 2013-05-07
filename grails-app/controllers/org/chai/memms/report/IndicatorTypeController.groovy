@@ -13,6 +13,7 @@ class IndicatorTypeController {
 
 	def scaffold = true
 	def list(Integer max) {
+		
 		params.max = Math.min(max ?: 10, 100)
 		[indicatorTypeInstanceList: IndicatorType.list(params), indicatorTypeInstanceTotal: IndicatorType.count()]
 	}
@@ -40,7 +41,7 @@ class IndicatorTypeController {
 		def indicatorTypeInstance = new IndicatorType(params)
 		//indicatorTypeInstance.save()
 		if (!indicatorTypeInstance.save(flush: true)) {
-			render(view: "create", model: [indicatorTypeInstance: indicatorTypeInstance])
+			render(view: "report/indicatorType/create", model: [indicatorTypeInstance: indicatorTypeInstance])
 			return
 		}
 

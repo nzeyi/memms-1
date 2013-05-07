@@ -1,28 +1,28 @@
-<%@ page import="org.chai.memms.report.FacilityReport" %>
+<%@ page import="org.chai.memms.report.DataLocationReport" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'facilityReport.label', default: 'FacilityReport')}" />
-		<title<g:message code="facilityReport.edit"/></title>
+		<g:set var="entityName" value="${message(code: 'dataLocationReport.label', default: 'DataLocationReport')}" />
+		<title<g:message code="dataLocationReport.edit"/></title>
 	</head>
 	<body>
 		
-		<div id="edit-facilityReport" class="content scaffold-edit" role="main">
-			<span class="don_titles"> <g:message code="facilityReport.edit"/></span>
+		<div id="edit-dataLocationReport" class="content scaffold-edit" role="main">
+			<span class="don_titles"> <g:message code="dataLocationReport.edit"/></span>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${facilityReportInstance}">
+			<g:hasErrors bean="${dataLocationReportInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${facilityReportInstance}" var="error">
+				<g:eachError bean="${dataLocationReportInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" class="simple-list">
-				<g:hiddenField name="id" value="${facilityReportInstance?.id}" />
-				<g:hiddenField name="version" value="${facilityReportInstance?.version}" />
+				<g:hiddenField name="id" value="${dataLocationReportInstance?.id}" />
+				<g:hiddenField name="version" value="${dataLocationReportInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

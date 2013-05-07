@@ -6,11 +6,11 @@ class IndicatorValue {
 	String code 
 	Date time
 	Double value
-	FacilityReport report
+	DataLocationReport report
 	//IndicatorType type
 	static belongsTo = [indicatorType:IndicatorType]
 	static mapping ={
-		table "memms_indicator_value"
+		table "memms_report_indicator_value"
 		version false
 		content type:"text"
 		

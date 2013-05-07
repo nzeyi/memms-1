@@ -1,22 +1,20 @@
 package org.chai.memms.report
 
-import org.chai.location.DataLocation;
-
-class FacilityReport {
-	Date time
-	DataLocation facility
+class MonthlyDataLocationReport {
 	String code
-	
-	static hasMany = [indicatorValues:IndicatorValue]
+	Date generatedAt
+	DataLocationReport report
+	Integer year
+	Integer month
 	static mapping ={
-		table "memms_facility_report"
+		table "memms_report_monthly_data_location"
 		version false
 		content type:"text"
 		
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		
+		month (blank:false, nullable:false)
 		
 		
 	}
@@ -25,4 +23,3 @@ class FacilityReport {
 		return code;
 	}
 }
-

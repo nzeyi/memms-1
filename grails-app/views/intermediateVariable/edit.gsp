@@ -1,28 +1,28 @@
-<%@ page import="org.chai.memms.report.IntermediateValues" %>
+<%@ page import="org.chai.memms.report.IntermediateVariable" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'intermediateValues.label', default: 'IntermediateValues')}" />
-		<title> <g:message code="intermediateValues.edit"/></title>
+		<g:set var="entityName" value="${message(code: 'intermediateVariable.label', default: 'IntermediateVariable')}" />
+		<title> <g:message code="intermediateVariable.edit"/></title>
 	</head>
 	<body>
 		
-		<div id="edit-intermediateValues" class="content scaffold-edit" role="main">
-			<span class="don_titles"> <g:message code="intermediateValues.edit"/></span>
+		<div id="edit-intermediateVariable" class="content scaffold-edit" role="main">
+			<span class="don_titles"> <g:message code="intermediateVariable.edit"/></span>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${intermediateValuesInstance}">
+			<g:hasErrors bean="${intermediateVariableInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${intermediateValuesInstance}" var="error">
+				<g:eachError bean="${intermediateVariableInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" class="simple-list">
-				<g:hiddenField name="id" value="${intermediateValuesInstance?.id}" />
-				<g:hiddenField name="version" value="${intermediateValuesInstance?.version}" />
+				<g:hiddenField name="id" value="${intermediateVariableInstance?.id}" />
+				<g:hiddenField name="version" value="${intermediateVariableInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

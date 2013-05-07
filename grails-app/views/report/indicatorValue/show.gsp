@@ -54,7 +54,7 @@
 				<li class="fieldcontain">
 					<span id="report-label" class="property-label"><g:message code="indicatorValue.report.label" default="Report" /></span>
 					
-						<span class="property-value" aria-labelledby="report-label"><g:link controller="facilityReport" action="show" id="${indicatorValueInstance?.report?.id}">${indicatorValueInstance?.report?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="report-label"><g:link controller="dataLocationReport" action="show" id="${indicatorValueInstance?.report?.id}">${indicatorValueInstance?.report?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

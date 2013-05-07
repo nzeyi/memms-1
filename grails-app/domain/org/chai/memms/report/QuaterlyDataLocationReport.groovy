@@ -1,14 +1,14 @@
 package org.chai.memms.report
 
-class QuaterlyFacilityReport {
-	Date time
+class QuaterlyDataLocationReport {
+	Date geneartedAt
 	String code
-	FacilityReport report
+	DataLocationReport report
 	Integer year
 	Integer month
 	String quarter
 	static mapping ={
-		table "memms_quatery_facility_report"
+		table "memms_report_quatery_data_location"
 		version false
 		content type:"text"
 	}

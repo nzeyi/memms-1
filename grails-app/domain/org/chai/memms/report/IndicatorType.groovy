@@ -10,10 +10,11 @@ class IndicatorType {
 	String formula
 	Boolean increasing
 	String finder
+	static i18nFields = ["name"]
 	static belongsTo = [categoryType:CategoryType]
-	static hasMany = [internediateValuess:IntermediateValues,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerFacilityType]
+	static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerFacilityType]
 	static mapping ={
-		table "memms_indicator_type"
+		table "memms_report_indicator_type"
 		version false
 		content type:"text"
 		

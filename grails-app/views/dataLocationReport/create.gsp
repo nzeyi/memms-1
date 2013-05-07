@@ -1,21 +1,21 @@
-<%@ page import="org.chai.memms.report.FacilityReport" %>
+<%@ page import="org.chai.memms.report.DataLocationReport" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'facilityReport.label', default: 'FacilityReport')}" />
+		<g:set var="entityName" value="${message(code: 'dataLocationReport.label', default: 'DataLocationReport')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
 		
-		<div id="create-facilityReport" class="content scaffold-create" role="main">
-			<span class="don_titles"> <g:message code="facilityReport.new"/></span>
+		<div id="create-dataLocationReport" class="content scaffold-create" role="main">
+			<span class="don_titles"> <g:message code="dataLocationReport.new"/></span>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${facilityReportInstance}">
+			<g:hasErrors bean="${dataLocationReportInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${facilityReportInstance}" var="error">
+				<g:eachError bean="${dataLocationReportInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
