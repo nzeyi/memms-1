@@ -19,7 +19,7 @@ class CategoryType {
 	
 	static constraints = {
 		code (blank:false, nullable:false)
-		name (blank:false, nullable:false,unique: true, size:3..10, matches:"[a-zA-Z1-9_]+")
+		name (blank:false, nullable:false,unique: true, size:3..100)
 		finder(blank:true, nullable:true,size:3..100)
 		
 	}

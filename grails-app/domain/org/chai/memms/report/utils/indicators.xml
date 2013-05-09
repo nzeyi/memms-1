@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<indicators>
+
+    <!-- MAN_ME_EQ -->
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_SHARE_OF_OPERATIONAL_EQUIPMENT" >
+
+        <name>
+            SHARE OF OPERATIONAL EQUIPMENT
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_QUANTITY_OF_EQUIPMENT__FOR_DISPOSAL" >
+
+        <name>
+           QUANTITY OF EQUIPMENT FOR DISPOSAL
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_QUANTITY_OF_EQUIPMENT__IN_STOCK" >
+
+        <name>
+           QUANTITY OF EQUIPMENT INSTOCK
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_DEGREE_OF_EQUIPMENT__STANDARDIZATION" >
+
+        <name>
+            DEGREE OF EQUIPMENT STANDARDIZATION
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT__DONATED" >
+
+        <name>
+           SHARE OF EQUIPMENT DONATED
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode=" MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT" >
+
+        <name>
+           SHARE OF EQUIPMENT UNDER ACTIVE WARRANTY OR UNDER ACTIVE SERVICE PROVIDER CONTRACT
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_THAT_IS_OBSOLETE" >
+
+        <name>
+           SHARE OF EQUIPMENT THAT IS OBSOLETE
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS" >
+
+        <name>
+           SHARE OF EQUIPMENT WITH LIFE TIME EXPIRING IN LESS THAN 2 YEARS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+    <!-- End -->
+    <!-- Preventive maintenance : -->
+
+    <indicator
+        categoryCode="PRI_MAIN"
+        indicatorCode="PRIV_MAINT_AVERAGE_IN_EWAITING_FOR_SPAREPARTS" >
+
+        <name>
+         AVERAGE IN WAITING FOR SPAREPARTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="PRI_MAIN"
+        indicatorCode="PRIV_MAINT_COST_EFFECTIVENESS_OF_PREVENTIVE_MAINTENANCE" >
+
+        <name>
+           COST EFFECTIVENESS OF PREVENTIVE MAINTENANCE
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_ME_EQ"
+        indicatorCode="PRIV_MAINT_DEGREE_EXECUTION" >
+
+        <name>
+          DEGREE EXECUTION
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="PRI_MAIN"
+        indicatorCode="PRIV_MAINT_SHARE_OF_MAINTENANCE_EXECUTED_AT_THE_FACILITY" >
+
+        <name>
+           SHARE OF MAINTENANCE EXECUTED AT THE FACILITY
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="PRI_MAIN"
+        indicatorCode="PRIV_MAINT_DEVIATION_AGAINST_SCHEDULED_DATE" >
+
+        <name>
+          DEVIATION AGAINST SCHEDULED DATE
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+    <!-- Corrective maintenance : -->
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_TOTAL_NO_OF_WORK_ORDERS_PER_QUARTER" >
+
+        <name>
+          TOTAL NO OF WORK ORDERS PER QUARTER
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_DEGREE_OF_COR_MAIN_EXECUTION_ACCORDING_TO_BENCHMARK" >
+
+        <name>
+          DEGREE OF CORRECTIVE MAINTENANC EEXECUTION ACCORDING TO BENCHMARK
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_DEGREE_OF_POSITIVE_FEEDBACK_FROM_EQUIPMENT_USER_POST_COR_MAIN" >
+
+        <name>
+          DEGREE OF POSITIVE FEED BACK FROM EQUIPMENT USER POST COR_MAIN
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_WITNESSING_REINCIDENCE_IN_A_PERIOD_OF_TIME_USERDEFINED" >
+
+        <name>
+          SHARE OF WORK ORDERS WITNESSING REINCIDENCE IN A PERIOD OF TIME (USER DEFINED)
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_COST_EFFECTIVENESS_OF_COR_MAIN" >
+
+        <name>
+          COST EFFECTIVENESS OF COR_MAIN
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_ESCALETED_T_OMMC" >
+
+        <name>
+          SHARE_OF_WORKORDERSESCALETEDTOMMC
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_OUTSOURCED_TO_3RDPARTIES" >
+
+        <name>
+         SHARE OF WORKORDERSOUTSOURCEDTO3RDPARTIES (EXCLUDING WARRANTY/SERVICE PROVIDER CONTRACTS)
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_UNDER_WARRANTY_SERVICE_PROVIDER_CONTRACTS" >
+
+        <name>
+         SHARE  OF WORK ORDERS UNDER WARRANTY/SERVICE PROVIDER CONTRACTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_EXECUTED_UNDERWARRANTY_SERVICE_PROVIDER_CONTRACTS" >
+
+        <name>
+          SHARE  OF WORK ORDERS EXECUTED UNDER WARRANTY/SERVICE PROVIDER CONTRACTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT" >
+
+        <name>
+         AVERAGE TIME TO FIX EQUIPMENT
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYDHTECHNICIAN" >
+
+        <name>
+         AVERAGE TIME TO FIX EQUIPMENT_ BY DH TECHNICIAN
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYMMC" >
+
+        <name>
+          AVERAGE TIME TO FIX EQUIPMENT_ BY MMC
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BY3RDPARTIES" >
+
+        <name>
+          AVERAGE TIME TO FIX EQUIPMENT BY 3RD PARTIES (EXCLUDING WARRANTY/SERVICE PROVIDER CONTRACTS)
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYWARRANTY_SERVICE_PROVIDER" >
+
+        <name>
+          AVERAGE TIME TO FIX EQUIPMENT BY WARRANTY/SERVICE PROVIDER
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_REQUIRING_NEW_SPAREPARTS" >
+
+        <name>
+          SHARE OF WORK ORDERS REQUIRING NEW SPARE PARTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_AVERAGE_TIME_WAITING_FOR_SPAREPARTS" >
+
+        <name>
+          AVERAGE TIME WAITING FOR SPARE PARTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="COR_MAIN"
+        indicatorCode="CORRE_MAINT_SHARE_OF_PROBLEMS_CAUSED_BY_MISUSE" >
+
+        <name>
+          SHARE OF PROBLEMS CAUSED BY MISUSE
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+    <!-- End -->
+    <!-- Management of spare parts: -->
+
+    <indicator
+        categoryCode="MAN_SPA"
+        indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_ABOUT_TO_BE_DISCONTINUED_IN_AYEAR" >
+
+        <name>
+          NUMBER OF TYPES OF SPARE PARTS ABOUT TO BE DISCONTINUED IN A YEAR
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_SPA"
+        indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_ABOUT_TO_STOCKOUT_IN_AGIVEN_TIME_PERIOD" >
+
+        <name>
+          NUMBER OF TYPES OF  SPARE PARTS ABOUT TO STOCK OUT IN A GIVEN TIME PERIOD
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_SPA"
+        indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_WITH_STOCK_MORE_THAN_A_GIVEN_TIME_PERIOD" >
+
+        <name>
+         NUMBER OF TYPES OF  SPARE PARTS WITH STOCK MORE THAN A GIVEN TIME PERIOD
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_SPA"
+        indicatorCode="MANA_SPARE_AVERAGE__STOCK_TIME" >
+
+        <name>
+         AVERAGE_ STOCK TIME
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MAN_SPA"
+        indicatorCode="MANA_SPARE_AVERAGE__TIME_BETWEEN_REQUEST_AND_ARRIVAL_OF_SPAREPARTS" >
+
+        <name>
+          AVERAGE_ TIME BETWEEN REQUEST AND ARRIVAL OF SPARE PARTS
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+    <!-- End -->
+    <!-- Monitoring of MEMMS use -->
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_AVERAGE_NUMBER_OF_EQUIPMENT_PER_FACILITY" >
+
+        <name>
+          AVERAGE_ NUMBER OF EQUIPMENT_ PER FACILITY
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NUMBER_OF_INVENTORYSTATUSCHANGE_SLESS_THAN_10INAYEAR" >
+
+        <name>
+         SHARE OF FACILITIES WITH NUMBER OF INVENTORY STATUS CHANGES LESS THAN 10 IN A YEAR
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NUMBER_OF_WORKORDERS_LESSTHAN_10INAYEAR" >
+
+        <name>
+        SHARE OF FACILITIES WITH NUMBER OF WORK ORDERS LESS THAN 10 IN A YEAR
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_AVERAGE_PERCENTAGE_OF_EQUIPMENTS_PER_FACILITY_HAVING_A_PREVENTIVE_MAINTENANCE_PLAN" >
+
+        <name>
+         AVERAGE PERCENTAGE OF EQUIPMENT_S PER FACILITY HAVING A PREVENTIVE MAINTENANCE PLAN
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NO_PREVENTIVE_MAINTENANCE_PLAN_FOR_MORE_THAN10_OF_THE_EQUIPMENT" >
+
+        <name>
+          SHARE OF FACILITIES WITH NO PREVENTIVE MAINTENANCE PLAN FOR MORE THAN 10% OF THE EQUIPMENT
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+    <indicator
+        categoryCode="MA_MEUSE"
+        indicatorCode="MON_MEMMS_SHARE_OF_WAREHOUSES_WITH_NUMBER_OF_SPAREPART_INVENTORYSTATUS_CHANGE_SLESSTHAN_20INAMONTH" >
+
+        <name>
+          SHARE OF WAREHOUSES WITH NUMBER OF SPARE PART INVENTORY STATUS CHANGES LESS THAN 20 IN A MONTH
+        </name>
+
+        <scriptFormula>
+        </scriptFormula>
+
+        <type>
+         Normal
+        </type>
+    </indicator>
+
+</indicators>

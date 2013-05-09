@@ -4,11 +4,11 @@ import org.chai.location.DataLocation;
 
 class IndicatorValue {
 	String code 
-	Date time
+	Date generatedAt
 	Double value
-	DataLocationReport report
+	//DataLocationReport dataLocationReport
 	//IndicatorType type
-	static belongsTo = [indicatorType:IndicatorType]
+	static belongsTo = [indicatorType:IndicatorType,dataLocationReport:DataLocationReport]
 	static mapping ={
 		table "memms_report_indicator_value"
 		version false

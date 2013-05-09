@@ -32,11 +32,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${dataLocationReportInstance?.facility}">
+				<g:if test="${dataLocationReportInstance?.dataLocation}">
 				<li class="fieldcontain">
-					<span id="facility-label" class="property-label"><g:message code="dataLocationReport.facility.label" default="Facility" /></span>
+					<span id="dataLocation-label" class="property-label"><g:message code="dataLocationReport.dataLocation.label" default="Facility" /></span>
 					
-						<span class="property-value" aria-labelledby="facility-label"><g:link controller="dataLocation" action="show" id="${dataLocationReportInstance?.facility?.id}">${dataLocationReportInstance?.facility?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="dataLocation-label"><g:link controller="dataLocation" action="show" id="${dataLocationReportInstance?.dataLocation?.id}">${dataLocationReportInstance?.dataLocation?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -52,11 +52,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${dataLocationReportInstance?.time}">
+				<g:if test="${dataLocationReportInstance?.generatedAt}">
 				<li class="fieldcontain">
-					<span id="time-label" class="property-label"><g:message code="dataLocationReport.time.label" default="Time" /></span>
+					<span id="generatedAt-label" class="property-label"><g:message code="dataLocationReport.generatedAt.label" default="Time" /></span>
 					
-						<span class="property-value" aria-labelledby="time-label"><g:formatDate date="${dataLocationReportInstance?.time}" /></span>
+						<span class="property-value" aria-labelledby="generatedAt-label"><g:formatDate date="${dataLocationReportInstance?.generatedAt}" /></span>
 					
 				</li>
 				</g:if>

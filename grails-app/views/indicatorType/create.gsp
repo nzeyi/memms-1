@@ -4,13 +4,18 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'indicatorType.label', default: 'IndicatorType')}" />
-		<title>	<g:message code="indicatorType.new"/></title>
+		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		
-		
+		<a href="#create-indicatorType" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+			</ul>
+		</div>
 		<div id="create-indicatorType" class="content scaffold-create" role="main">
-				<span class="don_titles"> <g:message code="indicatorType.new"/></span>
+			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -21,15 +26,13 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form action="save" class="simple-list">
+			<g:form action="save" >
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
-				
-				saveContinue
 			</g:form>
 		</div>
 	</body>

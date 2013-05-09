@@ -41,29 +41,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${indicatorValueInstance?.dataLocationReport}">
+				<li class="fieldcontain">
+					<span id="dataLocationReport-label" class="property-label"><g:message code="indicatorValue.dataLocationReport.label" default="Data Location Report" /></span>
+					
+						<span class="property-value" aria-labelledby="dataLocationReport-label"><g:link controller="dataLocationReport" action="show" id="${indicatorValueInstance?.dataLocationReport?.id}">${indicatorValueInstance?.dataLocationReport?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${indicatorValueInstance?.generatedAt}">
+				<li class="fieldcontain">
+					<span id="generatedAt-label" class="property-label"><g:message code="indicatorValue.generatedAt.label" default="Generated At" /></span>
+					
+						<span class="property-value" aria-labelledby="generatedAt-label"><g:formatDate date="${indicatorValueInstance?.generatedAt}" /></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${indicatorValueInstance?.indicatorType}">
 				<li class="fieldcontain">
 					<span id="indicatorType-label" class="property-label"><g:message code="indicatorValue.indicatorType.label" default="Indicator Type" /></span>
 					
 						<span class="property-value" aria-labelledby="indicatorType-label"><g:link controller="indicatorType" action="show" id="${indicatorValueInstance?.indicatorType?.id}">${indicatorValueInstance?.indicatorType?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${indicatorValueInstance?.report}">
-				<li class="fieldcontain">
-					<span id="report-label" class="property-label"><g:message code="indicatorValue.report.label" default="Report" /></span>
-					
-						<span class="property-value" aria-labelledby="report-label"><g:link controller="facilityReport" action="show" id="${indicatorValueInstance?.report?.id}">${indicatorValueInstance?.report?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${indicatorValueInstance?.time}">
-				<li class="fieldcontain">
-					<span id="time-label" class="property-label"><g:message code="indicatorValue.time.label" default="Time" /></span>
-					
-						<span class="property-value" aria-labelledby="time-label"><g:formatDate date="${indicatorValueInstance?.time}" /></span>
 					
 				</li>
 				</g:if>

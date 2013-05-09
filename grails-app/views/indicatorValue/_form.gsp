@@ -1,51 +1,44 @@
 <%@ page import="org.chai.memms.report.IndicatorValue" %>
-<div  class="entity-form-container togglable">
-	<div class="heading1-bar">
-<ul>
-				<g:reportMenus/>
-				
-			</ul>
-			</div>
-		<div class="main">
-<table><tr><td>
+
+
 
 <div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'code', 'error')} required">
 	<label for="code">
 		<g:message code="indicatorValue.code.label" default="Code" />
 		<span class="required-indicator">*</span>
 	</label>
-	
-</div></td><td><g:textField name="code" required="" value="${indicatorValueInstance?.code}"/></td></tr>
+	<g:textField name="code" required="" value="${indicatorValueInstance?.code}"/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'value', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'value', 'error')} required">
 	<label for="value">
 		<g:message code="indicatorValue.value.label" default="Value" />
 		<span class="required-indicator">*</span>
 	</label>
-	
-</div></td><td><g:field name="value" value="${fieldValue(bean: indicatorValueInstance, field: 'value')}" required=""/></td></tr>
+	<g:field name="value" value="${fieldValue(bean: indicatorValueInstance, field: 'value')}" required=""/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'indicatorType', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'dataLocationReport', 'error')} required">
+	<label for="dataLocationReport">
+		<g:message code="indicatorValue.dataLocationReport.label" default="Data Location Report" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="dataLocationReport" name="dataLocationReport.id" from="${org.chai.memms.report.DataLocationReport.list()}" optionKey="id" required="" value="${indicatorValueInstance?.dataLocationReport?.id}" class="many-to-one"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'generatedAt', 'error')} required">
+	<label for="generatedAt">
+		<g:message code="indicatorValue.generatedAt.label" default="Generated At" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="generatedAt" precision="day"  value="${indicatorValueInstance?.generatedAt}"  />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'indicatorType', 'error')} required">
 	<label for="indicatorType">
 		<g:message code="indicatorValue.indicatorType.label" default="Indicator Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	
-</div></td><td><g:select id="indicatorType" name="indicatorType.id" from="${org.chai.memms.report.IndicatorType.list()}" optionKey="id" required="" value="${indicatorValueInstance?.indicatorType?.id}" class="many-to-one"/></td></tr>
-
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'report', 'error')} required">
-	<label for="report">
-		<g:message code="indicatorValue.report.label" default="Report" />
-		<span class="required-indicator">*</span>
-	</label>
-	
-</div></td><td><g:select id="report" name="report.id" from="${org.chai.memms.report.FacilityReport.list()}" optionKey="id" required="" value="${indicatorValueInstance?.report?.id}" class="many-to-one"/></td></tr>
-
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'time', 'error')} required">
-	<label for="time">
-		<g:message code="indicatorValue.time.label" default="Time" />
-		<span class="required-indicator">*</span>
-	</label>
-	
-</div></td><td><g:datePicker name="time" precision="day"  value="${indicatorValueInstance?.time}"  /></td></tr></table></div></div>
+	<g:select id="indicatorType" name="indicatorType.id" from="${org.chai.memms.report.IndicatorType.list()}" optionKey="id" required="" value="${indicatorValueInstance?.indicatorType?.id}" class="many-to-one"/>
+</div>
 

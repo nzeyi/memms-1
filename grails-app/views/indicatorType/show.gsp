@@ -32,15 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${indicatorTypeInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="indicatorType.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${indicatorTypeInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${indicatorTypeInstance?.formula}">
 				<li class="fieldcontain">
 					<span id="formula-label" class="property-label"><g:message code="indicatorType.formula.label" default="Formula" /></span>
@@ -59,20 +50,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${indicatorTypeInstance?.indicatorName_en}">
+				<li class="fieldcontain">
+					<span id="indicatorName_en-label" class="property-label"><g:message code="indicatorType.indicatorName_en.label" default="Indicator Nameen" /></span>
+					
+						<span class="property-value" aria-labelledby="indicatorName_en-label"><g:fieldValue bean="${indicatorTypeInstance}" field="indicatorName_en"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${indicatorTypeInstance?.indicatorName_fr}">
+				<li class="fieldcontain">
+					<span id="indicatorName_fr-label" class="property-label"><g:message code="indicatorType.indicatorName_fr.label" default="Indicator Namefr" /></span>
+					
+						<span class="property-value" aria-labelledby="indicatorName_fr-label"><g:fieldValue bean="${indicatorTypeInstance}" field="indicatorName_fr"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${indicatorTypeInstance?.categoryType}">
 				<li class="fieldcontain">
 					<span id="categoryType-label" class="property-label"><g:message code="indicatorType.categoryType.label" default="Category Type" /></span>
 					
 						<span class="property-value" aria-labelledby="categoryType-label"><g:link controller="categoryType" action="show" id="${indicatorTypeInstance?.categoryType?.id}">${indicatorTypeInstance?.categoryType?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${indicatorTypeInstance?.increasing}">
-				<li class="fieldcontain">
-					<span id="increasing-label" class="property-label"><g:message code="indicatorType.increasing.label" default="Increasing" /></span>
-					
-						<span class="property-value" aria-labelledby="increasing-label"><g:formatBoolean boolean="${indicatorTypeInstance?.increasing}" /></span>
 					
 				</li>
 				</g:if>
@@ -104,7 +104,7 @@
 					<span id="internediateValuess-label" class="property-label"><g:message code="indicatorType.internediateValuess.label" default="Internediate Valuess" /></span>
 					
 						<g:each in="${indicatorTypeInstance.internediateValuess}" var="i">
-						<span class="property-value" aria-labelledby="internediateValuess-label"><g:link controller="intermediateValues" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="internediateValuess-label"><g:link controller="intermediateVariable" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

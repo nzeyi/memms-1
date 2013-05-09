@@ -1,7 +1,8 @@
 package org.chai.memms.report
 
 import java.util.List;
-
+import org.chai.location.DataLocationType;
+import org.chai.location.DataLocation;
 
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -17,20 +18,31 @@ class DataLocationReportController {
 	def scaffold = true
 
 	def list(Integer max) {
-		println"testin it==================================== list of indicators :"
-		List<IntermediateVariable> intermediateVariable=null
-		Double indicatorvalue=indicatorTypeService.indicatorValueCalculator(intermediateVariable,'[{excutableScript:"from EquipmentStatus where Status=\'INSTOCK\'",domainclass:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"from EquipmentStatus where Status=\'OPERATIONAL\'",domainclass="EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"from EquipmentStatus where Status=\'INSTOCK\' or Status=\'OPERATIONAL\' or Status=\'UNDERMAINTENANCE\'",domainclass:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"true",isIntermidiateVariable:"false",isDynamicFinder:"false"}]');
-		println"==================================== finished  the indicator value is :"+indicatorvalue
+		//println"indicators exml parser ok :"
+		//println"start"
+		indicatorTypeService.reportingEngine()
+		//println"end resding"
+		//println"testin it==================================== list of indicators :"
+		//int i=0
+		//for(DataLocation location:indicatorTypeService.getDataLications()){
+		//List<IntermediateVariable> intermediateVariables=null
+		//DataLocation location=DataLocation.findById(16)
+		//Double indicatorvalue=indicatorTypeService.indicatorValueCalculator(intermediateVariables,'[{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status=\'INSTOCK\' and equ.dataLocation=\'locationidentifier\'",classDomaine:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status=\'OPERATIONAL\' and equ.dataLocation=\'locationidentifier\'",classDomaine:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status=\'INSTOCK\' or equipmentStatus.status=\'OPERATIONAL\' or equipmentStatus.status=\'UNDERMAINTENANCE\' and equ.dataLocation=\'locationidentifier\'",classDomaine:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"true",isIntermidiateVariable:"false",isDynamicFinder:"false"}]');
+		//indicatorTypeService.indicatorValueCalculator(intermediateVariables,location);
+
+		//println"===========started ok finished  the indicator value is ok :"
+		//indicatorTypeService.getIndicatorFromfile()
+
+	//	println"==================================== finished  the indicator value is ok :"
+		//println"Thecation at "+i+" is  :"+location
+		//i++
+		//}
 		params.max = Math.min(max ?: 10, 100)
 		[dataLocationReportInstanceList: DataLocationReport.list(params), dataLocationReportInstanceTotal: DataLocationReport.count()]
 	}
 
 	def create() {
-		//List<Object> indicators=indicatorTypeService.getIndicatorTypes("select category_type_id from memms_report_indicator_type");
-		//println"==================================== list of indicators :"+indicators
-		//println"Total number of indicators is ok:"+indicators.size();
-		//int thenumber=indicatorTypeService.getIndicatorTypeValue("select count(category_type_id) from memms_indicator_type group by category_type_id")
-		//println"The returned number is :"+thenumber;
+		
 		[dataLocationReportInstance: new DataLocationReport(params)]
 	}
 

@@ -6,10 +6,9 @@ class IndicatorValueController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    /*def index() {
+    def index() {
         redirect(action: "list", params: params)
-    }*/
-	def scaffold = true
+    }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -28,7 +27,7 @@ class IndicatorValueController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), indicatorValueInstance.id])
-        redirect(action:"list", id: indicatorValueInstance.id)
+        redirect(action: "show", id: indicatorValueInstance.id)
     }
 
     def show(Long id) {
@@ -79,7 +78,7 @@ class IndicatorValueController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), indicatorValueInstance.id])
-        redirect(action:"list", id: indicatorValueInstance.id)
+        redirect(action: "show", id: indicatorValueInstance.id)
     }
 
     def delete(Long id) {
@@ -97,7 +96,7 @@ class IndicatorValueController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action:"list", id: id)
+            redirect(action: "show", id: id)
         }
     }
 }

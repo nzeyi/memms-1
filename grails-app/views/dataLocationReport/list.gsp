@@ -33,9 +33,9 @@
 					<th>&nbsp;</th>
 						<g:sortableColumn property="code" title="${message(code: 'dataLocationReport.code.label', default: 'Code')}" />
 					
-						<th><g:message code="dataLocationReport.facility.label" default="Facility" /></th>
+						<th><g:message code="dataLocationReport.dataLocation.label" default="Facility" /></th>
 					
-						<g:sortableColumn property="time" title="${message(code: 'dataLocationReport.time.label', default: 'Time')}" />
+						<g:sortableColumn property="generatedAt" title="${message(code: 'dataLocationReport.generatedAt.label', default: 'Time')}" />
 					
 					</tr>
 				</thead>
@@ -58,9 +58,9 @@
 			</td>
 						<td><g:link action="show" id="${dataLocationReportInstance.id}">${fieldValue(bean: dataLocationReportInstance, field: "code")}</g:link></td>
 					
-						<td>${fieldValue(bean: dataLocationReportInstance, field: "facility")}</td>
+						<td>${fieldValue(bean: dataLocationReportInstance, field: "dataLocation")}</td>
 					
-						<td><g:formatDate date="${dataLocationReportInstance.time}" /></td>
+						<td><g:formatDate date="${dataLocationReportInstance.generatedAt}" /></td>
 					
 					</tr>
 				</g:each>

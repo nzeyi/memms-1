@@ -1,74 +1,94 @@
 <%@ page import="org.chai.memms.report.IndicatorType" %>
 
 
-<div  class="entity-form-container togglable">
-	<div class="heading1-bar">
-			<ul>
-				<g:reportMenus/>
-				
-			</ul>
-		</div>
-<div class="main">
-<table><tr><td>
+
 <div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'code', 'error')} required">
 	<label for="code">
 		<g:message code="indicatorType.code.label" default="Code" />
 		<span class="required-indicator">*</span>
 	</label>
-	
-</div></td><td><g:textField name="code" required="" value="${indicatorTypeInstance?.code}"/></td></tr>
+	<g:textField name="code" required="" value="${indicatorTypeInstance?.code}"/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'name', 'error')} required">
-	<label for="name">
-		<g:message code="indicatorType.name.label" default="Name" />
-		<span class="required-indicator">*</span>
-	</label>
-	
-</div></td><td><g:textField name="name" maxlength="100" required="" value="${indicatorTypeInstance?.name}"/></td></tr>
-
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'formula', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'formula', 'error')} ">
 	<label for="formula">
 		<g:message code="indicatorType.formula.label" default="Formula" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	
-</div></td><td><g:textArea name="formula" cols="100" rows="10" maxlength="1000" required="" value="${indicatorTypeInstance?.formula}"/></td></tr>
+	<g:textArea name="formula" cols="40" rows="5" maxlength="1000" value="${indicatorTypeInstance?.formula}"/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'finder', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'finder', 'error')} ">
 	<label for="finder">
 		<g:message code="indicatorType.finder.label" default="Finder" />
 		
 	</label>
-	
-</div></td><td><g:textField name="finder" maxlength="100" value="${indicatorTypeInstance?.finder}"/></td></tr>
+	<g:textField name="finder" maxlength="100" value="${indicatorTypeInstance?.finder}"/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'categoryType', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'indicatorName_en', 'error')} ">
+	<label for="indicatorName_en">
+		<g:message code="indicatorType.indicatorName_en.label" default="Indicator Nameen" />
+		
+	</label>
+	<g:textField name="indicatorName_en" value="${indicatorTypeInstance?.indicatorName_en}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'indicatorName_fr', 'error')} ">
+	<label for="indicatorName_fr">
+		<g:message code="indicatorType.indicatorName_fr.label" default="Indicator Namefr" />
+		
+	</label>
+	<g:textField name="indicatorName_fr" value="${indicatorTypeInstance?.indicatorName_fr}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'categoryType', 'error')} required">
 	<label for="categoryType">
 		<g:message code="indicatorType.categoryType.label" default="Category Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	
-</div></td><td><g:select id="categoryType" name="categoryType.id" from="${org.chai.memms.report.CategoryType.list()}" optionKey="id" required="" value="${indicatorTypeInstance?.categoryType?.id}" class="many-to-one"/></td></tr>
+	<g:select id="categoryType" name="categoryType.id" from="${org.chai.memms.report.CategoryType.list()}" optionKey="id" required="" value="${indicatorTypeInstance?.categoryType?.id}" class="many-to-one"/>
+</div>
 
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'increasing', 'error')} ">
-	<label for="increasing">
-		<g:message code="indicatorType.increasing.label" default="Increasing" />
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'indicatorColors', 'error')} ">
+	<label for="indicatorColors">
+		<g:message code="indicatorType.indicatorColors.label" default="Indicator Colors" />
 		
 	</label>
 	
-</div></td><td><g:checkBox name="increasing" value="${indicatorTypeInstance?.increasing}" /><td></tr>
+<ul class="one-to-many">
+<g:each in="${indicatorTypeInstance?.indicatorColors?}" var="i">
+    <li><g:link controller="indicatorColorCriteriaPerFacilityType" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="indicatorColorCriteriaPerFacilityType" action="create" params="['indicatorType.id': indicatorTypeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indicatorColorCriteriaPerFacilityType.label', default: 'IndicatorColorCriteriaPerFacilityType')])}</g:link>
+</li>
+</ul>
 
+</div>
 
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'indicatorValues', 'error')} ">
+	<label for="indicatorValues">
+		<g:message code="indicatorType.indicatorValues.label" default="Indicator Values" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${indicatorTypeInstance?.indicatorValues?}" var="i">
+    <li><g:link controller="indicatorValue" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="indicatorValue" action="create" params="['indicatorType.id': indicatorTypeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue')])}</g:link>
+</li>
+</ul>
 
+</div>
 
-
-<tr><td><div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'internediateValuess', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: indicatorTypeInstance, field: 'internediateValuess', 'error')} ">
 	<label for="internediateValuess">
 		<g:message code="indicatorType.internediateValuess.label" default="Internediate Valuess" />
 		
 	</label>
-	
-</div></td><td><g:select name="internediateValuess" from="${org.chai.memms.report.IntermediateValues.list()}" multiple="multiple" optionKey="id" size="5" value="${indicatorTypeInstance?.internediateValuess*.id}" class="many-to-many"/></td></tr></table>
-</div>
+	<g:select name="internediateValuess" from="${org.chai.memms.report.IntermediateVariable.list()}" multiple="multiple" optionKey="id" size="5" value="${indicatorTypeInstance?.internediateValuess*.id}" class="many-to-many"/>
 </div>
 
