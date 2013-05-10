@@ -59,11 +59,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${indicatorValueInstance?.indicatorType}">
+				<g:if test="${indicatorValueInstance?.indicator}">
 				<li class="fieldcontain">
-					<span id="indicatorType-label" class="property-label"><g:message code="indicatorValue.indicatorType.label" default="Indicator Type" /></span>
+					<span id="indicator-label" class="property-label"><g:message code="indicatorValue.indicator.label" default="Indicator" /></span>
 					
-						<span class="property-value" aria-labelledby="indicatorType-label"><g:link controller="indicatorType" action="show" id="${indicatorValueInstance?.indicatorType?.id}">${indicatorValueInstance?.indicatorType?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="indicator-label"><g:link controller="indicator" action="show" id="${indicatorValueInstance?.indicator?.id}">${indicatorValueInstance?.indicator?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

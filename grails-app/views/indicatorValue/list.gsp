@@ -8,22 +8,27 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-indicatorValue" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
+		<table><tr><td><div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<g:reportMenus/>
+				
 			</ul>
+		</div></td><td>
+				
+			<a href="${createLink(controller:'indicatorValue', action:'create')}" class="next medium left push-r">
+			<g:message code="indicatorValue.new" />
+		</a>
+			</td></tr></table>
+			
 		</div>
-		<div id="list-indicatorValue" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<table>
+		<div id="list-categoryType" class="content scaffold-list" role="main">
+			<span class="don_titles"> <g:message code="indicatorValue.list"/></span>
+			
+			<table  class="items spaced">
 				<thead>
 					<tr>
-					
+					<th>&nbsp;</th>
 						<g:sortableColumn property="code" title="${message(code: 'indicatorValue.code.label', default: 'Code')}" />
 					
 						<g:sortableColumn property="value" title="${message(code: 'indicatorValue.value.label', default: 'Value')}" />
@@ -32,14 +37,27 @@
 					
 						<g:sortableColumn property="generatedAt" title="${message(code: 'indicatorValue.generatedAt.label', default: 'Generated At')}" />
 					
-						<th><g:message code="indicatorValue.indicatorType.label" default="Indicator Type" /></th>
+						<th><g:message code="indicatorValue.indicator.label" default="Indicator" /></th>
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${indicatorValueInstanceList}" status="i" var="indicatorValueInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<td>
+				<ul class="horizontal">
+					<li>
+						<a href="${createLink(controller:'indicatorValue', action:'edit', params:[id: indicatorValueInstance.id])}" class="edit-button">
+							<g:message code="default.link.edit.label" />
+						</a>
+					</li>
+					<!--
+					<li>
+						<a href="${createLink(controller:'indicatorValue', action:'delete', params:[id: indicatorValueInstance.id])}" onclick="return confirm('\${message(code: 'default.link.delete.confirm.message')}');" class="delete-button"><g:message code="default.link.delete.label" /></a>
+					</li>-->
 					
+				</ul>
+			</td>
 						<td><g:link action="show" id="${indicatorValueInstance.id}">${fieldValue(bean: indicatorValueInstance, field: "code")}</g:link></td>
 					
 						<td>${fieldValue(bean: indicatorValueInstance, field: "value")}</td>
@@ -48,7 +66,7 @@
 					
 						<td><g:formatDate date="${indicatorValueInstance.generatedAt}" /></td>
 					
-						<td>${fieldValue(bean: indicatorValueInstance, field: "indicatorType")}</td>
+						<td>${fieldValue(bean: indicatorValueInstance, field: "indicator")}</td>
 					
 					</tr>
 				</g:each>

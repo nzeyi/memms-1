@@ -41,21 +41,41 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${intermediateVariableInstance?.formula}">
+				<g:if test="${intermediateVariableInstance?.executableScript}">
 				<li class="fieldcontain">
-					<span id="formula-label" class="property-label"><g:message code="intermediateVariable.formula.label" default="Formula" /></span>
+					<span id="executableScript-label" class="property-label"><g:message code="intermediateVariable.executableScript.label" default="Executable Script" /></span>
 					
-						<span class="property-value" aria-labelledby="formula-label"><g:fieldValue bean="${intermediateVariableInstance}" field="formula"/></span>
+						<span class="property-value" aria-labelledby="executableScript-label"><g:fieldValue bean="${intermediateVariableInstance}" field="executableScript"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${intermediateVariableInstance?.indicatorTypes}">
+				<g:if test="${intermediateVariableInstance?.intermediateVariables}">
 				<li class="fieldcontain">
-					<span id="indicatorTypes-label" class="property-label"><g:message code="intermediateVariable.indicatorTypes.label" default="Indicator Types" /></span>
+					<span id="intermediateVariables-label" class="property-label"><g:message code="intermediateVariable.intermediateVariables.label" default="Intermediate Variables" /></span>
 					
-						<g:each in="${intermediateVariableInstance.indicatorTypes}" var="i">
-						<span class="property-value" aria-labelledby="indicatorTypes-label"><g:link controller="indicatorType" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
+						<g:each in="${intermediateVariableInstance.intermediateVariables}" var="i">
+						<span class="property-value" aria-labelledby="intermediateVariables-label"><g:link controller="intermediateVariable" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${intermediateVariableInstance?.executionResult}">
+				<li class="fieldcontain">
+					<span id="executionResult-label" class="property-label"><g:message code="intermediateVariable.executionResult.label" default="Execution Result" /></span>
+					
+						<span class="property-value" aria-labelledby="executionResult-label"><g:fieldValue bean="${intermediateVariableInstance}" field="executionResult"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${intermediateVariableInstance?.indicators}">
+				<li class="fieldcontain">
+					<span id="indicators-label" class="property-label"><g:message code="intermediateVariable.indicators.label" default="Indicators" /></span>
+					
+						<g:each in="${intermediateVariableInstance.indicators}" var="i">
+						<span class="property-value" aria-labelledby="indicators-label"><g:link controller="indicator" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

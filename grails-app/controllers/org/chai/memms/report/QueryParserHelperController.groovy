@@ -1,4 +1,4 @@
-package org.chai.memms.report.utils
+package org.chai.memms.report
 
 import org.springframework.dao.DataIntegrityViolationException
 

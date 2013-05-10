@@ -6,7 +6,7 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(IndicatorTypeController)
-@Mock(IndicatorType)
+@Mock(Indicator)
 class IndicatorTypeControllerTests {
 
     def populateValidParams(params) {
@@ -47,7 +47,7 @@ class IndicatorTypeControllerTests {
 
         assert response.redirectedUrl == '/indicatorType/show/1'
         assert controller.flash.message != null
-        assert IndicatorType.count() == 1
+        assert Indicator.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class IndicatorTypeControllerTests {
         assert response.redirectedUrl == '/indicatorType/list'
 
         populateValidParams(params)
-        def indicatorType = new IndicatorType(params)
+        def indicatorType = new Indicator(params)
 
         assert indicatorType.save() != null
 
@@ -75,7 +75,7 @@ class IndicatorTypeControllerTests {
         assert response.redirectedUrl == '/indicatorType/list'
 
         populateValidParams(params)
-        def indicatorType = new IndicatorType(params)
+        def indicatorType = new Indicator(params)
 
         assert indicatorType.save() != null
 
@@ -95,7 +95,7 @@ class IndicatorTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def indicatorType = new IndicatorType(params)
+        def indicatorType = new Indicator(params)
 
         assert indicatorType.save() != null
 
@@ -139,17 +139,17 @@ class IndicatorTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def indicatorType = new IndicatorType(params)
+        def indicatorType = new Indicator(params)
 
         assert indicatorType.save() != null
-        assert IndicatorType.count() == 1
+        assert Indicator.count() == 1
 
         params.id = indicatorType.id
 
         controller.delete()
 
-        assert IndicatorType.count() == 0
-        assert IndicatorType.get(indicatorType.id) == null
+        assert Indicator.count() == 0
+        assert Indicator.get(indicatorType.id) == null
         assert response.redirectedUrl == '/indicatorType/list'
     }
 }

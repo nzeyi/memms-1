@@ -1,5 +1,5 @@
 
-<%@ page import="org.chai.memms.report.utils.QueryParserHelper" %>
+<%@ page import="org.chai.memms.report.QueryParserHelper" %>
 <!doctype html>
 <html>
 	<head>
@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list queryParserHelper">
 			
-				<g:if test="${queryParserHelperInstance?.excutableScript}">
+				<g:if test="${queryParserHelperInstance?.executableScript}">
 				<li class="fieldcontain">
-					<span id="excutableScript-label" class="property-label"><g:message code="queryParserHelper.excutableScript.label" default="Excutable Script" /></span>
+					<span id="executableScript-label" class="property-label"><g:message code="queryParserHelper.executableScript.label" default="Executable Script" /></span>
 					
-						<span class="property-value" aria-labelledby="excutableScript-label"><g:fieldValue bean="${queryParserHelperInstance}" field="excutableScript"/></span>
+						<span class="property-value" aria-labelledby="executableScript-label"><g:fieldValue bean="${queryParserHelperInstance}" field="executableScript"/></span>
 					
 				</li>
 				</g:if>
@@ -50,11 +50,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${queryParserHelperInstance?.indType}">
+				<g:if test="${queryParserHelperInstance?.indicator}">
 				<li class="fieldcontain">
-					<span id="indType-label" class="property-label"><g:message code="queryParserHelper.indType.label" default="Ind Type" /></span>
+					<span id="indicator-label" class="property-label"><g:message code="queryParserHelper.indicator.label" default="Indicator" /></span>
 					
-						<span class="property-value" aria-labelledby="indType-label"><g:fieldValue bean="${queryParserHelperInstance}" field="indType"/></span>
+						<span class="property-value" aria-labelledby="indicator-label"><g:link controller="indicator" action="show" id="${queryParserHelperInstance?.indicator?.id}">${queryParserHelperInstance?.indicator?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -63,7 +63,7 @@
 				<li class="fieldcontain">
 					<span id="indicatorType-label" class="property-label"><g:message code="queryParserHelper.indicatorType.label" default="Indicator Type" /></span>
 					
-						<span class="property-value" aria-labelledby="indicatorType-label"><g:link controller="indicatorType" action="show" id="${queryParserHelperInstance?.indicatorType?.id}">${queryParserHelperInstance?.indicatorType?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="indicatorType-label"><g:fieldValue bean="${queryParserHelperInstance}" field="indicatorType"/></span>
 					
 				</li>
 				</g:if>

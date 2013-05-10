@@ -6,9 +6,8 @@ class IndicatorValue {
 	String code 
 	Date generatedAt
 	Double value
-	//DataLocationReport dataLocationReport
-	//IndicatorType type
-	static belongsTo = [indicatorType:IndicatorType,dataLocationReport:DataLocationReport]
+	
+	static belongsTo = [indicator:Indicator,dataLocationReport:DataLocationReport]
 	static mapping ={
 		table "memms_report_indicator_value"
 		version false

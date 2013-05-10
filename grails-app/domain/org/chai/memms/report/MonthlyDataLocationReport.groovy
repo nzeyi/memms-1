@@ -1,11 +1,15 @@
 package org.chai.memms.report
 
+import java.util.Date;
+
 class MonthlyDataLocationReport {
 	String code
 	Date generatedAt
-	DataLocationReport report
-	Integer year
-	Integer month
+	DataLocationReport dataLocationReport
+	Integer generationYear
+	Integer generationMonth
+	Date startDate
+	Date endDate
 	static mapping ={
 		table "memms_report_monthly_data_location"
 		version false
@@ -14,9 +18,6 @@ class MonthlyDataLocationReport {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		month (blank:false, nullable:false)
-		
-		
 	}
 	@Override
 	public String toString() {

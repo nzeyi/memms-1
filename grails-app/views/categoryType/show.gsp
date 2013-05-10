@@ -41,14 +41,7 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${categoryTypeInstance?.finder}">
-				<li class="fieldcontain">
-					<span id="finder-label" class="property-label"><g:message code="categoryType.finder.label" default="Finder" /></span>
-					
-						<span class="property-value" aria-labelledby="finder-label"><g:fieldValue bean="${categoryTypeInstance}" field="finder"/></span>
-					
-				</li>
-				</g:if>
+				
 			
 				<g:if test="${categoryTypeInstance?.indicatorTypes}">
 				<li class="fieldcontain">

@@ -12,15 +12,15 @@ class IndicatorTypeController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [indicatorTypeInstanceList: IndicatorType.list(params), indicatorTypeInstanceTotal: IndicatorType.count()]
+        [indicatorTypeInstanceList: Indicator.list(params), indicatorTypeInstanceTotal: Indicator.count()]
     }
 
     def create() {
-        [indicatorTypeInstance: new IndicatorType(params)]
+        [indicatorTypeInstance: new Indicator(params)]
     }
 
     def save() {
-        def indicatorTypeInstance = new IndicatorType(params)
+        def indicatorTypeInstance = new Indicator(params)
         if (!indicatorTypeInstance.save(flush: true)) {
             render(view: "create", model: [indicatorTypeInstance: indicatorTypeInstance])
             return
@@ -31,7 +31,7 @@ class IndicatorTypeController {
     }
 
     def show(Long id) {
-        def indicatorTypeInstance = IndicatorType.get(id)
+        def indicatorTypeInstance = Indicator.get(id)
         if (!indicatorTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorType.label', default: 'IndicatorType'), id])
             redirect(action: "list")
@@ -42,7 +42,7 @@ class IndicatorTypeController {
     }
 
     def edit(Long id) {
-        def indicatorTypeInstance = IndicatorType.get(id)
+        def indicatorTypeInstance = Indicator.get(id)
         if (!indicatorTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorType.label', default: 'IndicatorType'), id])
             redirect(action: "list")
@@ -53,7 +53,7 @@ class IndicatorTypeController {
     }
 
     def update(Long id, Long version) {
-        def indicatorTypeInstance = IndicatorType.get(id)
+        def indicatorTypeInstance = Indicator.get(id)
         if (!indicatorTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorType.label', default: 'IndicatorType'), id])
             redirect(action: "list")
@@ -82,7 +82,7 @@ class IndicatorTypeController {
     }
 
     def delete(Long id) {
-        def indicatorTypeInstance = IndicatorType.get(id)
+        def indicatorTypeInstance = Indicator.get(id)
         if (!indicatorTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorType.label', default: 'IndicatorType'), id])
             redirect(action: "list")

@@ -1,5 +1,5 @@
 
-<%@ page import="org.chai.memms.report.utils.QueryParserHelper" %>
+<%@ page import="org.chai.memms.report.QueryParserHelper" %>
 <!doctype html>
 <html>
 	<head>
@@ -8,31 +8,35 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-queryParserHelper" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
+		<table><tr><td><div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<g:reportMenus/>
+				
 			</ul>
+		</div></td><td>
+				
+			<a href="${createLink(controller:'queryParserHelper', action:'create')}" class="next medium left push-r">
+			<g:message code="indicator.new" />
+		</a>
+			</td></tr></table>
+			
 		</div>
 		<div id="list-queryParserHelper" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<table>
+			<span class="don_titles"> <g:message code="queryParserHelper.list"/></span>
+			<table  class="items spaced">
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="excutableScript" title="${message(code: 'queryParserHelper.excutableScript.label', default: 'Excutable Script')}" />
+					<th>&nbsp;</th>
+						<g:sortableColumn property="executableScript" title="${message(code: 'queryParserHelper.executableScript.label', default: 'Executable Script')}" />
 					
 						<g:sortableColumn property="classDomaine" title="${message(code: 'queryParserHelper.classDomaine.label', default: 'Class Domaine')}" />
 					
 						<g:sortableColumn property="followOperand" title="${message(code: 'queryParserHelper.followOperand.label', default: 'Follow Operand')}" />
 					
-						<g:sortableColumn property="indType" title="${message(code: 'queryParserHelper.indType.label', default: 'Ind Type')}" />
+						<th><g:message code="queryParserHelper.indicator.label" default="Indicator" /></th>
 					
-						<th><g:message code="queryParserHelper.indicatorType.label" default="Indicator Type" /></th>
+						<g:sortableColumn property="indicatorType" title="${message(code: 'queryParserHelper.indicatorType.label', default: 'Indicator Type')}" />
 					
 						<g:sortableColumn property="isDenominator" title="${message(code: 'queryParserHelper.isDenominator.label', default: 'Is Denominator')}" />
 					
@@ -41,14 +45,28 @@
 				<tbody>
 				<g:each in="${queryParserHelperInstanceList}" status="i" var="queryParserHelperInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<td>
+				<ul class="horizontal">
+					<li>
+						<a href="${createLink(controller:'queryParserHelper', action:'edit', params:[id: queryParserHelperInstance.id])}" class="edit-button">
+							<g:message code="default.link.edit.label" />
+						</a>
+					</li>
+					<!--
+					<li>
+						<a href="${createLink(controller:'queryParserHelper', action:'delete', params:[id: queryParserHelperInstance.id])}" onclick="return confirm('\${message(code: 'default.link.delete.confirm.message')}');" class="delete-button"><g:message code="default.link.delete.label" /></a>
+					</li>-->
 					
-						<td><g:link action="show" id="${queryParserHelperInstance.id}">${fieldValue(bean: queryParserHelperInstance, field: "excutableScript")}</g:link></td>
+				</ul>
+			</td>
+				
+						<td><g:link action="show" id="${queryParserHelperInstance.id}">${fieldValue(bean: queryParserHelperInstance, field: "executableScript")}</g:link></td>
 					
 						<td>${fieldValue(bean: queryParserHelperInstance, field: "classDomaine")}</td>
 					
 						<td>${fieldValue(bean: queryParserHelperInstance, field: "followOperand")}</td>
 					
-						<td>${fieldValue(bean: queryParserHelperInstance, field: "indType")}</td>
+						<td>${fieldValue(bean: queryParserHelperInstance, field: "indicator")}</td>
 					
 						<td>${fieldValue(bean: queryParserHelperInstance, field: "indicatorType")}</td>
 					

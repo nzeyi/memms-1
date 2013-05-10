@@ -34,7 +34,7 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'categoryType.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="finder" title="${message(code: 'categoryType.finder.label', default: 'Finder')}" />
+						
 					
 						<g:sortableColumn property="maxYellowValue" title="${message(code: 'categoryType.maxYellowValue.label', default: 'Max Yellow Value')}" />
 					
@@ -63,7 +63,7 @@
 					
 						<td>${fieldValue(bean: categoryTypeInstance, field: "name")}</td>
 					
-						<td>${fieldValue(bean: categoryTypeInstance, field: "finder")}</td>
+						
 					
 						<td>${fieldValue(bean: categoryTypeInstance, field: "maxYellowValue")}</td>
 					

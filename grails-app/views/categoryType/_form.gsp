@@ -25,13 +25,7 @@
 	
 <g:textField name="name" maxlength="10" pattern="${categoryTypeInstance.constraints.name.matches}" required="" value="${categoryTypeInstance?.name}"/></div>
 
-<div class="form-section" ${hasErrors(bean: categoryTypeInstance, field: 'finder', 'error')} ">
-	<label for="finder">
-		<g:message code="categoryType.finder.label" default="Finder" />
-		
-	</label>
-	
-<g:textField name="finder" maxlength="100" value="${categoryTypeInstance?.finder}"/></div>
+
 
  
 

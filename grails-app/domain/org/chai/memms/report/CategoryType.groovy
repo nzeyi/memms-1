@@ -6,10 +6,10 @@ class CategoryType {
 	//color not yet decided
 	Double minYellowValue
 	Double maxYellowValue 
-	String finder
+	
 	//*indicatorTypes
 	
-	static hasMany = [indicatorTypes:IndicatorType]
+	static hasMany = [indicators:Indicator]
 	static mapping ={
 		table "memms_report_category_type"
 		version false
@@ -20,7 +20,7 @@ class CategoryType {
 	static constraints = {
 		code (blank:false, nullable:false)
 		name (blank:false, nullable:false,unique: true, size:3..100)
-		finder(blank:true, nullable:true,size:3..100)
+		
 		
 	}
 	@Override

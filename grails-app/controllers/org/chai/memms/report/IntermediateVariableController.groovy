@@ -27,7 +27,7 @@ class IntermediateVariableController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), intermediateVariableInstance.id])
-        redirect(action: "list", id: intermediateVariableInstance.id)
+        redirect(action: "show", id: intermediateVariableInstance.id)
     }
 
     def show(Long id) {
@@ -78,7 +78,7 @@ class IntermediateVariableController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), intermediateVariableInstance.id])
-        redirect(action: "list", id: intermediateVariableInstance.id)
+        redirect(action: "show", id: intermediateVariableInstance.id)
     }
 
     def delete(Long id) {
@@ -96,7 +96,7 @@ class IntermediateVariableController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list", id: id)
+            redirect(action: "show", id: id)
         }
     }
 }

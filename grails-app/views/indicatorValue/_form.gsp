@@ -34,11 +34,11 @@
 	<g:datePicker name="generatedAt" precision="day"  value="${indicatorValueInstance?.generatedAt}"  />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'indicatorType', 'error')} required">
-	<label for="indicatorType">
-		<g:message code="indicatorValue.indicatorType.label" default="Indicator Type" />
+<div class="fieldcontain ${hasErrors(bean: indicatorValueInstance, field: 'indicator', 'error')} required">
+	<label for="indicator">
+		<g:message code="indicatorValue.indicator.label" default="Indicator" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="indicatorType" name="indicatorType.id" from="${org.chai.memms.report.IndicatorType.list()}" optionKey="id" required="" value="${indicatorValueInstance?.indicatorType?.id}" class="many-to-one"/>
+	<g:select id="indicator" name="indicator.id" from="${org.chai.memms.report.Indicator.list()}" optionKey="id" required="" value="${indicatorValueInstance?.indicator?.id}" class="many-to-one"/>
 </div>
 

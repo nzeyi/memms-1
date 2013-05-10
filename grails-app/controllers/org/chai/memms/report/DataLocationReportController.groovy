@@ -10,7 +10,7 @@ class DataLocationReportController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	IndicatorTypeService indicatorTypeService
+	IndicatorService indicatorService
 	/*
 	 def index() {
 	 redirect(action: "list", params: params)
@@ -20,7 +20,8 @@ class DataLocationReportController {
 	def list(Integer max) {
 		//println"indicators exml parser ok :"
 		//println"start"
-		indicatorTypeService.reportingEngine()
+		
+		indicatorService.reportingEngine()
 		//println"end resding"
 		//println"testin it==================================== list of indicators :"
 		//int i=0
@@ -59,7 +60,7 @@ class DataLocationReportController {
 		])
 
 
-		indicatorTypeService.getIndicatorTypes()
+		
 		redirect(action: "list", id: dataLocationReportInstance.id, model: [dataLocationReportInstance: dataLocationReportInstance])
 	}
 

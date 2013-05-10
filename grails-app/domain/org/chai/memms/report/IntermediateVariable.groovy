@@ -2,12 +2,13 @@ package org.chai.memms.report;
 
 public class IntermediateVariable {
 	String name
-	String formula
+	String executableScript
 	String code
-	Double value
-	//List dependencies
-	static belongsTo =IndicatorType
-	static hasMany = [indicatorTypes:IndicatorType,dependencies: IntermediateVariable]
+	Double executionResult
+	
+	
+	static belongsTo =Indicator
+	static hasMany = [indicators:Indicator,intermediateVariables: IntermediateVariable]
 	
 	static mapping ={
 		table "memms_report_int_vble"
@@ -18,10 +19,10 @@ public class IntermediateVariable {
 	static constraints = {
 		code (blank:false, nullable:false)
 		name (blank:false, nullable:false,size:3..100)
-		formula(blank:false, nullable:false,size:3..500)
-		dependencies (validator: {value, obj, errors->
+		executableScript(blank:false, nullable:false,size:3..500)
+		intermediateVariables (validator: {value, obj, errors->
 			if(value.contains(obj)){
-			  errors.rejectValue('dependencies', 'Cannot be a dependencies of its self')
+			  errors.rejectValue('intermediateVariables', 'Cannot be a dependencies of its self')
 			}})
 		
 		

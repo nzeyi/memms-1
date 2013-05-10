@@ -1,13 +1,13 @@
-<%@ page import="org.chai.memms.report.utils.QueryParserHelper" %>
+<%@ page import="org.chai.memms.report.QueryParserHelper" %>
 
 
 
-<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'excutableScript', 'error')} ">
-	<label for="excutableScript">
-		<g:message code="queryParserHelper.excutableScript.label" default="Excutable Script" />
+<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'executableScript', 'error')} ">
+	<label for="executableScript">
+		<g:message code="queryParserHelper.executableScript.label" default="Executable Script" />
 		
 	</label>
-	<g:textArea name="excutableScript" cols="40" rows="5" maxlength="1000" value="${queryParserHelperInstance?.excutableScript}"/>
+	<g:textArea name="executableScript" cols="40" rows="5" maxlength="1000" value="${queryParserHelperInstance?.executableScript}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'classDomaine', 'error')} ">
@@ -26,20 +26,20 @@
 	<g:textField name="followOperand" value="${queryParserHelperInstance?.followOperand}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'indType', 'error')} ">
-	<label for="indType">
-		<g:message code="queryParserHelper.indType.label" default="Ind Type" />
-		
-	</label>
-	<g:textField name="indType" value="${queryParserHelperInstance?.indType}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'indicatorType', 'error')} required">
-	<label for="indicatorType">
-		<g:message code="queryParserHelper.indicatorType.label" default="Indicator Type" />
+<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'indicator', 'error')} required">
+	<label for="indicator">
+		<g:message code="queryParserHelper.indicator.label" default="Indicator" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="indicatorType" name="indicatorType.id" from="${org.chai.memms.report.IndicatorType.list()}" optionKey="id" required="" value="${queryParserHelperInstance?.indicatorType?.id}" class="many-to-one"/>
+	<g:select id="indicator" name="indicator.id" from="${org.chai.memms.report.Indicator.list()}" optionKey="id" required="" value="${queryParserHelperInstance?.indicator?.id}" class="many-to-one"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'indicatorType', 'error')} ">
+	<label for="indicatorType">
+		<g:message code="queryParserHelper.indicatorType.label" default="Indicator Type" />
+		
+	</label>
+	<g:textField name="indicatorType" value="${queryParserHelperInstance?.indicatorType}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: queryParserHelperInstance, field: 'isDenominator', 'error')} ">

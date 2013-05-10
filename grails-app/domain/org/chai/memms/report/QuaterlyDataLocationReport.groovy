@@ -1,12 +1,14 @@
 package org.chai.memms.report
 
 class QuaterlyDataLocationReport {
-	Date geneartedAt
+	
 	String code
-	DataLocationReport report
-	Integer year
-	Integer month
-	String quarter
+	DataLocationReport dataLocationReport
+	Integer generationYear
+	Integer generationMonth
+	
+	Date startDate
+	Date endDate
 	static mapping ={
 		table "memms_report_quatery_data_location"
 		version false
@@ -14,7 +16,7 @@ class QuaterlyDataLocationReport {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		quarter (blank:false, nullable:false)
+		
 	}
 	@Override
 	public String toString() {

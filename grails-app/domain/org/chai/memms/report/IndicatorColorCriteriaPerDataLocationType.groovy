@@ -1,12 +1,12 @@
 package org.chai.memms.report
 import org.chai.location.DataLocationType;
-class IndicatorColorCriteriaPerFacilityType {
+class IndicatorColorCriteriaPerDataLocationType {
 	String minYellow
 	String maxYellow
-	Boolean increasing
+	Boolean isIncreasing
 	String code
-	DataLocationType facilityType
-	IndicatorType indicatorType
+	DataLocationType dataLocationType
+	Indicator indicator
 	static mapping ={
 		table "memms_report_indicator_color_criteria"
 		version false
