@@ -21,6 +21,7 @@ class QueryParserHelper {
 	Boolean isIntermidiateVariable=false
 	Boolean isDynamicFinder=false
 	IndicatorType indicatorType
+	String indType
 
 	static belongsTo = [indicatorType:IndicatorType]
 	static mapping ={

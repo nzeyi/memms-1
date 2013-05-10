@@ -101,10 +101,10 @@ class IndicatorTypeService {
 			indicators.indicator.each{
 				category=CategoryType.findByCode(it.attribute("categoryCode"))
 				if(category!=null){
-					println"formula :"+it.scriptFormula.text()
-					println"with no text() :"+it.scriptFormula
+					
+					String indTypeValue=it.type.text()
 					def scripts=it.scriptFormula
-					def indicator = new IndicatorType(indicatorName:it.name.text(),code:it.attribute("indicatorCode"),categoryType:category,formula:it.scriptFormula.text(),finder:it.attribute("indicatorCode"))
+					def indicator = new IndicatorType(indicatorName:it.name.text(),code:it.attribute("indicatorCode"),categoryType:category,formula:it.formula.text(),finder:it.attribute("indicatorCode"))
 
 					indicator.save(failOnError: true)
 
@@ -120,7 +120,7 @@ class IndicatorTypeService {
 								,followOperand:it.attribute("followOperand")
 								, isDenominator:it.attribute("isDenominator")
 								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
-								,isDynamicFinder:it.attribute("isDynamicFinder"),indicatorType:indicatortype)
+								,isDynamicFinder:it.attribute("isDynamicFinder"),indicatorType:indicatortype,indType:indTypeValue)
 								queryParserHelper.save(failOnError: true)
 
 							}
@@ -141,7 +141,7 @@ class IndicatorTypeService {
 					oldInd=IndicatorType.findByCode(it.attribute("indicatorCode"))
 					if(oldInd==null){
 						println" the indicator is null"
-						def indicator = new IndicatorType(indicatorName:it.name.text(),code:it.attribute("indicatorCode"),categoryType:category,formula:it.scriptFormula.text(),finder:it.attribute("indicatorCode"))
+						def indicator = new IndicatorType(indicatorName:it.name.text(),code:it.attribute("indicatorCode"),categoryType:category,formula:it.formula.text(),finder:it.attribute("indicatorCode"))
 
 						indicator.save(failOnError: true)
 						println" created new indicator"
@@ -157,7 +157,7 @@ class IndicatorTypeService {
 					def scripts=it.scriptFormula
 
 					IndicatorType indicatortype=IndicatorType.findByCode(it.attribute("indicatorCode"))
-
+					String indTypeValue=it.type.text()
 					if(scripts!=null&&indicatortype!=null){
 						println" get indicator type"
 						def queryParserHelpers=QueryParserHelper.findByIndicatorType(indicatortype)
@@ -170,7 +170,7 @@ class IndicatorTypeService {
 								,followOperand:it.attribute("followOperand")
 								, isDenominator:it.attribute("isDenominator")
 								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
-								,isDynamicFinder:it.attribute("isDynamicFinder"),indicatorType:indicatortype)
+								,isDynamicFinder:it.attribute("isDynamicFinder"),indicatorType:indicatortype,indType:indTypeValue)
 								queryParserHelper.save(failOnError: true)
 								println" i am adding script to this :"+indicatortype
 							}
@@ -193,7 +193,7 @@ class IndicatorTypeService {
 		//List<QueryParserHelper> listOfGsonisedQueries=jsonParser(scriptformulaAsJson)
 		List<QueryParserHelper> numeratorQueries=new ArrayList<QueryParserHelper>()
 		List<QueryParserHelper> denominatorQueries=new ArrayList<QueryParserHelper>()
-
+		
 		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
 		def indicators = new XmlParser().parseText(indicatorFileContent)
 		if(location!=null){
@@ -205,6 +205,8 @@ class IndicatorTypeService {
 				facilityReport.save(failOnError: true)
 				println" the report is created ok"
 				indicators.indicator.each{
+					int totalAtNumerator=0;
+					int totalAtDenominator=0;
 					double indicatorValue=0.0
 					println"the indicator code ok :"+it.attribute("indicatorCode")
 					IndicatorType currentIndicatorType=IndicatorType.findByCode(it.attribute("indicatorCode"))
@@ -216,7 +218,7 @@ class IndicatorTypeService {
 						//if(it.attribute("indicatorCode").equals("MANA_EQUIPMENT_SHARE_OF_OPERATIONAL_EQUIPMENT")){
 						//println"Indicator name :"+it.name.text()
 						//println"Indicator code :"+it.attribute("indicatorCode")
-
+						String indType=it.type.text()
 
 
 						def scripts=it.scriptFormula
@@ -232,7 +234,7 @@ class IndicatorTypeService {
 							helper.isDenominator=Boolean.parseBoolean(it.attribute("isDenominator"))
 							helper.isIntermidiateVariable=Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))
 							helper.isDynamicFinder=Boolean.parseBoolean(it.attribute("isDynamicFinder"))
-
+							helper.indType=indType
 							if(helper.isDenominator){
 								denominatorQueries.add(helper)
 							}else if(!helper.isDenominator){
@@ -246,13 +248,13 @@ class IndicatorTypeService {
 
 
 						// execute numerators against the db  by applying mathematical operators
-						int totalAtNumerator=getSumOfNumerators(numeratorQueries,location)
+						 totalAtNumerator=getSumOfNumerators(numeratorQueries,location)
 
 
 						// execute denominators against the db  by applying mathematical operators
 
 
-						int totalAtDenominator=getSumOfDenominators(denominatorQueries,location)
+						 totalAtDenominator=getSumOfDenominators(denominatorQueries,location)
 
 
 
@@ -307,38 +309,44 @@ class IndicatorTypeService {
 						int locationidentifier=location.id
 
 						String validQueryLocation=numerator.excutableScript.replace('locationidentifier',""+locationidentifier+"")
-						if(!numerator.isDynamicFinder){
+						if(numerator.indType.equalsIgnoreCase("Normal")){
+							if(!numerator.isDynamicFinder){
 
 
-							def query = session.createQuery(validQueryLocation)
+								def query = session.createQuery(validQueryLocation)
 
-							def results = query.list()
+								def results = query.list()
 
-							println" how many numerator results ok hanooo:"+results.size()
-							Object numberInObject=Equipment.executeQuery("select code from Equipment eq where eq.id=1")
-							if(numberInObject!=null){
-								if(!numerator.useCountFunction){
+								println" how many numerator results ok hanooo:"+results.size()
+								Object numberInObject=Equipment.executeQuery("select code from Equipment eq where eq.id=1")
+								if(numberInObject!=null){
+									if(!numerator.useCountFunction){
 
 
-									//uniqueNum=className.findAll("from EquipmentStatus where Status='INSTOCK' or Status='OPERATIONAL' or Status='UNDERMAINTENANCE'").size()
-									//uniqueNum=className.findAll(numerator.excutableScript).size()
+										//uniqueNum=className.findAll("from EquipmentStatus where Status='INSTOCK' or Status='OPERATIONAL' or Status='UNDERMAINTENANCE'").size()
+										//uniqueNum=className.findAll(numerator.excutableScript).size()
 
-									uniqueNum=results[0]
-									println" don't apply count: "+results
+										uniqueNum=results[0]
+										println" don't apply count: "+results
 
-								}else{
-									println" befor apply count: "
-									//uniqueNum=numberInObject.count
+									}else{
+										println" befor apply count: "
+										//uniqueNum=numberInObject.count
 
-									uniqueNum=results.size()
-									println" counted is ok number: "+uniqueNum
+										uniqueNum=results.size()
+										println" counted is ok number: "+uniqueNum
 
-								}
-							}else
-								println"The query returned null"
+									}
+								}else
+									println"The query returned null"
 
-						}else if(numerator.isDynamicFinder){
-							uniqueNum=className.findAll(numerator.excutableScript).size()
+							}else if(numerator.isDynamicFinder){
+								uniqueNum=className.findAll(numerator.excutableScript).size()
+							}
+
+						}else if(numerator.indType.equalsIgnoreCase("Special")){
+
+							println" i will call the factory to process this special indicator"
 						}
 						// update the sum after query excution in all possible cases
 						totalAtNumerator=totalAtNumerator+uniqueNum
@@ -378,38 +386,41 @@ class IndicatorTypeService {
 						int locationidentifier=location.id
 
 						String validQueryLocation=denominator.excutableScript.replace('locationidentifier',""+locationidentifier+"")
-						if(!denominator.isDynamicFinder){
+						if(denominator.indType.equalsIgnoreCase("Normal")){
+							if(!denominator.isDynamicFinder){
 
 
-							def query = session.createQuery(validQueryLocation)
+								def query = session.createQuery(validQueryLocation)
 
-							def results = query.list()
+								def results = query.list()
 
-							println" how many numerator results ok hanooo:"+results.size()
-							Object numberInObject=Equipment.executeQuery("select code from Equipment eq where eq.id=1")
-							if(numberInObject!=null){
-								if(!denominator.useCountFunction){
+								println" how many numerator results ok hanooo:"+results.size()
+								Object numberInObject=Equipment.executeQuery("select code from Equipment eq where eq.id=1")
+								if(numberInObject!=null){
+									if(!denominator.useCountFunction){
 
 
-									//uniqueNum=className.findAll("from EquipmentStatus where Status='INSTOCK' or Status='OPERATIONAL' or Status='UNDERMAINTENANCE'").size()
-									//uniqueNum=className.findAll(numerator.excutableScript).size()
 
-									uniqueDenom=results[0]
-									println" don't apply count: "+results
 
-								}else{
-									println" befor apply count: "
-									//uniqueNum=numberInObject.count
+										uniqueDenom=results[0]
 
-									uniqueDenom=results.size()
-									println" counted is ok number: "+uniqueDenom
 
-								}
-							}else
-								println"The query returned null"
+									}else{
 
-						}else if(denominator.isDynamicFinder){
-							uniqueDenom=className.findAll(denominator.excutableScript).size()
+
+
+										uniqueDenom=results.size()
+
+
+									}
+								}else
+									println"The query returned null"
+
+							}else if(denominator.isDynamicFinder){
+								uniqueDenom=className.findAll(denominator.excutableScript).size()
+							}
+						}else if(denominator.indType.equalsIgnoreCase("Special")){
+							println" i will call the factory to process this special indicator by passing the indicator finder/code"
 						}
 						// update the sum after query excution in all possible cases
 						totalAtDenominator=totalAtDenominator+uniqueDenom

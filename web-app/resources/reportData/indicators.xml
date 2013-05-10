@@ -9,11 +9,13 @@
 
         <name>
             SHARE OF OPERATIONAL EQUIPMENT
-            <!--
-Slide 7: (total number equipment with STATUS=“Operational”) 
-/ (total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”})
-            -->
+<!-- Slide 7: -->
         </name>
+
+        <formula>
+(total number equipment with STATUS=“Operational”) 
+/ (total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”})
+        </formula>
 
         <scriptFormula>
 
@@ -59,8 +61,12 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
 
         <name>
            QUANTITY OF EQUIPMENT FOR DISPOSAL
-            <!-- Slid 8  total number of equipment with status “For disposal” -->
+            <!-- Slid 8 -->
         </name>
+
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
 
         <scriptFormula>
 
@@ -90,6 +96,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
            QUANTITY OF EQUIPMENT INSTOCK
         </name>
 
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
+
         <scriptFormula>
 
             <excutableScript
@@ -118,6 +128,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
             DEGREE OF EQUIPMENT STANDARDIZATION
         </name>
 
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -135,6 +149,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
             <!-- slid 11: (total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”} and PURCHASER = {“Donor”})/(total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”}) -->
            SHARE OF EQUIPMENT DONATED
         </name>
+
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
 
         <scriptFormula>
 
@@ -174,6 +192,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
            SHARE OF EQUIPMENT THAT IS OBSOLETE
         </name>
 
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
+
         <scriptFormula>
 
             <excutableScript
@@ -211,6 +233,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
             <!-- sild 13  [(total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”} and [{Current Date – Warranty Start Date} < {Warranty period}) or {Current Date – Contract Start Date} < {Contract period})]/(total number equipment with STATUS={“Operational”; “Partially operational”, “Under maintenance”}) -->
            SHARE OF EQUIPMENT UNDER ACTIVE WARRANTY OR UNDER ACTIVE SERVICE PROVIDER CONTRACT
         </name>
+
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
 
         <scriptFormula>
 
@@ -250,6 +276,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
            SHARE OF EQUIPMENT WITH LIFE TIME EXPIRING IN LESS THAN 2 YEARS
         </name>
 
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
+
         <scriptFormula>
 
             <excutableScript
@@ -288,6 +318,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
          AVERAGE IN WAITING FOR SPAREPARTS
         </name>
 
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -303,6 +337,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
            COST EFFECTIVENESS OF PREVENTIVE MAINTENANCE
         </name>
+
+        <formula>
+total number of equipment with status “For disposal”
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -320,6 +358,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           DEGREE EXECUTION
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -336,6 +378,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
            SHARE OF MAINTENANCE EXECUTED AT THE FACILITY
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -351,6 +397,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           DEVIATION AGAINST SCHEDULED DATE
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -369,6 +419,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           TOTAL NO OF WORK ORDERS PER QUARTER
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -384,6 +438,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           DEGREE OF CORRECTIVE MAINTENANC EEXECUTION ACCORDING TO BENCHMARK
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -401,6 +459,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           DEGREE OF POSITIVE FEED BACK FROM EQUIPMENT USER POST CORRECTIVE_MAINTENANCE
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -416,6 +478,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           SHARE OF WORK ORDERS WITNESSING REINCIDENCE IN A PERIOD OF TIME (USER DEFINED)
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -433,6 +499,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           COST EFFECTIVENESS OF CORRECTIVE_MAINTENANCE
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -448,6 +518,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           SHARE_OF_WORKORDERSESCALETEDTOMMC
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -465,6 +539,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
          SHARE OF WORKORDERSOUTSOURCEDTO3RDPARTIES (EXCLUDING WARRANTY/SERVICE PROVIDER CONTRACTS)
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -480,6 +558,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
          SHARE  OF WORK ORDERS UNDER WARRANTY/SERVICE PROVIDER CONTRACTS
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -497,6 +579,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           SHARE  OF WORK ORDERS EXECUTED UNDER WARRANTY/SERVICE PROVIDER CONTRACTS
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -512,6 +598,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
          AVERAGE TIME TO FIX EQUIPMENT
         </name>
+
+        <formula>
+
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -529,6 +619,10 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
          AVERAGE TIME TO FIX EQUIPMENT_ BY DH TECHNICIAN
         </name>
 
+        <formula>
+
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -544,6 +638,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           AVERAGE TIME TO FIX EQUIPMENT_ BY MMC
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -561,6 +658,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           AVERAGE TIME TO FIX EQUIPMENT BY 3RD PARTIES (EXCLUDING WARRANTY/SERVICE PROVIDER CONTRACTS)
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -576,6 +676,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           AVERAGE TIME TO FIX EQUIPMENT BY WARRANTY/SERVICE PROVIDER
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -593,6 +696,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           SHARE OF WORK ORDERS REQUIRING NEW SPARE PARTS
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -609,6 +715,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           AVERAGE TIME WAITING FOR SPARE PARTS
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -624,6 +733,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           SHARE OF PROBLEMS CAUSED BY MISUSE
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -643,6 +755,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           NUMBER OF TYPES OF SPARE PARTS ABOUT TO BE DISCONTINUED IN A YEAR
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -658,6 +773,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           NUMBER OF TYPES OF  SPARE PARTS ABOUT TO STOCK OUT IN A GIVEN TIME PERIOD
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -675,6 +793,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
          NUMBER OF TYPES OF  SPARE PARTS WITH STOCK MORE THAN A GIVEN TIME PERIOD
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -691,6 +812,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
          AVERAGE_ STOCK TIME
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -706,6 +830,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           AVERAGE_ TIME BETWEEN REQUEST AND ARRIVAL OF SPARE PARTS
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -725,6 +852,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           AVERAGE_ NUMBER OF EQUIPMENT_ PER FACILITY
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -740,6 +870,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
          SHARE OF FACILITIES WITH NUMBER OF INVENTORY STATUS CHANGES LESS THAN 10 IN A YEAR
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -757,6 +890,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         SHARE OF FACILITIES WITH NUMBER OF WORK ORDERS LESS THAN 10 IN A YEAR
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -772,6 +908,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
          AVERAGE PERCENTAGE OF EQUIPMENT_S PER FACILITY HAVING A PREVENTIVE MAINTENANCE PLAN
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
@@ -789,6 +928,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
           SHARE OF FACILITIES WITH NO PREVENTIVE MAINTENANCE PLAN FOR MORE THAN 10% OF THE EQUIPMENT
         </name>
 
+        <formula>
+        </formula>
+
         <scriptFormula>
         </scriptFormula>
 
@@ -804,6 +946,9 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
         <name>
           SHARE OF WAREHOUSES WITH NUMBER OF SPARE PART INVENTORY STATUS CHANGES LESS THAN 20 IN A MONTH
         </name>
+
+        <formula>
+        </formula>
 
         <scriptFormula>
         </scriptFormula>
