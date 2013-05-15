@@ -13,15 +13,15 @@ class CategoryTypeController {
 def scaffold = true
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [categoryTypeInstanceList: CategoryType.list(params), categoryTypeInstanceTotal: CategoryType.count()]
+        [categoryTypeInstanceList: IndicatorCategory.list(params), categoryTypeInstanceTotal: IndicatorCategory.count()]
     }
 
     def create() {
-        [categoryTypeInstance: new CategoryType(params)]
+        [categoryTypeInstance: new IndicatorCategory(params)]
     }
 
     def save() {
-        def categoryTypeInstance = new CategoryType(params)
+        def categoryTypeInstance = new IndicatorCategory(params)
         if (!categoryTypeInstance.save(flush: true)) {
             render(view: "create", model: [categoryTypeInstance: categoryTypeInstance])
             return
@@ -32,7 +32,7 @@ def scaffold = true
     }
 
     def show(Long id) {
-        def categoryTypeInstance = CategoryType.get(id)
+        def categoryTypeInstance = IndicatorCategory.get(id)
         if (!categoryTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), id])
             redirect(action: "list")
@@ -43,7 +43,7 @@ def scaffold = true
     }
 
     def edit(Long id) {
-        def categoryTypeInstance = CategoryType.get(id)
+        def categoryTypeInstance = IndicatorCategory.get(id)
         if (!categoryTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), id])
             redirect(action: "list")
@@ -54,7 +54,7 @@ def scaffold = true
     }
 
     def update(Long id, Long version) {
-        def categoryTypeInstance = CategoryType.get(id)
+        def categoryTypeInstance = IndicatorCategory.get(id)
         if (!categoryTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), id])
             redirect(action: "list")
@@ -83,7 +83,7 @@ def scaffold = true
     }
 
     def delete(Long id) {
-        def categoryTypeInstance = CategoryType.get(id)
+        def categoryTypeInstance = IndicatorCategory.get(id)
         if (!categoryTypeInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'categoryType.label', default: 'CategoryType'), id])
             redirect(action: "list")

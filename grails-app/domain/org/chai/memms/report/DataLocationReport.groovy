@@ -1,10 +1,14 @@
 package org.chai.memms.report
+import org.chai.location.DataLocationType;
+
+
 
 import org.chai.location.DataLocation;
 
 class DataLocationReport {
 	String code
 	DataLocation dataLocation
+	DataLocationType dataLocationType
 	Date generatedAt
 	static hasMany = [indicatorValues:IndicatorValue]
 	static mapping ={

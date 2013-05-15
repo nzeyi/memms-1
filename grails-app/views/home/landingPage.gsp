@@ -21,8 +21,7 @@
   		</shiro:hasPermission>
   		<shiro:hasPermission permission="menu:reports">
   		<li><a href="#"><g:message code="header.navigation.reports"/></a></li>
-  		<li><a href="${createLink(controller: 'indicator', action:'list')}"><g:message code="header_navigation_reports_config"/></a></li>
-  		<li><a href="#"><g:message code="header_navigation_reports_generate"/></a></li>
+  		
   		</shiro:hasPermission>
   	</ul>
   </div>

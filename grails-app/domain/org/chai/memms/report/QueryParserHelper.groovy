@@ -20,7 +20,7 @@ class QueryParserHelper {
 	Boolean isIntermidiateVariable=false
 	Boolean isCriteria=false
 	Boolean isDynamicFinder=false
-	String indicatorType
+	String type
 	
 	
 

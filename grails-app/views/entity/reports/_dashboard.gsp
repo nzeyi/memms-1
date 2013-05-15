@@ -18,7 +18,10 @@
       <img src="${resource(dir:'images',file:'list-spinner.gif')}" class="ajax-big-spinner"/>
     </div> -->
     <ul id='top_tabs' class="v-tabs-nav left">
-      <li><a class="active" id="#corrective">Corrective Maintenance</a></li>
+     <li><a href="${createLinkWithTargetURI(controller:'indicator', action:'list')}" class="active">
+									<g:message code="default.link.test.label" />
+								</a></li>
+      <li><a id="#corrective">Corrective Maintenance</a></li>
       <li><a id="#preventive">Preventive Maintenance</a></li>
       <li><a id="#equipment">Management Medical Equipment</a></li>
       <li><a id="#spare_parts">Management Of Spare Parts</a></li>

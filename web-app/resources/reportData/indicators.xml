@@ -26,8 +26,8 @@
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
                 useCountFunction="true" >
-select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='INSTOCK' and equ.dataLocation='locationidentifier'
-            </excutableScript>
+select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='OPERATIONAL' and equ.dataLocation='locationidentifier'
+                       </excutableScript>
 
             <excutableScript
                 classDomaine="Equipment"
@@ -36,8 +36,8 @@ select equ.code from Equipment as equ inner join equ.status as equipmentStatus w
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
                 useCountFunction="true" >
-select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='OPERATIONAL' and equ.dataLocation='locationidentifier'
-            </excutableScript>
+select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='UNDERMAINTENANCE' and equ.dataLocation='locationidentifier'
+                        </excutableScript>
 
             <excutableScript
                 classDomaine="Equipment"

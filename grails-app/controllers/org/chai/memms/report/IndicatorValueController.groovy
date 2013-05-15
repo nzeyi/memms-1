@@ -1,102 +1,105 @@
 package org.chai.memms.report
+import java.util.Set
+import java.util.Map
 
-import org.springframework.dao.DataIntegrityViolationException
+import org.apache.commons.lang.math.NumberUtils
+import org.chai.memms.AbstractEntityController;
 
-class IndicatorValueController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+class IndicatorValueController extends AbstractEntityController {
+	def indicatorValueService
+	//def grailsApplication
+	def getLabel() {
+		return "indicatorValue.label"
+	}
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
+	def getEntityClass() {
+		return IndicatorValue.class
+	}
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [indicatorValueInstanceList: IndicatorValue.list(params), indicatorValueInstanceTotal: IndicatorValue.count()]
-    }
 
-    def create() {
-        [indicatorValueInstance: new IndicatorValue(params)]
-    }
+	def getEntity(def id) {
+		return IndicatorValue.get(id)
+	}
 
-    def save() {
-        def indicatorValueInstance = new IndicatorValue(params)
-        if (!indicatorValueInstance.save(flush: true)) {
-            render(view: "create", model: [indicatorValueInstance: indicatorValueInstance])
-            return
-        }
+	def createEntity() {
+		return new IndicatorValue()
+	}
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), indicatorValueInstance.id])
-        redirect(action: "show", id: indicatorValueInstance.id)
-    }
+	def getTemplate() {
+		return "/entity/reports/dashboard/indicatorValue/createIndicatorValue"
+	}
 
-    def show(Long id) {
-        def indicatorValueInstance = IndicatorValue.get(id)
-        if (!indicatorValueInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "list")
-            return
-        }
 
-        [indicatorValueInstance: indicatorValueInstance]
-    }
+	def deleteEntity(def entity) {
 
-    def edit(Long id) {
-        def indicatorValueInstance = IndicatorValue.get(id)
-        if (!indicatorValueInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "list")
-            return
-        }
+		super.deleteEntity(entity)
+	}
 
-        [indicatorValueInstance: indicatorValueInstance]
-    }
+	def bindParams(def entity) {
+		entity.properties = params
+	}
 
-    def update(Long id, Long version) {
-        def indicatorValueInstance = IndicatorValue.get(id)
-        if (!indicatorValueInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "list")
-            return
-        }
+	def getExportClass() {
+		return "IndicatorValueExportTask"
+	}
 
-        if (version != null) {
-            if (indicatorValueInstance.version > version) {
-                indicatorValueInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'indicatorValue.label', default: 'IndicatorValue')] as Object[],
-                          "Another user has updated this IndicatorValue while you were editing")
-                render(view: "edit", model: [indicatorValueInstance: indicatorValueInstance])
-                return
-            }
-        }
+	def getModel(def entity) {
+		[
+			indicatorValue: entity
+		]
+	}
 
-        indicatorValueInstance.properties = params
 
-        if (!indicatorValueInstance.save(flush: true)) {
-            render(view: "edit", model: [indicatorValueInstance: indicatorValueInstance])
-            return
-        }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), indicatorValueInstance.id])
-        redirect(action: "show", id: indicatorValueInstance.id)
-    }
 
-    def delete(Long id) {
-        def indicatorValueInstance = IndicatorValue.get(id)
-        if (!indicatorValueInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "list")
-            return
-        }
 
-        try {
-            indicatorValueInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'indicatorValue.label', default: 'IndicatorValue'), id])
-            redirect(action: "show", id: id)
-        }
-    }
+	def model(def entities) {
+		return [
+			entities: entities,
+			entityCount: entities.totalCount,
+			entityClass:getEntityClass(),
+			code: getLabel()
+		]
+	}
+	def ajaxModel(def entities,def searchTerm) {
+		def model = model(entities) << [q:searchTerm]
+		def listHtml = g.render(template:"/entity/reports/dashboard/indicatorValue/indicatorValueList",model:model)
+		render(contentType:"text/json") { results = [listHtml]}
+	}
+	def search = {
+		adaptParamsForList()
+		def indicatorValues  = indicatorValueService.searchIndicatorValue(params['q'],null,params)
+
+		if(request.xhr)
+			this.ajaxModel(indicatorValues,params['q'])
+		else {
+			render(view:"/entity/list/",model:model(indicatorValues) << [
+				template:"/reports/dashboard/indicatorValue/indicatorValueList",
+				listTop:"/reports/dashboard/indicatorValue/listTop",
+			
+			])
+		}
+	}
+		
+	
+	def list = {
+		println"i am there ok"
+		adaptParamsForList()
+		
+		def indicatorValues = IndicatorValue.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
+		if(request.xhr){
+			this.ajaxModel(indicatorValues,"")
+			println"i was just kiding okkkkkkkkkkkkkkkkkkkkkkk"
+		}
+		else{
+			println"seriously doneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+			render(view:"/entity/list",model:model(indicatorValues) << [
+				template:"/reports/dashboard/indicatorValue/indicatorValueList",
+				listTop:"/reports/dashboard/indicatorValue/listTop"
+
+			])
+			println"hi how are you doing ok ??????????????????????????????????????????????????????????"
+		}
+	}
 }

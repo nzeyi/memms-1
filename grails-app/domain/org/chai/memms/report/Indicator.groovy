@@ -5,14 +5,18 @@ import i18nfields.I18nFields
 @EqualsAndHashCode(includes="code")
 class Indicator {
 	String code
-	CategoryType categoryType
-	String indicatorName
-	String formula
-	String indicatorType
 	
-	static i18nFields = ["indicatorName",]
-	static belongsTo = [categoryType:CategoryType]
+	
+	String names
+	String formula
+	
+	String type
+	
+	static i18nFields = ["names"]
+	static belongsTo = [indicatorCategory:IndicatorCategory]
+	//static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
 	static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
+	
 	static mapping ={
 		table "memms_report_indicator"
 		version false
@@ -22,14 +26,11 @@ class Indicator {
 	}
 	static constraints = {
 		code blank:false, nullable:false
-		indicatorName nullable: true, blank: true
+		names nullable: true, blank: true
 	    formula blank:true, nullable:true,size:3..1000
-		
-		
-		
 	}
 	@Override
 	public String toString() {
-		return indicatorName;
+	return "Indicator[id="+id+"code=" + code + "]";
 	}
 }

@@ -144,7 +144,8 @@
 		<shiro:hasPermission permission="menu:reports">
 			<li><a class="${controllerName=='report'?'active':''}" href="#"><g:message code="header.navigation.reports"/></a>
 				<ul class="submenu">
-					%{-- <shiro:hasPermission permission="menu:dashboard">
+					
+					<shiro:hasPermission permission="menu:dashboard">
 							<li>
 								<a href="${createLink(controller:'reports', action:'dashboard')}">
 									<g:message code="header.navigation.reports.dashboard"/>
@@ -157,7 +158,7 @@
 									<g:message code="header.navigation.reports.listing"/>
 								</a>
 							</li>
-					</shiro:hasPermission> --}%
+					</shiro:hasPermission>
 					<shiro:hasPermission permission="menu:equipmentExport">
 							<li>
 								<a href="${createLink(controller: 'equipmentView', action:'generalExport')}">
@@ -171,6 +172,91 @@
 		<shiro:hasPermission permission="menu:admin">
 			<li><a href="#"><g:message code="header.navigation.administration"/></a>
 	         	<ul class="submenu">
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	<shiro:hasPermission permission="menu:dashboard">
+						<li><a href="#"><g:message code="report.config.label"/></a>
+							<div class="sub-submenu">
+								<ul class="submenu">
+									<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicator', action:'list')}">
+									<g:message code="header.navigation.indicator.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorCategory', action:'list')}">
+									<g:message code="header.navigation.indicatorCategory.reports.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorColorCriteriaPerDataLocationType', action:'list')}">
+									<g:message code="header.navigation.reports.indicatorColor.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorValue', action:'list')}">
+									<g:message code="header.navigation.reports.indicatorValue.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard"><li>
+								<a href="${createLink(controller:'intermediateVariable', action:'list')}">
+									<g:message code="header.navigation.reports.intermediateVariable.lebel"/>
+								</a></li>
+								</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard"><li>
+								<a href="${createLink(controller:'queryParserHelper', action:'list')}">
+									<g:message code="header.navigation.reports.queryParserHelper.lebel"/>
+								</a>
+							</li></shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li><a href="${createLink(controller:'dataLocationReport', action:'list')}">
+									<g:message code="header.navigation.reports.dataLocationReport.lebel"/>
+								</a>
+							</li>
+							
+					</shiro:hasPermission>
+								</ul>
+							</div>
+						</li>
+					</shiro:hasPermission>
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
+	         	
 	         		<shiro:hasPermission permission="menu:equipmentType">
 						<li>
 							<a href="${createLink(controller: 'equipmentType', action:'list')}">
@@ -197,12 +283,14 @@
 							</div>
 						</li>
 					</shiro:hasPermission>
+					
 					<shiro:hasPermission permission="menu:department">
 						<li><a href="${createLink(controller: 'department', action:'list')}"><g:message code="department.label"/></a></li>
 					</shiro:hasPermission>
 					<shiro:hasPermission permission="menu:provider">
 						<li><a href="${createLink(controller: 'provider', action:'list')}"><g:message code="header.navigation.manufacturer.and.supplier"/></a></li>
 					</shiro:hasPermission>
+		
 					<shiro:hasPermission permission="menu:user">
 						<li><a href="#"><g:message code="user.manage.users.label"/></a>
 							<div class="sub-submenu">
@@ -220,6 +308,14 @@
 					<shiro:hasPermission permission="menu:managehelp">
 						<li><a href="#"><g:message code="header.manage.help.label"/></a></li>
 					</shiro:hasPermission>
+					
+					
+					
+					
+					
+					
+					
+					
 	         	</ul>
         	 </li>
 		</shiro:hasPermission>

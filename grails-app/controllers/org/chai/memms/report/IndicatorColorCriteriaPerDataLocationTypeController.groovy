@@ -1,102 +1,87 @@
 package org.chai.memms.report
+import java.util.Set
+import java.util.Map
 
+import org.apache.commons.lang.math.NumberUtils
+import org.chai.memms.AbstractEntityController;
 import org.springframework.dao.DataIntegrityViolationException
 
-class IndicatorColorCriteriaPerDataLocationTypeController {
+class IndicatorColorCriteriaPerDataLocationTypeController extends AbstractEntityController{
+	def indicatorColorCriteriaPerDataLocationTypeService
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	def getLabel() {
+		return "inndicatorColorCriteriaPerDataLocationType.label"
+	}
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
+	def getEntityClass() {
+		return IndicatorColorCriteriaPerDataLocationType.class
+	}
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [indicatorColorCriteriaPerDataLocationTypeInstanceList: IndicatorColorCriteriaPerDataLocationType.list(params), indicatorColorCriteriaPerDataLocationTypeInstanceTotal: IndicatorColorCriteriaPerDataLocationType.count()]
-    }
 
-    def create() {
-        [indicatorColorCriteriaPerDataLocationTypeInstance: new IndicatorColorCriteriaPerDataLocationType(params)]
-    }
+	def getEntity(def id) {
+		return IndicatorColorCriteriaPerDataLocationType.get(id)
+	}
 
-    def save() {
-        def indicatorColorCriteriaPerDataLocationTypeInstance = new IndicatorColorCriteriaPerDataLocationType(params)
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance.save(flush: true)) {
-            render(view: "create", model: [indicatorColorCriteriaPerDataLocationTypeInstance: indicatorColorCriteriaPerDataLocationTypeInstance])
-            return
-        }
+	def createEntity() {
+		return new IndicatorColorCriteriaPerDataLocationType()
+	}
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), indicatorColorCriteriaPerDataLocationTypeInstance.id])
-        redirect(action: "show", id: indicatorColorCriteriaPerDataLocationTypeInstance.id)
-    }
+	def getTemplate() {
+		return "/entity/reports/dashboard/indicatorColorCriteria/createIndicatorColorCriteria"
+	}
 
-    def show(Long id) {
-        def indicatorColorCriteriaPerDataLocationTypeInstance = IndicatorColorCriteriaPerDataLocationType.get(id)
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "list")
-            return
-        }
+	def bindParams(def entity) {
+		entity.properties = params
+	}
 
-        [indicatorColorCriteriaPerDataLocationTypeInstance: indicatorColorCriteriaPerDataLocationTypeInstance]
-    }
+	def getModel(def entity) {
+		[
+			indicatorColorCriteriaPerDataLocationType: entity
+		]
+	}
 
-    def edit(Long id) {
-        def indicatorColorCriteriaPerDataLocationTypeInstance = IndicatorColorCriteriaPerDataLocationType.get(id)
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "list")
-            return
-        }
+	def model(def entities) {
+		return [
+			entities: entities,
+			entityCount: entities.totalCount,
+			entityClass:getEntityClass(),
+			code: getLabel()
+		]
+	}
+	def ajaxModel(def entities,def searchTerm) {
+		def model = model(entities) << [q:searchTerm]
+		def listHtml = g.render(template:"/entity/reports/dashboard/indicatorColorCriteria/indicatorColorCriteriaList",model:model)
+		render(contentType:"text/json") { results = [listHtml]}
+	}
+	def search = {
+		adaptParamsForList()
+		def indicatorColorCriterias  = indicatorColorCriteriaPerDataLocationTypeService.searchIndicatorColorCriteriaPerDataLocationType(params['q'],null,params)
 
-        [indicatorColorCriteriaPerDataLocationTypeInstance: indicatorColorCriteriaPerDataLocationTypeInstance]
-    }
+		if(request.xhr)
+			this.ajaxModel(indicatorColorCriterias,params['q'])
+		else {
+			render(view:"/entity/list",model:model(indicatorColorCriterias) << [
+				template:"/reports/dashboard/indicatorColorCriteria/indicatorColorCriteriaList",
+				listTop:"/reports/dashboard/indicatorColorCriteria/listTop",
 
-    def update(Long id, Long version) {
-        def indicatorColorCriteriaPerDataLocationTypeInstance = IndicatorColorCriteriaPerDataLocationType.get(id)
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "list")
-            return
-        }
+			])
+		}
+	}
 
-        if (version != null) {
-            if (indicatorColorCriteriaPerDataLocationTypeInstance.version > version) {
-                indicatorColorCriteriaPerDataLocationTypeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType')] as Object[],
-                          "Another user has updated this IndicatorColorCriteriaPerDataLocationType while you were editing")
-                render(view: "edit", model: [indicatorColorCriteriaPerDataLocationTypeInstance: indicatorColorCriteriaPerDataLocationTypeInstance])
-                return
-            }
-        }
-
-        indicatorColorCriteriaPerDataLocationTypeInstance.properties = params
-
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance.save(flush: true)) {
-            render(view: "edit", model: [indicatorColorCriteriaPerDataLocationTypeInstance: indicatorColorCriteriaPerDataLocationTypeInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), indicatorColorCriteriaPerDataLocationTypeInstance.id])
-        redirect(action: "show", id: indicatorColorCriteriaPerDataLocationTypeInstance.id)
-    }
-
-    def delete(Long id) {
-        def indicatorColorCriteriaPerDataLocationTypeInstance = IndicatorColorCriteriaPerDataLocationType.get(id)
-        if (!indicatorColorCriteriaPerDataLocationTypeInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            indicatorColorCriteriaPerDataLocationTypeInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'indicatorColorCriteriaPerDataLocationType.label', default: 'IndicatorColorCriteriaPerDataLocationType'), id])
-            redirect(action: "show", id: id)
-        }
-    }
+	def list = {
+		
+		println"helooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+		adaptParamsForList()
+		
+		def indicatorColorCriterias = IndicatorColorCriteriaPerDataLocationType.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
+		if(request.xhr){
+			this.ajaxModel(indicatorColorCriterias,"")
+		}
+		else{
+			render(view:"/entity/list",model:model(indicatorColorCriterias) << [
+				template:"/reports/dashboard/indicatorColorCriteria/indicatorColorCriteriaList",
+				listTop:"/reports/dashboard/indicatorColorCriteria/listTop"
+			])
+		}
+	}
 }

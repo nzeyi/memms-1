@@ -6,7 +6,7 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(CategoryTypeController)
-@Mock(CategoryType)
+@Mock(IndicatorCategory)
 class CategoryTypeControllerTests {
 
     def populateValidParams(params) {
@@ -47,7 +47,7 @@ class CategoryTypeControllerTests {
 
         assert response.redirectedUrl == '/categoryType/show/1'
         assert controller.flash.message != null
-        assert CategoryType.count() == 1
+        assert IndicatorCategory.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class CategoryTypeControllerTests {
         assert response.redirectedUrl == '/categoryType/list'
 
         populateValidParams(params)
-        def categoryType = new CategoryType(params)
+        def categoryType = new IndicatorCategory(params)
 
         assert categoryType.save() != null
 
@@ -75,7 +75,7 @@ class CategoryTypeControllerTests {
         assert response.redirectedUrl == '/categoryType/list'
 
         populateValidParams(params)
-        def categoryType = new CategoryType(params)
+        def categoryType = new IndicatorCategory(params)
 
         assert categoryType.save() != null
 
@@ -95,7 +95,7 @@ class CategoryTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def categoryType = new CategoryType(params)
+        def categoryType = new IndicatorCategory(params)
 
         assert categoryType.save() != null
 
@@ -139,17 +139,17 @@ class CategoryTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def categoryType = new CategoryType(params)
+        def categoryType = new IndicatorCategory(params)
 
         assert categoryType.save() != null
-        assert CategoryType.count() == 1
+        assert IndicatorCategory.count() == 1
 
         params.id = categoryType.id
 
         controller.delete()
 
-        assert CategoryType.count() == 0
-        assert CategoryType.get(categoryType.id) == null
+        assert IndicatorCategory.count() == 0
+        assert IndicatorCategory.get(categoryType.id) == null
         assert response.redirectedUrl == '/categoryType/list'
     }
 }

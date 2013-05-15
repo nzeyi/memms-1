@@ -1,102 +1,120 @@
 package org.chai.memms.report
+import java.util.Set
+import java.util.Map
+import org.apache.commons.lang.math.NumberUtils
+import org.chai.memms.AbstractEntityController
 
-import org.springframework.dao.DataIntegrityViolationException
 
-class IntermediateVariableController {
-
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
-    def index() {
-        redirect(action: "list", params: params)
-    }
-
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [intermediateVariableInstanceList: IntermediateVariable.list(params), intermediateVariableInstanceTotal: IntermediateVariable.count()]
-    }
-
-    def create() {
-        [intermediateVariableInstance: new IntermediateVariable(params)]
-    }
-
-    def save() {
-        def intermediateVariableInstance = new IntermediateVariable(params)
-        if (!intermediateVariableInstance.save(flush: true)) {
-            render(view: "create", model: [intermediateVariableInstance: intermediateVariableInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), intermediateVariableInstance.id])
-        redirect(action: "show", id: intermediateVariableInstance.id)
-    }
-
-    def show(Long id) {
-        def intermediateVariableInstance = IntermediateVariable.get(id)
-        if (!intermediateVariableInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [intermediateVariableInstance: intermediateVariableInstance]
-    }
-
-    def edit(Long id) {
-        def intermediateVariableInstance = IntermediateVariable.get(id)
-        if (!intermediateVariableInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [intermediateVariableInstance: intermediateVariableInstance]
-    }
-
-    def update(Long id, Long version) {
-        def intermediateVariableInstance = IntermediateVariable.get(id)
-        if (!intermediateVariableInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (intermediateVariableInstance.version > version) {
-                intermediateVariableInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'intermediateVariable.label', default: 'IntermediateVariable')] as Object[],
-                          "Another user has updated this IntermediateVariable while you were editing")
-                render(view: "edit", model: [intermediateVariableInstance: intermediateVariableInstance])
-                return
-            }
-        }
-
-        intermediateVariableInstance.properties = params
-
-        if (!intermediateVariableInstance.save(flush: true)) {
-            render(view: "edit", model: [intermediateVariableInstance: intermediateVariableInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), intermediateVariableInstance.id])
-        redirect(action: "show", id: intermediateVariableInstance.id)
-    }
-
-    def delete(Long id) {
-        def intermediateVariableInstance = IntermediateVariable.get(id)
-        if (!intermediateVariableInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            intermediateVariableInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'intermediateVariable.label', default: 'IntermediateVariable'), id])
-            redirect(action: "show", id: id)
-        }
-    }
+class IntermediateVariableController extends AbstractEntityController {
+	def intermediateVariableService
+	
+		def getEntity(def id) {
+			return IntermediateVariable.get(id);
+		}
+	
+		def createEntity() {
+			return new IntermediateVariable();
+		}
+	
+		def getTemplate() {
+			return "/entity/reports/dashboard/intermediateVariable/createIntermediateVariable";
+		}
+	
+		def getLabel() {
+			return "equipment.type.label";
+		}
+	
+		def getEntityClass() {
+			return IntermediateVariable.class;
+		}
+		def deleteEntity(def entity) {
+			
+				super.deleteEntity(entity);
+		}
+	
+		def bindParams(def entity) {
+			entity.properties = params
+		}
+	
+		def getExportClass() {
+			return null
+		}
+	
+		def getModel(def entity) {
+			[
+				intermediateVariable: entity
+			]
+		}
+				
+		def list = {
+			adaptParamsForList()
+			def types = IntermediateVariable.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc");
+			if(request.xhr)
+				this.ajaxModel(types,"")
+			else{
+				render(view:"/entity/list",model:model(types) << [
+					template:"reports/dashboard/intermediateVariable/intermediateVariableList",
+					listTop:"reports/dashboard/intermediateVariable/listTop",
+					
+				])
+			}
+		}
+		
+		def search = {
+			adaptParamsForList()
+			def types  = intermediateVariableService.searchIntermediateVariable(params['q'],null,params)
+	
+			if(request.xhr)
+				this.ajaxModel(types,params['q'])
+			else {
+				render(view:"/entity/list",model:model(types) << [
+					template:"reports/dashboard/intermediateVariable/intermediateVariableList",
+					listTop:"reports/dashboard/intermediateVariable/listTop",
+					
+				])
+			}
+		}
+			
+		
+		def model(def entities) {
+			return [
+				entities: entities,
+				entityCount: entities.totalCount,
+				entityClass:getEntityClass(),
+				code: getLabel()
+			]
+		}
+		
+		def ajaxModel(def entities,def searchTerm) {
+			def model = model(entities) << [q:searchTerm]
+			def listHtml = g.render(template:"/entity/intermediateVariable/intermediateVariableList",model:model)
+			render(contentType:"text/json") { results = [listHtml] }
+		}
+	
+		/*The form side will be discueesd*/
+		def getAjaxData = {
+			def intermediateVariables = intermediateVariableService.searchIntermediateVariable(params['term'],[:])
+			render(contentType:"text/json") {
+				elements = array {
+					intermediateVariables.each { intermediateVariable ->
+						elem (
+								key: intermediateVariable.id,
+								value: intermediateVariable.getNames(languageService.getCurrentLanguage()) + ' ['+intermediateVariable.code+']'
+								)
+					}
+				}
+				htmls = array {
+					intermediateVariables.each { intermediateVariable -> 
+						elem (
+								key: intermediateVariable.id,
+								html: g.render(template:"/templates/typeFormSide",model:[type:intermediateVariable,label:label,cssClass:"form-aside-hidden",field:'type'])
+								)
+					}
+				}
+			}
+		}
+		
+		
+		
+    
 }

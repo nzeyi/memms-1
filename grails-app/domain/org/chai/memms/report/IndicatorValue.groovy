@@ -5,7 +5,7 @@ import org.chai.location.DataLocation;
 class IndicatorValue {
 	String code 
 	Date generatedAt
-	Double value
+	Double computedValue
 	
 	static belongsTo = [indicator:Indicator,dataLocationReport:DataLocationReport]
 	static mapping ={
@@ -16,12 +16,12 @@ class IndicatorValue {
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		value (blank:false, nullable:false)
+		computedValue (blank:false, nullable:false)
 		
 		
 	}
 	@Override
 	public String toString() {
-		return code;
+		return  "IndicatorValue[id="+id+"code=" + code + "]";
 	}
 }
