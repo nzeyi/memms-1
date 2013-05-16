@@ -71,7 +71,7 @@ class IndicatorController  extends AbstractEntityController{
 	}
 
 	def list = {
-		println"okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+		indicatorService.testQuery()
 		indicatorService.indicatorWriterFromXml()
 		adaptParamsForList()
 		

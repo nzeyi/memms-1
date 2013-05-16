@@ -51,6 +51,8 @@ class IndicatorCategoryController extends AbstractEntityController{
 			
 	def list = {
 		adaptParamsForList()
+		
+		
 		def types = IndicatorCategory.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc");
 		if(request.xhr)
 			this.ajaxModel(types,"")

@@ -8,12 +8,14 @@ import grails.converters.*
 import org.codehaus.groovy.grails.web.json.*
 
 
-import org.chai.memms.inventory.Equipment
-import org.chai.memms.inventory.EquipmentStatus
+
 import org.chai.memms.report.utils.*
 import com.google.gson.*
 
 import org.chai.memms.Inventory.*
+import org.chai.memms.inventory.Equipment;
+import org.chai.memms.maintenance.*
+import org.chai.memms.preventive.maintenance.*
 import org.chai.location.DataLocationType
 import org.chai.location.DataLocation
 
@@ -35,11 +37,13 @@ class IndicatorService {
 
 
 			Date startTime=new Date()
+			
 			println"========================================================================================"
 			println"========================================================================================"
 			println"======= Data Location Report Executor Engine Started At :"+startTime+"================="
 			println"========================================================================================"
 			println"========================================================================================"
+			
 			List<DataLocation> dataLocations=getDataLications()
 			List<IntermediateVariable> intermidiateValiables
 			if(dataLocations!=null){
@@ -77,9 +81,9 @@ class IndicatorService {
 		dataLocations=DataLocation.findAll()
 		return dataLocations
 	}
-	public static def newIndicatorCategory(def names,def code,def minYellowValue,def maxYellowValue){
+	public  def newIndicatorCategory(def names,def code,def minYellowValue,def maxYellowValue){
 		def category = new IndicatorCategory(names:names,code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
-		//Utils.setLocaleValueInMap(category,names,"Names")
+		
 		return category.save(failOnError:true)
 	}
 	public void indicatorWriterFromXml(){
@@ -191,6 +195,21 @@ class IndicatorService {
 			}
 		}
 
+	}
+	
+	
+	public void testQuery(){
+		def c = Equipment.createCriteria()
+		def results = c.list {
+			like("currentStatus", "INSTOCK%")
+			and {
+				
+				eq("location", "1")
+			}
+			
+		}
+		println" results is :"+results
+		println" results count is  :"+results.size()
 	}
 
 
