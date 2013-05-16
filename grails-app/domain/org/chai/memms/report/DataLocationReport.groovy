@@ -15,13 +15,10 @@ class DataLocationReport {
 		table "memms_report_data_location"
 		version false
 		content type:"text"
-		
 	}
 	static constraints = {
 		code (blank:false, nullable:false)
-		
-		
-		
+		dataLocationType (blank:true, nullable:true)
 	}
 	@Override
 	public String toString() {

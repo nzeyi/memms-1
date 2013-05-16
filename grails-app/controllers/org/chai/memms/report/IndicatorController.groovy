@@ -5,6 +5,7 @@ import java.util.Map
 
 import org.apache.commons.lang.math.NumberUtils
 
+import org.chai.location.DataLocation
 import org.chai.memms.AbstractEntityController;
 
 
@@ -71,8 +72,13 @@ class IndicatorController  extends AbstractEntityController{
 	}
 
 	def list = {
-		indicatorService.testQuery()
-		indicatorService.indicatorWriterFromXml()
+		//indicatorService.testQuery()
+		//indicatorService.indicatorWriterFromXml()
+		//DataLocation dataLocation=DataLocation.findById("16")
+		//int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
+		
+		//println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
+		indicatorService.reportingEngine()
 		adaptParamsForList()
 		
 		def indicators = Indicator.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")

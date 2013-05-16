@@ -32,8 +32,8 @@
 					</ul>
 				</td>
 				<td>${dataLocationReport.code}</td>
-				<td>${dataLocationReport.dataLocation.name}</td>
-				<td>${dataLocationReport.dataLocationType}</td>
+				<td>${dataLocationReport.dataLocation?.names}</td>
+				<td>${dataLocationReport.dataLocationType?.names}</td>
 				<td>${dataLocationReport.generatedAt}</td>
 				
 			</tr>

@@ -4,7 +4,7 @@
 			<th/>
 			<g:sortableColumn property="code"  title="${message(code: 'indicator.value.code.label')}" params="[q:q]" />
 			<g:sortableColumn property="computedValue"  title="${message(code: 'indicator.value.computed.value.label')}" params="[q:q]" />
-			<th>code: 'indicator.value.indicator.label')}" params="[q:q]" /></th>
+			<th><g:message code="indicator.value.indicator.label" /></th>
 		    <g:sortableColumn property="generatedAt"  title="${message(code: 'indicator.value.generated.at.label')}" params="[q:q]" />
 			
 		</tr>

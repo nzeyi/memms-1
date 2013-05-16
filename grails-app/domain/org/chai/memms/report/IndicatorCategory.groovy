@@ -11,7 +11,7 @@ class IndicatorCategory {
 	Double maxYellowValue
 
 	//*indicatorTypes
-	static i18nFields = ["names",]
+	static i18nFields = ["names"]
 	static hasMany = [indicators:Indicator]
 	static mapping ={
 		table "memms_report_indicator_category"
@@ -22,7 +22,7 @@ class IndicatorCategory {
 
 	static constraints = {
 		code (blank:false, nullable:false)
-		names (blank:true, nullable:true,unique: true, size:3..100)
+		names (blank:true, nullable:true,size:3..100)
 
 
 	}

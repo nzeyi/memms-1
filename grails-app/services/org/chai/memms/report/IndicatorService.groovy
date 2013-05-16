@@ -1,6 +1,6 @@
 package org.chai.memms.report
 
-
+import org.chai.memms.inventory.EquipmentStatus.Status;
 
 import java.lang.reflect.Type
 
@@ -8,20 +8,23 @@ import grails.converters.*
 import org.codehaus.groovy.grails.web.json.*
 
 
-
+import org.chai.memms.Warranty
+import org.chai.memms.Period
 import org.chai.memms.report.utils.*
 import com.google.gson.*
 
-import org.chai.memms.Inventory.*
+
 import org.chai.memms.inventory.Equipment;
-import org.chai.memms.maintenance.*
-import org.chai.memms.preventive.maintenance.*
+import org.chai.memms.inventory.EquipmentStatus;
+
+
 import org.chai.location.DataLocationType
 import org.chai.location.DataLocation
 
 import groovy.util.XmlParser
 import groovy.xml.XmlUtil
 import org.chai.memms.util.Utils;
+import org.chai.memms.Warranty;
 
 class IndicatorService {
 	static transactional = true
@@ -37,13 +40,13 @@ class IndicatorService {
 
 
 			Date startTime=new Date()
-			
+
 			println"========================================================================================"
 			println"========================================================================================"
 			println"======= Data Location Report Executor Engine Started At :"+startTime+"================="
 			println"========================================================================================"
 			println"========================================================================================"
-			
+
 			List<DataLocation> dataLocations=getDataLications()
 			List<IntermediateVariable> intermidiateValiables
 			if(dataLocations!=null){
@@ -81,47 +84,55 @@ class IndicatorService {
 		dataLocations=DataLocation.findAll()
 		return dataLocations
 	}
-	public  def newIndicatorCategory(def names,def code,def minYellowValue,def maxYellowValue){
-		def category = new IndicatorCategory(names:names,code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
-		
-		return category.save(failOnError:true)
+	public  void newIndicatorCategory(Map<String,String> names,def code,def minYellowValue,def maxYellowValue){
+		try{
+			def category = new IndicatorCategory(code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
+			Utils.setLocaleValueInMap(category,names,"Names")
+			category.save(failOnError:true,flush:true)
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace()
+
+		}
 	}
 	public void indicatorWriterFromXml(){
-		println"======================ok========================================11"
+
 		if(!IndicatorCategory.count()){
 			String indicatorCategoryFileContent = new File('web-app/resources/reportData/indicatorCategories.xml').text
 			def categories = new XmlParser().parseText(indicatorCategoryFileContent)
 			categories.category.each{
-				println"the name isssssssssssssssssssssssssssssssssssssssss :"+it.name.text()
-				def indicatorCategory =newIndicatorCategory(it.name.text(),it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
 
-				println" what is it ?:"+indicatorCategory
+				Map<String,String> names=new HashMap<String,String>()
+				names.put('en', it.name.text())
+				names.put('fr', "To be added later")
+				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
+
 			}
 		}
-		println"heloooooooooooooooooooooo"
+
 		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
-		println"heloooooooooooooooooooooo1"
+
 		def indicators = new XmlParser().parseText(indicatorFileContent)
-		println"heloooooooooooooooooooooo2"
+
 		if(!Indicator.count()){
-			println"heloooooooooooooooooooooo3"
+
 			IndicatorCategory category=null
 			indicators.indicator.each{
 				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
-				println"heloooooooooooooooooooooo3yessssssssssssssssssssssssss"+it.attribute("categoryCode")
+
 				if(category!=null){
-					println"heloooooooooooooooooooooo33"
+
 					String indTypeValue=it.type.text()
 					def scripts=it.scriptFormula
-					println"formula ok :"+it.formula.text()
+
 					def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
-					println"heloooooooooooooooooooooo33savr"
+
 					indicator.save(failOnError: true)
-					println"heloooooooooooooooooooooo33444444444444444444"
+
 					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
 
 					if(scripts!=null&&indicatorr!=null){
-						println"heloooooooooooooooooooofoundddddddddddddddddddddddddoo33"
+
 						def queryParserHelpers=QueryParserHelper.findByIndicator(indicatorr)
 
 						if(queryParserHelpers==null){
@@ -142,32 +153,32 @@ class IndicatorService {
 					println"category not found heloooooooooooooooooooooo3"
 			}
 		}else{
-			println"heloooooooooooooooooooooo4"
+
 			IndicatorCategory category=null
 			Indicator oldInd=null
 			indicators.indicator.each{
-				println"heloooooooooooooooooooooo411"
+
 				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
 				if(category!=null){
 
 					oldInd=Indicator.findByCode(it.attribute("indicatorCode"))
 					if(oldInd==null){
-						println" the indicator is null"
+
 						def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
 
 						indicator.save(failOnError: true)
-						println" created new indicator"
+
 					}
 					else if(oldInd!=null){
-						println" found current indicator to change formula"
+
 						oldInd.formula=it.scriptFormula.text()
 						oldInd.indicatorCategory=category
 						oldInd.save(failOnError: true)
 					}else
-						println" It will not change the formula"
 
-					def scripts=it.scriptFormula
-					println"heloooooooooooooooooooooo44444444444444444"
+
+						def scripts=it.scriptFormula
+
 					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
 					String indTypeValue=it.type.text()
 					if(scripts!=null&&indicatorr!=null){
@@ -196,27 +207,27 @@ class IndicatorService {
 		}
 
 	}
-	
-	
+
+
 	public void testQuery(){
+		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
 		def c = Equipment.createCriteria()
-		def results = c.list {
-			like("currentStatus", "INSTOCK%")
-			and {
-				
-				eq("location", "1")
-			}
-			
-		}
-		println" results is :"+results
-		println" results count is  :"+results.size()
+		DataLocation location=DataLocation.findById("16")
+		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
+		println"location id :"+location.id
+		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
+		def session = sessionFactory.getCurrentSession()
+		def query = session.createQuery(validQueryLocation)
+
+		def results = query.list()
+
+		println"date diff  :"+results
+		println" by donor results count is  :"+results.size()
 	}
 
 
 	public void indicatorValueCalculator(List<IntermediateVariable> listOfComputedIntermidiateVariables,DataLocation location){
-		// in memory keeping of numerator and denominator queries
-		//String okkkkkkkkkkkkk="[{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='INSTOCK' and equ.dataLocation='locationidentifier'",classDomaine:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='OPERATIONAL' and equ.dataLocation='locationidentifier'",classDomaine="EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"false",isIntermidiateVariable:"false",isDynamicFinder:"false"},{excutableScript:"select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equipmentStatus.status='INSTOCK' or equipmentStatus.status='OPERATIONAL' or equipmentStatus.status='UNDERMAINTENANCE' and equ.dataLocation='locationidentifier'",classDomaine:"EquipmentStatus",useCountFunction:"true",followOperand:"add",isDenominator:"true",isIntermidiateVariable:"false",isDynamicFinder:"false"}]"
-		//List<QueryParserHelper> listOfGsonisedQueries=jsonParser(scriptformulaAsJson)
+
 		List<QueryParserHelper> numeratorQueries=new ArrayList<QueryParserHelper>()
 		List<QueryParserHelper> denominatorQueries=new ArrayList<QueryParserHelper>()
 
@@ -224,21 +235,23 @@ class IndicatorService {
 		def indicators = new XmlParser().parseText(indicatorFileContent)
 		if(location!=null){
 			if(location.id>0){
-				println"Creating the facility report"
+
 				Date today=new Date()
 				String reportCod=ExecutorProvider.idGenerator(""+today.toString())
-				DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,generatedAt:today)
+
+				DataLocationType type=location.type
+				DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
 				facilityReport.save(failOnError: true)
-				println" the report is created ok"
+
 				indicators.indicator.each{
 					int totalAtNumerator=0
 					int totalAtDenominator=0
 					double indicatorValue=0.0
-					println"the indicator code ok :"+it.attribute("indicatorCode")
+
 					Indicator currentIndicator=Indicator.findByCode(it.attribute("indicatorCode"))
 					if(currentIndicator!=null){
 
-						println"ready to calculate  indicator values for thi indicator :"+currentIndicator
+
 
 
 
@@ -250,7 +263,7 @@ class IndicatorService {
 						scripts.excutableScript.each{
 
 							QueryParserHelper helper=new QueryParserHelper()
-							println" parsing and contructing queies"
+
 							helper.executableScript=it.text()
 							helper.classDomaine=it.attribute("classDomaine")
 							helper.useCountFunction=Boolean.parseBoolean(it.attribute("useCountFunction"))
@@ -267,7 +280,6 @@ class IndicatorService {
 
 						}
 
-						//}
 
 
 
@@ -282,7 +294,6 @@ class IndicatorService {
 
 
 
-						// calculating the indicator value
 
 						if(totalAtDenominator>0)
 							indicatorValue=totalAtNumerator/totalAtDenominator
@@ -296,11 +307,19 @@ class IndicatorService {
 
 						DataLocationReport savedFacilityReport=DataLocationReport.findByCode(reportCod)
 						if(savedFacilityReport!=null){
-							println"Found report object:"+savedFacilityReport
-							String indicatorValueCode=ExecutorProvider.idGenerator(today.toString()+""+indicatorValue)
-							IndicatorValue indicatorValueObj=new IndicatorValue(code:indicatorValueCode,value:indicatorValue,dataLocationReport:savedFacilityReport,generatedAt:today,indicator:currentIndicator)
-							indicatorValueObj.save(failOnError: true)
-							println"Indicator value created ok"
+							if(currentIndicator.type!=null){
+								if(currentIndicator.type.equals("Normal")){
+									//FOR NORMAL INDICATORS
+									String indicatorValueCode=ExecutorProvider.idGenerator(today.toString()+""+indicatorValue)
+									IndicatorValue indicatorValueObj=new IndicatorValue(code:indicatorValueCode,computedValue:indicatorValue,dataLocationReport:savedFacilityReport,generatedAt:today,indicator:currentIndicator)
+									indicatorValueObj.save(failOnError: true)
+								}else if(currentIndicator.type.equals("Special")){
+									//FOR SPECIAL INDICATORS
+
+									println" -----------------------------------------------------Indicator value in special case--------------------------------- "
+									indicatorValueCalculatorFactory(currentIndicator.code,listOfComputedIntermidiateVariables,location,savedFacilityReport)
+								}
+							}
 						}
 					}else
 						println" Indicator not found "
@@ -334,23 +353,16 @@ class IndicatorService {
 						String validQueryLocation=numerator.executableScript.replace('locationidentifier',""+locationidentifier+"")
 						if(numerator.type.equalsIgnoreCase("Normal")){
 							if(!numerator.isDynamicFinder){
-								//String queryBe="select equ.code from Equipment as equ inner join equ.status as equipmentStatus where equ.currentStatus=equipmentStatus.status and equipmentStatus.status='INSTOCK' and equ.dataLocation='locationidentifier'"
-								//String ontherr=queryBe.replace('locationidentifier',""+locationidentifier+"")
-								//def testQuery=session.createQuery(ontherr);
-								//println" twageragejeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee wawo:"+testQuery.list()
+
+
+
 								def query = session.createQuery(validQueryLocation)
 
 								def results = query.list()
 
-								def c = Equipment.createCriteria()
-								def resultss = c.list {
-									like("currentStatus", "OPERATIONAL%")
-									and {eq("dataLocation.id", "18") }
 
 
-								}
 
-								println"with creiteria:"+resultss
 								if(!numerator.useCountFunction){
 
 
@@ -358,12 +370,14 @@ class IndicatorService {
 									//uniqueNum=className.findAll(numerator.executableScript).size()
 
 									uniqueNum=results[0]
+									
 
 
 								}else{
 
 
 									uniqueNum=results.size()
+									
 
 
 								}
@@ -392,7 +406,7 @@ class IndicatorService {
 			// TODO: handle exception
 			e.printStackTrace()
 		}
-		println"Total numerators:"+totalAtNumerator
+		
 		return totalAtNumerator
 	}
 	public int getSumOfDenominators(List<QueryParserHelper> denominatorHelpers,DataLocation location){
@@ -465,9 +479,89 @@ class IndicatorService {
 			// TODO: handle exception
 			e.printStackTrace()
 		}
-		println"Total numerators:"+totalAtDenominator
+		
 
 		return totalAtDenominator
+	}
+
+
+
+	public void indicatorValueCalculatorFactory(String engineFinder,List<IntermediateVariable> intermediateVariables,DataLocation dataLocation,DataLocationReport datalocationReport){
+
+		if(engineFinder.equals(ExecutorProvider.MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT)){
+			println"call to the equipement under active waranty or under service provider contract"
+			Indicator indicator=Indicator.findByCode(ExecutorProvider.MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT)
+			double calculatedIndicatorValue=getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation)
+			Date today=new Date()
+			String indicatorValueCode=ExecutorProvider.idGenerator(today.toString()+""+calculatedIndicatorValue)
+			IndicatorValue indicatorValueObj=new IndicatorValue(code:indicatorValueCode,computedValue:calculatedIndicatorValue,dataLocationReport:datalocationReport,generatedAt:today,indicator:indicator)
+			indicatorValueObj.save(failOnError: true)
+			println"?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? call to the equipement under active waranty or under service provider contract"
+		}else if(engineFinder.equalsIgnoreCase(ExecutorProvider.MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS)){
+			println"MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS"
+
+		}
+		else if(engineFinder.equalsIgnoreCase(ExecutorProvider.PRIV_MAINT_AVERAGE_IN_EWAITING_FOR_SPAREPARTS)){
+			println"PRIV_MAINT_AVERAGE_IN_EWAITING_FOR_SPAREPARTS"
+
+		}
+
+
+	}
+
+
+	public  double getIndicatorValueForActiveWarantOrServiceProviderContarct(DataLocation location){
+
+		int expireryCounter=0
+		double indicatorValue=0.0
+		// sild 13  (total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – Warranty Start Date) < (Warranty period)) or (Current Date – Contract Start Date) < (Contract period))/(total number equipment with STATUS=(Operational; Partially operational, Under maintenance))
+		def criteria = Equipment.createCriteria()
+		List<Equipment> equipements= criteria.list{
+
+
+			or{
+				eq('currentStatus',EquipmentStatus.Status.UNDERMAINTENANCE)
+				eq('currentStatus',EquipmentStatus.Status.OPERATIONAL)
+				eq('currentStatus',EquipmentStatus.Status.PARTIALLYOPERATIONAL)
+
+
+			}
+			and{ eq('dataLocation',location) }
+
+
+		}
+
+		int denominator=equipements.size()
+
+		println" denominator:"+equipements.size()
+
+
+		Date currentDate=new Date()
+		println"active service provide not checked"
+
+		int numberOfEquipementsUnderActiveWarenty=0
+		for(Equipment equipement:equipements){
+			def numberOfMonths=0
+			def warantyStartDateFromCurentDate=0
+
+			def warentyPeriod=equipement.warrantyPeriod.numberOfMonths
+
+			def warrantyStartdate=equipement.warranty.startDate
+
+			warantyStartDateFromCurentDate=currentDate-warrantyStartdate
+
+			numberOfMonths=warantyStartDateFromCurentDate/30
+			if(numberOfMonths<warentyPeriod)
+				numberOfEquipementsUnderActiveWarenty++
+		}
+		if(denominator>0)
+			indicatorValue=numberOfEquipementsUnderActiveWarenty/denominator
+		else
+			indicatorValue=numberOfEquipementsUnderActiveWarenty
+
+		println" special indicator valuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu :"+indicatorValue
+
+		return indicatorValue
 	}
 
 	public def getIndicators(){
