@@ -3,7 +3,7 @@
 		<tr>
 	
 			
-			
+			<th></th>
 			<g:sortableColumn property="classDomaine"  title="${message(code: 'queryParserHelper.classDomaine.label')}" params="[q:q]" />
 			<g:sortableColumn property="executableScript"  title="${message(code: 'queryParserHelper.executableScript.label')}" params="[q:q]" />
 			<g:sortableColumn property="followOperand"  title="${message(code: 'indicato.followOperand.label')}" params="[q:q]" />
@@ -42,7 +42,7 @@
 				
 				<td>${queryParserHelper.classDomaine}</td>
 				
-				<td>${queryParserHelper.executableScript}</td>
+				<td><g:stripHtml field="${queryParserHelper.executableScript}" chars="20"/></td>
 				<td>${queryParserHelper.followOperand}</td>
 				<td>${queryParserHelper.isDenominator}</td>
 				<td>${queryParserHelper.useCountFunction}</td>

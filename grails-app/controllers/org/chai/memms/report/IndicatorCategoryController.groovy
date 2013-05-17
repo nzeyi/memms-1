@@ -26,7 +26,7 @@ class IndicatorCategoryController extends AbstractEntityController{
 	}
 
 	def getLabel() {
-		return "equipment.type.label";
+		return "indicator.category.label";
 	}
 
 	def getEntityClass() {

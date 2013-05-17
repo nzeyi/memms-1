@@ -1,12 +1,15 @@
 package org.chai.memms.report
 
+import java.util.List;
 import java.util.Set
 import java.util.Map
 
 import org.apache.commons.lang.math.NumberUtils
 
 import org.chai.location.DataLocation
+import org.chai.location.DataLocationType
 import org.chai.memms.AbstractEntityController;
+import org.chai.memms.report.utils.ExecutorProvider;
 
 
 class IndicatorController  extends AbstractEntityController{
@@ -72,15 +75,37 @@ class IndicatorController  extends AbstractEntityController{
 	}
 
 	def list = {
+
+		indicatorService.testQuery()
+		//		Date today=new Date()
+		//		List<IntermediateVariable> intermidiateValiables
+		for(DataLocation location:indicatorService.getDataLications()){
+			//			println"location "+location
+			//			String reportCod=ExecutorProvider.idGenerator(""+today.toString())
+			//
+			//			DataLocationType type=location.type
+			//			DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
+			//			facilityReport.save(failOnError: true)
+			//
+			//			DataLocationReport savedFacilityReport=DataLocationReport.findByCode(reportCod)
+			//			Indicator indicator=Indicator.findById("7")
+			//			//Indicator indicator=Indicator.findByCode("MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT")
+			//			indicatorService.indicatorValueCalculatorFactory(indicator.code,intermidiateValiables,location,facilityReport)
+			//indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(location)
+		}
+
+
+
+
 		//indicatorService.testQuery()
 		//indicatorService.indicatorWriterFromXml()
-		//DataLocation dataLocation=DataLocation.findById("16")
-		//int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
-		
-		//println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
-		indicatorService.reportingEngine()
+		//		DataLocation dataLocation=DataLocation.findById("16")
+		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
+		//
+		//		println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
+		//indicatorService.reportingEngine()
 		adaptParamsForList()
-		
+
 		def indicators = Indicator.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
 		if(request.xhr){
 			this.ajaxModel(indicators,"")

@@ -10,7 +10,7 @@ class IndicatorColorCriteriaPerDataLocationTypeController extends AbstractEntity
 	def indicatorColorCriteriaPerDataLocationTypeService
 
 	def getLabel() {
-		return "inndicatorColorCriteriaPerDataLocationType.label"
+		return "inndicator.color.label"
 	}
 
 	def getEntityClass() {

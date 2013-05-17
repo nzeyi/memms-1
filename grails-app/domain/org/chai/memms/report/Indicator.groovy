@@ -5,16 +5,11 @@ import i18nfields.I18nFields
 @EqualsAndHashCode(includes="code")
 class Indicator {
 	String code
-	
-	
 	String names
 	String formula
-	
 	String type
-	
 	static i18nFields = ["names"]
 	static belongsTo = [indicatorCategory:IndicatorCategory]
-	//static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
 	static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
 	
 	static mapping ={
@@ -24,6 +19,7 @@ class Indicator {
 		cache true
 		
 	}
+	
 	static constraints = {
 		code blank:false, nullable:false
 		names nullable: true, blank: true

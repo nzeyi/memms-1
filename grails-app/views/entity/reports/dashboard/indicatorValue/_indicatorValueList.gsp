@@ -6,7 +6,7 @@
 			<g:sortableColumn property="computedValue"  title="${message(code: 'indicator.value.computed.value.label')}" params="[q:q]" />
 			<th><g:message code="indicator.value.indicator.label" /></th>
 		    <g:sortableColumn property="generatedAt"  title="${message(code: 'indicator.value.generated.at.label')}" params="[q:q]" />
-			
+			<th><g:message code="indicator.value.data.location.report.label" /></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -33,8 +33,9 @@
 				</td>
 				<td>${indicatorValue.code}</td>
 				<td>${indicatorValue.computedValue}</td>
-				<td>${indicatorValue.indicator?.code}</td>
+				<td>${indicatorValue.indicator?.names}</td>
 				<td>${indicatorValue.generatedAt}</td>
+				<td>${indicatorValue.dataLocationReport.code}</td>
 				
 			</tr>
 		</g:each>

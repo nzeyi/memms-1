@@ -2,10 +2,10 @@
 	<thead>
 		<tr>
 			<th/>
-			<g:sortableColumn property="code"  title="${message(code: 'spare.part.code.label')}" params="[q:q]" />
-			<g:sortableColumn property="minYellow"  title="${message(code: 'min.yellow')}" params="[q:q]" />
-			<g:sortableColumn property="maxYellow"  title="${message(code: 'max.yellow')}" params="[q:q]" />
-			<g:sortableColumn property="isIncreasing"  title="${message(code: 'is.increasing')}" params="[q:q]" />
+			<g:sortableColumn property="code"  title="${message(code: 'color.eval.code.label')}" params="[q:q]" />
+			<g:sortableColumn property="minYellow"  title="${message(code: 'color.eval.min.yellow')}" params="[q:q]" />
+			<g:sortableColumn property="maxYellow"  title="${message(code: 'color.eval.max.yellow')}" params="[q:q]" />
+			<g:sortableColumn property="isIncreasing"  title="${message(code: 'color.eval.is.increasing')}" params="[q:q]" />
 			<th><g:message code="data.location.type.label" /></th>
 		    <th>  <g:message code="indicator.label" /></th>
 		

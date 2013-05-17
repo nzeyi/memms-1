@@ -3,6 +3,7 @@
 		<tr>
 			<th/>
 			<g:sortableColumn property="code"  title="${message(code: 'indicator.code.label')}" params="[q:q]" />
+			
 			<g:sortableColumn property="names"  title="${message(code: 'indicator.names.label')}" params="[q:q]" />
 			<g:sortableColumn property="formula"  title="${message(code: 'indicato.formula.label')}" params="[q:q]" />
 			<g:sortableColumn property="type"  title="${message(code: 'indicatort.indicator.type.label')}" params="[q:q]" />
@@ -26,9 +27,9 @@
 						</li>
 					</ul>
 				</td>
-				<td>${indicator.code}</td>
-				<td>${indicator.names}</td>
-				<td>${indicator.formula}</td>
+				<td><g:stripHtml field="${indicator.code}" chars="10"/></td>
+				<td><g:stripHtml field="${indicator.names}" chars="25"/></td>
+				<td><g:stripHtml field="${indicator.formula}" chars="35"/></td>
 				<td>${indicator.type}</td>
 				<td>${indicator?.indicatorCategory?.code}</td>
 			</tr>
