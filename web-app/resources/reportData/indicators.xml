@@ -216,7 +216,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
 
     <indicator
         categoryCode="MANAGEMENT_MEDICAL_EQUIPEMENT"
-        indicatorCode=" MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT" >
+        indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT" >
 
         <name>
 
@@ -237,12 +237,22 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
                 useCountFunction="true" >
-MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT
+select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and ((DATEDIFF(:currentDate,equ.warranty.startDate)lessthan(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)lessthan(equ.serviceContractPeriod.numberOfMonths)*30) and equ.dataLocation=locationidentifier)
+            </excutableScript>
+
+            <excutableScript
+                classDomaine="Equipment"
+                followOperand="add"
+                isDenominator="true"
+                isDynamicFinder="false"
+                isIntermidiateVariable="false"
+                useCountFunction="true" >
+select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
         </scriptFormula>
 
         <type>
-         Special
+         Normal
         </type>
     </indicator>
 
@@ -269,12 +279,22 @@ MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
                 useCountFunction="true" >
-MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS
+select equ.code from Equipment as equ where (DATEDIFF(:currentDate,equ.warranty.startDate)lessthan(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)lessthan(equ.serviceContractPeriod.numberOfMonths)*30 and equ.dataLocation=locationidentifier)
+            </excutableScript>
+
+            <excutableScript
+                classDomaine="Equipment"
+                followOperand="add"
+                isDenominator="true"
+                isDynamicFinder="false"
+                isIntermidiateVariable="false"
+                useCountFunction="true" >
+select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
         </scriptFormula>
 
         <type>
-         Special
+         Normal
         </type>
     </indicator>
     <!-- End -->

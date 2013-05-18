@@ -220,47 +220,50 @@ class IndicatorService {
 
 	public void testQuery(){
 		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
-//		def c = Equipment.createCriteria()
-//		DataLocation location=DataLocation.findById("16")
-//		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
-//		println"location id :"+location.id
-//		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
-//		def session = sessionFactory.getCurrentSession()
-//		def query = session.createQuery(validQueryLocation)
-		
+		//		def c = Equipment.createCriteria()
+		//		DataLocation location=DataLocation.findById("16")
+		//		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
+		//		println"location id :"+location.id
+		//		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
+		//		def session = sessionFactory.getCurrentSession()
+		//		def query = session.createQuery(validQueryLocation)
+
 		/*SELECT purch.customer.company AS name, 
-   purch.duedate AS duedate, 
-   current_date AS today, 
-   DATEDIFF(current_date, purch.duedate) AS overdue, 
-FROM Purchase AS purch
-WHERE 
-   DATEDIFF(current_date, purch.duedate) >= :duevar*/
-		
-		//Date twentyDaysInFuture = new Date(Calendar.getInstance().add(Calendar.DAY_OF_MONTH, 20));
+		 purch.duedate AS duedate, 
+		 current_date AS today, 
+		 DATEDIFF(current_date, purch.duedate) AS overdue, 
+		 FROM Purchase AS purch
+		 WHERE 
+		 DATEDIFF(current_date, purch.duedate) >= :duevar*/
+
+		//(total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – date of first inventory updation/DATE OF PURCHASE) >(Expected life time – 2years)/(total number equipment with STATUS = (Operational; Partially operational, Under maintenance))
 		DataLocation location=DataLocation.findById("16")
 		def session = sessionFactory.getCurrentSession()
-		def query = session.createQuery("select equ.warranty.startDate from Equipment as equ where (DATEDIFF(:currentDate,equ.warranty.startDate)<(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)<(equ.serviceContractPeriod.numberOfMonths)*30 and equ.datalocation=16)").setParameter("currentDate", new Date());
+		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and ((DATEDIFF(:currentDate,equ.warranty.startDate)lessthan(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)lessthan(equ.serviceContractPeriod.numberOfMonths)*30) and equ.dataLocation=locationidentifier)").setParameter("currentDate", new Date());
 
-		
-		
-		
+
+
+
 
 		def results = query.list()
 
-		println"current date biracuritse  :"+results
+		println"current shizemo parantesis ok  :"+results
 		println" added location start date ooooooo count is  :"+results.size()
 	}
 
 
 	public void indicatorValueCalculator(List<IntermediateVariable> listOfComputedIntermidiateVariables,DataLocation location){
 
-		List<QueryParserHelper> numeratorQueries=new ArrayList<QueryParserHelper>()
-		List<QueryParserHelper> denominatorQueries=new ArrayList<QueryParserHelper>()
+		List<QueryParserHelper> numeratorQueries=null
+
+		List<QueryParserHelper> denominatorQueries=null
+
 
 		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
 		def indicators = new XmlParser().parseText(indicatorFileContent)
 		if(location!=null){
 			if(location.id>0){
+
 
 				Date today=new Date()
 				String reportCod=ExecutorProvider.idGenerator(""+today.toString())
@@ -270,12 +273,16 @@ WHERE
 				facilityReport.save(failOnError: true)
 
 				indicators.indicator.each{
-					int totalAtNumerator=0
-					int totalAtDenominator=0
-					double indicatorValue=0.0
+
 
 					Indicator currentIndicator=Indicator.findByCode(it.attribute("indicatorCode"))
 					if(currentIndicator!=null){
+						numeratorQueries=new ArrayList<QueryParserHelper>()
+						denominatorQueries=new ArrayList<QueryParserHelper>()
+						int totalAtNumerator=0
+						int totalAtDenominator=0
+						double indicatorValue=0.0
+						
 
 
 
@@ -375,14 +382,24 @@ WHERE
 						def session = sessionFactory.getCurrentSession()
 						//DataLocation location=DataLocation.findById(18)
 						int locationidentifier=location.id
-
 						String validQueryLocation=numerator.executableScript.replace('locationidentifier',""+locationidentifier+"")
+						String validQueryLessThanOperatorAdded=""
+						if(validQueryLocation.contains("lessthan"))
+							validQueryLessThanOperatorAdded=validQueryLocation.replace('lessthan','<')
+						else
+							validQueryLessThanOperatorAdded=validQueryLocation
 						if(numerator.type.equalsIgnoreCase("Normal")){
 							if(!numerator.isDynamicFinder){
 
-								println"numerator query here is :"+validQueryLocation
 
-								def query = session.createQuery(validQueryLocation)
+								def query=null
+								if(validQueryLocation.contains("currentDate")){
+									//println"numerator query here is :"+validQueryLocation
+									query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
+									println"numerator query here is :"+validQueryLessThanOperatorAdded
+								}
+								else
+									query = session.createQuery(validQueryLessThanOperatorAdded)
 
 								def results = query.list()
 
@@ -396,7 +413,7 @@ WHERE
 									//uniqueNum=className.findAll(numerator.executableScript).size()
 
 									uniqueNum=results[0]
-									println"result array :"+results
+									//println"result array :"+results
 
 
 								}else{
@@ -586,10 +603,10 @@ WHERE
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")
 			if(equipement.warranty.startDate!=null){
 				String ancientDate =formater.format(equipement.warranty.startDate)
-				
+
 				//warranty start date isues
 				String nowDate = formater.format(currentDate)
-				
+
 				DateTime oldDate = formatter.parseDateTime(ancientDate)
 				DateTime newDate = formatter.parseDateTime(nowDate)
 				final Months warrantyMonthsUntilNow = Months.monthsBetween(oldDate, newDate)
@@ -620,11 +637,11 @@ WHERE
 			indicatorValue=numberOfEquipementsUnderActiveWarenty
 
 		println"the value :"+indicatorValue
-		
-		
-		
-		
-		
+
+
+
+
+
 		return indicatorValue
 	}
 

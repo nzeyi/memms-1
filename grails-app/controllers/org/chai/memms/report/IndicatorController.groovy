@@ -76,10 +76,10 @@ class IndicatorController  extends AbstractEntityController{
 
 	def list = {
 
-		indicatorService.testQuery()
+		//indicatorService.testQuery()
 		//		Date today=new Date()
 		//		List<IntermediateVariable> intermidiateValiables
-		for(DataLocation location:indicatorService.getDataLications()){
+		//for(DataLocation location:indicatorService.getDataLications()){
 			//			println"location "+location
 			//			String reportCod=ExecutorProvider.idGenerator(""+today.toString())
 			//
@@ -92,7 +92,7 @@ class IndicatorController  extends AbstractEntityController{
 			//			//Indicator indicator=Indicator.findByCode("MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT")
 			//			indicatorService.indicatorValueCalculatorFactory(indicator.code,intermidiateValiables,location,facilityReport)
 			//indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(location)
-		}
+		//}
 
 
 
@@ -103,7 +103,7 @@ class IndicatorController  extends AbstractEntityController{
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
 		//
 		//		println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
-		//indicatorService.reportingEngine()
+		indicatorService.reportingEngine()
 		adaptParamsForList()
 
 		def indicators = Indicator.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
