@@ -279,7 +279,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
                 useCountFunction="true" >
-select equ.code from Equipment as equ where (DATEDIFF(:currentDate,equ.warranty.startDate)lessthan(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)lessthan(equ.serviceContractPeriod.numberOfMonths)*30 and equ.dataLocation=locationidentifier)
+select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and (((equ.expectedLifeTime.numberOfMonths-24)*30)lessthan(DATEDIFF(:currentDate,equ.purchaseDate))) and equ.dataLocation=locationidentifier
             </excutableScript>
 
             <excutableScript

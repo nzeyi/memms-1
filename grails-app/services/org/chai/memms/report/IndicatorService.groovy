@@ -239,7 +239,7 @@ class IndicatorService {
 		//(total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – date of first inventory updation/DATE OF PURCHASE) >(Expected life time – 2years)/(total number equipment with STATUS = (Operational; Partially operational, Under maintenance))
 		DataLocation location=DataLocation.findById("16")
 		def session = sessionFactory.getCurrentSession()
-		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and ((DATEDIFF(:currentDate,equ.warranty.startDate)lessthan(equ.warrantyPeriod.numberOfMonths)*30) or (DATEDIFF(:currentDate,equ.serviceContractStartDate)lessthan(equ.serviceContractPeriod.numberOfMonths)*30) and equ.dataLocation=locationidentifier)").setParameter("currentDate", new Date());
+		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and (((equ.expectedLifeTime.numberOfMonths-24)*30)<(DATEDIFF(:currentDate,equ.purchaseDate))) and equ.dataLocation=16").setParameter("currentDate", new Date());
 
 
 
@@ -247,7 +247,7 @@ class IndicatorService {
 
 		def results = query.list()
 
-		println"current shizemo parantesis ok  :"+results
+		println" nomgeyenoibimenyetso grater than in two years ok *30 :"+results
 		println" added location start date ooooooo count is  :"+results.size()
 	}
 
@@ -282,7 +282,7 @@ class IndicatorService {
 						int totalAtNumerator=0
 						int totalAtDenominator=0
 						double indicatorValue=0.0
-						
+
 
 
 
@@ -393,7 +393,7 @@ class IndicatorService {
 
 
 								def query=null
-								if(validQueryLocation.contains("currentDate")){
+								if(validQueryLessThanOperatorAdded.contains("currentDate")){
 									//println"numerator query here is :"+validQueryLocation
 									query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
 									println"numerator query here is :"+validQueryLessThanOperatorAdded
@@ -409,11 +409,10 @@ class IndicatorService {
 								if(!numerator.useCountFunction){
 
 
-									//uniqueNum=className.findAll("from EquipmentStatus where Status='INSTOCK' or Status='OPERATIONAL' or Status='UNDERMAINTENANCE'").size()
-									//uniqueNum=className.findAll(numerator.executableScript).size()
+
 
 									uniqueNum=results[0]
-									//println"result array :"+results
+
 
 
 								}else{
