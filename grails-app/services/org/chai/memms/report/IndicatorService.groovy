@@ -373,7 +373,7 @@ class IndicatorService {
 						for(IntermediateVariable intermVal:intermediateVariables)
 							if(intermVal.id==intermediateId){
 								uniqueDenom=intermVal.computedValue
-								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttinmemid"+intermediateId+"tttttttt:"+uniqueDenom
+								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
 
 								break
 							}
