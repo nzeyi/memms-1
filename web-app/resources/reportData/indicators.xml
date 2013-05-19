@@ -22,6 +22,7 @@
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -32,9 +33,10 @@ select equ.code from Equipment as equ where equ.currentStatus='OPERATIONAL' and 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
                 isDynamicFinder="false"
-                isIntermidiateVariable="false"
+                isIntermidiateVariable="true"
                 useCountFunction="true" >
 select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
@@ -63,6 +65,7 @@ total number of equipment with status For disposal
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -95,6 +98,7 @@ total number of equipment with status IN STOCK
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -149,6 +153,7 @@ select equ.code from Equipment as equ where equ.currentStatus='INSTOCK' and equ.
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -159,9 +164,10 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
                 isDynamicFinder="false"
-                isIntermidiateVariable="false"
+                isIntermidiateVariable="true"
                 useCountFunction="true" >
          select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
@@ -191,6 +197,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -201,9 +208,10 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
                 isDynamicFinder="false"
-                isIntermidiateVariable="false"
+                isIntermidiateVariable="true"
                 useCountFunction="true" >
 select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
@@ -233,6 +241,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -243,9 +252,10 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
                 isDynamicFinder="false"
-                isIntermidiateVariable="false"
+                isIntermidiateVariable="true"
                 useCountFunction="true" >
 select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
@@ -275,6 +285,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -285,9 +296,10 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
                 isDynamicFinder="false"
-                isIntermidiateVariable="false"
+                isIntermidiateVariable="true"
                 useCountFunction="true" >
 select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
             </excutableScript>
@@ -304,12 +316,12 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
         categoryCode="PRIVENTIVE_MAINTENANCE"
         indicatorCode="PRIV_MAINT_AVERAGE_IN_EWAITING_FOR_SPAREPARTS" >
 
-        <name>
+        <name> <!-- Slid 32 -->
          AVERAGE IN WAITING FOR SPAREPARTS
         </name>
 
         <formula>
-             AVERAGE IN WAITING FOR SPAREPARTS
+            Average time waiting for spare parts
         </formula>
 
         <scriptFormula>
@@ -317,6 +329,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             <excutableScript
                 classDomaine="Equipment"
                 followOperand="add"
+                internediateVariableCode="NA"
                 isDenominator="false"
                 isDynamicFinder="false"
                 isIntermidiateVariable="false"
@@ -334,11 +347,13 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
         indicatorCode="PRIV_MAINT_COST_EFFECTIVENESS_OF_PREVENTIVE_MAINTENANCE" >
 
         <name>
+
+            <!-- slid 33 -->
            COST EFFECTIVENESS OF PREVENTIVE MAINTENANCE
         </name>
 
         <formula>
-total number of equipment with status For disposal
+Average equipments (cumulative cost of  preventive maintenance maintenance for an equipment/cost of the equipment)
         </formula>
 
         <scriptFormula>
@@ -353,11 +368,13 @@ total number of equipment with status For disposal
         categoryCode="MANAGEMENT_MEDICAL_EQUIPEMENT"
         indicatorCode="PRIV_MAINT_DEGREE_EXECUTION" >
 
-        <name>
+        <name> <!-- Slide 34 -->
+>
           DEGREE EXECUTION
         </name>
 
         <formula>
+            Number of preventive maintenance deadlines adhered to/total  number of preventive maintenance deadlines
         </formula>
 
         <scriptFormula>
@@ -373,10 +390,13 @@ total number of equipment with status For disposal
         indicatorCode="PRIV_MAINT_SHARE_OF_MAINTENANCE_EXECUTED_AT_THE_FACILITY" >
 
         <name>
+
+            <!-- Slide 35 -->
            SHARE OF MAINTENANCE EXECUTED AT THE FACILITY
         </name>
 
         <formula>
+            Number of PM deadlines adhered to at the facility/Total number of PM deadlines
         </formula>
 
         <scriptFormula>
@@ -391,11 +411,12 @@ total number of equipment with status For disposal
         categoryCode="PRIVENTIVE_MAINTENANCE"
         indicatorCode="PRIV_MAINT_DEVIATION_AGAINST_SCHEDULED_DATE" >
 
-        <name>
+        <name> <!-- slid 36 -->
           DEVIATION AGAINST SCHEDULED DATE
         </name>
 
         <formula>
+            Average deviation from scheduled date 
         </formula>
 
         <scriptFormula>
@@ -431,11 +452,12 @@ total number of equipment with status For disposal
         categoryCode="CORRECTIVE_MAINTENANCE"
         indicatorCode="CORRE_MAINT_DEGREE_OF_CORRECTIVE_MAINTENANCE_EXECUTION_ACCORDING_TO_BENCHMARK" >
 
-        <name>
+        <name> <!-- Slid 16 -->
           DEGREE OF CORRECTIVE MAINTENANC EEXECUTION ACCORDING TO BENCHMARK
         </name>
 
         <formula>
+            Total no. of work orders executed/total no. of work orders generated in a given time frame (time frame to be decided by the user) 
         </formula>
 
         <scriptFormula>

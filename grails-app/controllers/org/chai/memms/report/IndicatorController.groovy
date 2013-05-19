@@ -14,7 +14,7 @@ import org.chai.memms.report.utils.ExecutorProvider;
 
 class IndicatorController  extends AbstractEntityController{
 	def indicatorService
-
+	def intermediateVariableService
 	def getLabel() {
 		return "indicator.label"
 	}
@@ -80,24 +80,25 @@ class IndicatorController  extends AbstractEntityController{
 		//		Date today=new Date()
 		//		List<IntermediateVariable> intermidiateValiables
 		//for(DataLocation location:indicatorService.getDataLications()){
-			//			println"location "+location
-			//			String reportCod=ExecutorProvider.idGenerator(""+today.toString())
-			//
-			//			DataLocationType type=location.type
-			//			DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
-			//			facilityReport.save(failOnError: true)
-			//
-			//			DataLocationReport savedFacilityReport=DataLocationReport.findByCode(reportCod)
-			//			Indicator indicator=Indicator.findById("7")
-			//			//Indicator indicator=Indicator.findByCode("MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT")
-			//			indicatorService.indicatorValueCalculatorFactory(indicator.code,intermidiateValiables,location,facilityReport)
-			//indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(location)
+		//			println"location "+location
+		//			String reportCod=ExecutorProvider.idGenerator(""+today.toString())
+		//
+		//			DataLocationType type=location.type
+		//			DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
+		//			facilityReport.save(failOnError: true)
+		//
+		//			DataLocationReport savedFacilityReport=DataLocationReport.findByCode(reportCod)
+		//			Indicator indicator=Indicator.findById("7")
+		//			//Indicator indicator=Indicator.findByCode("MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT")
+		//			indicatorService.indicatorValueCalculatorFactory(indicator.code,intermidiateValiables,location,facilityReport)
+		//indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(location)
 		//}
 
 
 
 
 		//indicatorService.testQuery()
+		//intermediateVariableService.intermediateVariableWriter()
 		//indicatorService.indicatorWriterFromXml()
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)

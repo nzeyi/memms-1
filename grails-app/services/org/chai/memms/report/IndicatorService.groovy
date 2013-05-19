@@ -42,7 +42,7 @@ class IndicatorService {
 
 
 	def dataSource  //Auto Injected
-
+	def intermediateVariableService
 
 	public void reportingEngine(){
 		try{
@@ -63,6 +63,8 @@ class IndicatorService {
 				for(DataLocation location:dataLocations){
 					if(location!=null){
 						if(ExecutorProvider.isLong(""+location.id)){
+							intermidiateValiables=intermediateVariableService.intermediateVariableValueCalculator(location)
+
 							indicatorValueCalculator(intermidiateValiables,location)
 						}else
 							println"Invalid location"
@@ -88,179 +90,20 @@ class IndicatorService {
 		}
 
 	}
-	public List<DataLocation> getDataLications(){
-		def dataLocations=null
-		dataLocations=DataLocation.findAll()
-		return dataLocations
-	}
-	public  void newIndicatorCategory(Map<String,String> names,def code,def minYellowValue,def maxYellowValue){
-		try{
-			def category = new IndicatorCategory(code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
-			Utils.setLocaleValueInMap(category,names,"Names")
-			category.save(failOnError:true,flush:true)
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace()
-
-		}
-	}
-	public void indicatorWriterFromXml(){
-
-		if(!IndicatorCategory.count()){
-			String indicatorCategoryFileContent = new File('web-app/resources/reportData/indicatorCategories.xml').text
-			def categories = new XmlParser().parseText(indicatorCategoryFileContent)
-			categories.category.each{
-
-				Map<String,String> names=new HashMap<String,String>()
-				names.put('en', it.name.text())
-				names.put('fr', "To be added later")
-				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
-
-			}
-		}
-		println"heloooooooooooooooooooooo"
-		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
-		println"heloooooooooooooooooooooo1"
-		def indicators = new XmlParser().parseText(indicatorFileContent)
-		println"heloooooooooooooooooooooo2"
-		if(!Indicator.count()){
-			println"heloooooooooooooooooooooo3"
-			IndicatorCategory category=null
-			indicators.indicator.each{
-				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
-				println"heloooooooooooooooooooooo3yessssssssssssssssssssssssss"+it.attribute("categoryCode")
-				if(category!=null){
-					println"heloooooooooooooooooooooo33"
-					String indTypeValue=it.type.text()
-					def scripts=it.scriptFormula
-					println"formula ok :"+it.formula.text()
-					def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
-					println"heloooooooooooooooooooooo33savr"
-					indicator.save(failOnError: true)
-					println"heloooooooooooooooooooooo33444444444444444444"
-					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
-
-					if(scripts!=null&&indicatorr!=null){
-						println"heloooooooooooooooooooofoundddddddddddddddddddddddddoo33"
-						def queryParserHelpers=QueryParserHelper.findByIndicator(indicatorr)
-
-						if(queryParserHelpers==null){
-							scripts.excutableScript.each{
-
-								def queryParserHelper=new QueryParserHelper(executableScript:it.text(),classDomaine:it.attribute("classDomaine")
-								,useCountFunction:it.attribute("useCountFunction")
-								,followOperand:it.attribute("followOperand")
-								, isDenominator:it.attribute("isDenominator")
-								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
-								,isDynamicFinder:it.attribute("isDynamicFinder"),indicator:indicatorr,type:indTypeValue)
-								queryParserHelper.save(failOnError: true)
-
-							}
-						}
-					}
-				}else
-					println"category not found heloooooooooooooooooooooo3"
-			}
-		}else{
-			println"heloooooooooooooooooooooo4"
-			IndicatorCategory category=null
-			Indicator oldInd=null
-			indicators.indicator.each{
-				println"heloooooooooooooooooooooo411"
-				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
-				if(category!=null){
-
-					oldInd=Indicator.findByCode(it.attribute("indicatorCode"))
-					if(oldInd==null){
-						println" the indicator is null"
-						def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
-
-						indicator.save(failOnError: true)
-						println" created new indicator"
-					}
-					else if(oldInd!=null){
-						println" found current indicator to change formula"
-						oldInd.formula=it.scriptFormula.text()
-						oldInd.indicatorCategory=category
-						oldInd.save(failOnError: true)
-					}else
-						println" It will not change the formula"
-
-					def scripts=it.scriptFormula
-
-					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
-					String indTypeValue=it.type.text()
-					if(scripts!=null&&indicatorr!=null){
-
-						def queryParserHelpers=QueryParserHelper.findByIndicator(indicatorr)
-
-						if(queryParserHelpers==null){
-
-							scripts.excutableScript.each{
-								def queryParserHelper=new QueryParserHelper(executableScript:it.text(),classDomaine:it.attribute("classDomaine")
-								,useCountFunction:it.attribute("useCountFunction")
-								,followOperand:it.attribute("followOperand")
-								, isDenominator:it.attribute("isDenominator")
-								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
-								,isDynamicFinder:it.attribute("isDynamicFinder"),indicator:indicatorr,type:indTypeValue)
-								queryParserHelper.save(failOnError: true)
-
-							}
-						}
-					}
-
-
-				}
-
-			}
-		}
-
-	}
-
-
-	public void testQuery(){
-		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
-		//		def c = Equipment.createCriteria()
-		//		DataLocation location=DataLocation.findById("16")
-		//		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
-		//		println"location id :"+location.id
-		//		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
-		//		def session = sessionFactory.getCurrentSession()
-		//		def query = session.createQuery(validQueryLocation)
-
-		/*SELECT purch.customer.company AS name, 
-		 purch.duedate AS duedate, 
-		 current_date AS today, 
-		 DATEDIFF(current_date, purch.duedate) AS overdue, 
-		 FROM Purchase AS purch
-		 WHERE 
-		 DATEDIFF(current_date, purch.duedate) >= :duevar*/
-
-		//(total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – date of first inventory updation/DATE OF PURCHASE) >(Expected life time – 2years)/(total number equipment with STATUS = (Operational; Partially operational, Under maintenance))
-		DataLocation location=DataLocation.findById("16")
-		def session = sessionFactory.getCurrentSession()
-		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and (((equ.expectedLifeTime.numberOfMonths-24)*30)<(DATEDIFF(:currentDate,equ.purchaseDate))) and equ.dataLocation=16").setParameter("currentDate", new Date());
-
-
-
-
-
-		def results = query.list()
-
-		println" nomgeyenoibimenyetso grater than in two years ok *30 :"+results
-		println" added location start date ooooooo count is  :"+results.size()
-	}
 
 
 	public void indicatorValueCalculator(List<IntermediateVariable> listOfComputedIntermidiateVariables,DataLocation location){
+
+
 
 		List<QueryParserHelper> numeratorQueries=null
 
 		List<QueryParserHelper> denominatorQueries=null
 
 
-		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
-		def indicators = new XmlParser().parseText(indicatorFileContent)
+		//String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
+		//def indicators = new XmlParser().parseText(indicatorFileContent)
+		def indicators = getIndicators()
 		if(location!=null){
 			if(location.id>0){
 
@@ -272,10 +115,11 @@ class IndicatorService {
 				DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
 				facilityReport.save(failOnError: true)
 
-				indicators.indicator.each{
+				for(Indicator currentIndicator:indicators){
+					//indicators.indicator.each{
 
 
-					Indicator currentIndicator=Indicator.findByCode(it.attribute("indicatorCode"))
+					//Indicator currentIndicator=Indicator.findByCode(it.attribute("indicatorCode"))
 					if(currentIndicator!=null){
 						numeratorQueries=new ArrayList<QueryParserHelper>()
 						denominatorQueries=new ArrayList<QueryParserHelper>()
@@ -288,23 +132,28 @@ class IndicatorService {
 
 
 
-						String indType=it.type.text()
+						//String indType=it.type.text()
 
 
-						def scripts=it.scriptFormula
+						//def scripts=it.scriptFormula
+						String indType=currentIndicator.type
 
-						scripts.excutableScript.each{
 
-							QueryParserHelper helper=new QueryParserHelper()
+						def scripts=currentIndicator.queryParserHelpers
 
-							helper.executableScript=it.text()
-							helper.classDomaine=it.attribute("classDomaine")
-							helper.useCountFunction=Boolean.parseBoolean(it.attribute("useCountFunction"))
-							helper.followOperand=it.attribute("followOperand")
-							helper.isDenominator=Boolean.parseBoolean(it.attribute("isDenominator"))
-							helper.isIntermidiateVariable=Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))
-							helper.isDynamicFinder=Boolean.parseBoolean(it.attribute("isDynamicFinder"))
-							helper.type=indType
+						for(QueryParserHelper helper:scripts){
+							//scripts.excutableScript.each{
+
+							//QueryParserHelper helper=new QueryParserHelper()
+
+							//helper.executableScript=it.text()
+							//helper.classDomaine=it.attribute("classDomaine")
+							//helper.useCountFunction=Boolean.parseBoolean(it.attribute("useCountFunction"))
+							//helper.followOperand=it.attribute("followOperand")
+							//helper.isDenominator=Boolean.parseBoolean(it.attribute("isDenominator"))
+							//helper.isIntermidiateVariable=Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))
+							//helper.isDynamicFinder=Boolean.parseBoolean(it.attribute("isDynamicFinder"))
+							//helper.type=indType
 							if(helper.isDenominator){
 								denominatorQueries.add(helper)
 							}else if(!helper.isDenominator){
@@ -323,7 +172,7 @@ class IndicatorService {
 						// execute denominators against the db  by applying mathematical operators
 
 
-						totalAtDenominator=getSumOfDenominators(denominatorQueries,location)
+						totalAtDenominator=getSumOfDenominators(denominatorQueries,location,listOfComputedIntermidiateVariables)
 
 
 
@@ -396,7 +245,7 @@ class IndicatorService {
 								if(validQueryLessThanOperatorAdded.contains("currentDate")){
 									//println"numerator query here is :"+validQueryLocation
 									query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
-									println"numerator query here is :"+validQueryLessThanOperatorAdded
+									//println"numerator query here is :"+validQueryLessThanOperatorAdded
 								}
 								else
 									query = session.createQuery(validQueryLessThanOperatorAdded)
@@ -419,7 +268,7 @@ class IndicatorService {
 
 
 									uniqueNum=results.size()
-									println"result from count:"+results.size()
+									//println"result from count:"+results.size()
 
 
 								}
@@ -440,7 +289,7 @@ class IndicatorService {
 					}
 
 				}else{
-					println" invalid query passed"
+					println" numerator invalid query passed"
 				}
 				uniqueNum=0
 			}
@@ -448,80 +297,100 @@ class IndicatorService {
 			// TODO: handle exception
 			e.printStackTrace()
 		}
-		println"Total numerators:"+totalAtNumerator
+		//println"Total numerators:"+totalAtNumerator
 		return totalAtNumerator
 	}
-	public int getSumOfDenominators(List<QueryParserHelper> denominatorHelpers,DataLocation location){
+	public int getSumOfDenominators(List<QueryParserHelper> denominatorHelpers,DataLocation location,List<IntermediateVariable> intermediateVariables){
+		//println"twinjiyemo ok :"+intermediateVariables
 		ClassFinder finder=new ClassFinder()
 		Class className = null
 
 		int totalAtDenominator=0
 
 		try{
+			
 			for(QueryParserHelper denominator:denominatorHelpers){
 				int uniqueDenom=0
 
+
+				
 				if(denominator.classDomaine!=null&& denominator.executableScript!=null){
-					className = finder.findClassByName(denominator.classDomaine)
+					
+					if(!denominator.isIntermidiateVariable){
+						className = finder.findClassByName(denominator.classDomaine)
+						
+
+						if(className!=null){
+							def session = sessionFactory.getCurrentSession()
+							//DataLocation location=DataLocation.findById(18)
+							int locationidentifier=location.id
+
+							String validQueryLocation=denominator.executableScript.replace('locationidentifier',""+locationidentifier+"")
+							if(denominator.type.equalsIgnoreCase("Normal")){
+								if(!denominator.isDynamicFinder){
 
 
-					if(className!=null){
-						def session = sessionFactory.getCurrentSession()
-						//DataLocation location=DataLocation.findById(18)
-						int locationidentifier=location.id
+									def query = session.createQuery(validQueryLocation)
 
-						String validQueryLocation=denominator.executableScript.replace('locationidentifier',""+locationidentifier+"")
-						if(denominator.type.equalsIgnoreCase("Normal")){
-							if(!denominator.isDynamicFinder){
-
-
-								def query = session.createQuery(validQueryLocation)
-
-								def results = query.list()
-
-
-
-
-								if(!denominator.useCountFunction){
+									def results = query.list()
 
 
 
 
-									uniqueDenom=results[0]
-
-
-								}else{
+									if(!denominator.useCountFunction){
 
 
 
-									uniqueDenom=results.size()
+
+										uniqueDenom=results[0]
 
 
+									}else{
+
+
+
+										uniqueDenom=results.size()
+
+
+									}
+
+
+								}else if(denominator.isDynamicFinder){
+									uniqueDenom=className.findAll(denominator.executableScript).size()
 								}
-
-
-							}else if(denominator.isDynamicFinder){
-								uniqueDenom=className.findAll(denominator.executableScript).size()
+							}else if(denominator.type.equalsIgnoreCase("Special")){
+								println" i will call the factory to process this special indicator by passing the indicator finder/code"
 							}
-						}else if(denominator.type.equalsIgnoreCase("Special")){
-							println" i will call the factory to process this special indicator by passing the indicator finder/code"
-						}
-						// update the sum after query excution in all possible cases
-						totalAtDenominator=totalAtDenominator+uniqueDenom
-					}else{
-						println"Can't find the class name to query"
-					}
+							// update the sum after query excution in all possible cases
 
+						}else{
+							println"Can't find the class name to query"
+						}
+					}else if(denominator.isIntermidiateVariable){
+						
+						def intermediateId=denominator.intermediateVariable.id
+						
+						for(IntermediateVariable intermVal:intermediateVariables)
+							if(intermVal.id==intermediateId){
+								uniqueDenom=intermVal.computedValue
+								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttinmemid"+intermediateId+"tttttttt:"+uniqueDenom
+
+								break
+							}
+					}
 				}else{
 					println" invalid query passed"
 				}
-				uniqueDenom=0
+
+
+
+				totalAtDenominator=totalAtDenominator+uniqueDenom
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace()
 		}
-		println"Total numerators:"+totalAtDenominator
+		//println"Total numerators:"+totalAtDenominator
 
 		return totalAtDenominator
 	}
@@ -642,6 +511,180 @@ class IndicatorService {
 
 
 		return indicatorValue
+	}
+
+
+	public List<DataLocation> getDataLications(){
+		def dataLocations=null
+		dataLocations=DataLocation.findAll()
+		return dataLocations
+	}
+	public  void newIndicatorCategory(Map<String,String> names,def code,def minYellowValue,def maxYellowValue){
+		try{
+			def category = new IndicatorCategory(code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
+			Utils.setLocaleValueInMap(category,names,"Names")
+			category.save(failOnError:true,flush:true)
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace()
+
+		}
+	}
+	public void indicatorWriterFromXml(){
+
+		if(!IndicatorCategory.count()){
+			String indicatorCategoryFileContent = new File('web-app/resources/reportData/indicatorCategories.xml').text
+			def categories = new XmlParser().parseText(indicatorCategoryFileContent)
+			categories.category.each{
+
+				Map<String,String> names=new HashMap<String,String>()
+				names.put('en', it.name.text())
+				names.put('fr', "To be added later")
+				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
+
+			}
+		}
+
+		intermediateVariableService.intermediateVariableWriter()
+
+		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
+
+		def indicators = new XmlParser().parseText(indicatorFileContent)
+
+		if(!Indicator.count()){
+
+			IndicatorCategory category=null
+			indicators.indicator.each{
+				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
+
+				if(category!=null){
+
+					String indTypeValue=it.type.text()
+					def scripts=it.scriptFormula
+					println"formula ok :"+it.formula.text()
+					def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
+
+					indicator.save(failOnError: true)
+
+					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
+
+					if(scripts!=null&&indicatorr!=null){
+
+						def queryParserHelpers=QueryParserHelper.findByIndicator(indicatorr)
+
+						if(queryParserHelpers==null){
+							scripts.excutableScript.each{
+
+
+								IntermediateVariable intermediateVariable=null
+								if(Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))&&!(it.attribute("internediateVariableCode").equalsIgnoreCase("NA"))){
+									intermediateVariable=IntermediateVariable.findByCode(it.attribute("internediateVariableCode"))
+								}
+								def queryParserHelper=new QueryParserHelper(executableScript:it.text(),classDomaine:it.attribute("classDomaine")
+								,useCountFunction:it.attribute("useCountFunction")
+								,followOperand:it.attribute("followOperand")
+								, isDenominator:it.attribute("isDenominator")
+								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
+								,isDynamicFinder:it.attribute("isDynamicFinder"),indicator:indicatorr,type:indTypeValue,intermediateVariable:intermediateVariable)
+								queryParserHelper.save(failOnError: true)
+
+							}
+						}
+					}
+				}else
+					println"category not found heloooooooooooooooooooooo3"
+			}
+		}else{
+
+			IndicatorCategory category=null
+			Indicator oldInd=null
+			indicators.indicator.each{
+
+				category=IndicatorCategory.findByCode(it.attribute("categoryCode"))
+				if(category!=null){
+
+					oldInd=Indicator.findByCode(it.attribute("indicatorCode"))
+					if(oldInd==null){
+
+						def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
+
+						indicator.save(failOnError: true)
+
+					}
+					else if(oldInd!=null){
+
+						oldInd.formula=it.scriptFormula.text()
+						oldInd.indicatorCategory=category
+						oldInd.save(failOnError: true)
+					}else
+						println" It will not change the formula"
+
+					def scripts=it.scriptFormula
+
+					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
+					String indTypeValue=it.type.text()
+					if(scripts!=null&&indicatorr!=null){
+
+						def queryParserHelpers=QueryParserHelper.findByIndicator(indicatorr)
+
+						if(queryParserHelpers==null){
+							IntermediateVariable intermediateVariable=null
+							if(Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))&&!(it.attribute("internediateVariableCode").equalsIgnoreCase("NA"))){
+								intermediateVariable=IntermediateVariable.findByCode(it.attribute("internediateVariableCode"))
+							}
+							scripts.excutableScript.each{
+								def queryParserHelper=new QueryParserHelper(executableScript:it.text(),classDomaine:it.attribute("classDomaine")
+								,useCountFunction:it.attribute("useCountFunction")
+								,followOperand:it.attribute("followOperand")
+								, isDenominator:it.attribute("isDenominator")
+								, isIntermidiateVariable:it.attribute("isIntermidiateVariable")
+								,isDynamicFinder:it.attribute("isDynamicFinder"),indicator:indicatorr,type:indTypeValue,intermediateVariable:intermediateVariable)
+								queryParserHelper.save(failOnError: true)
+
+							}
+						}
+					}
+
+
+				}
+
+			}
+		}
+
+	}
+
+
+	public void testQuery(){
+		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
+		//		def c = Equipment.createCriteria()
+		//		DataLocation location=DataLocation.findById("16")
+		//		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
+		//		println"location id :"+location.id
+		//		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
+		//		def session = sessionFactory.getCurrentSession()
+		//		def query = session.createQuery(validQueryLocation)
+
+		/*SELECT purch.customer.company AS name,
+		 purch.duedate AS duedate,
+		 current_date AS today,
+		 DATEDIFF(current_date, purch.duedate) AS overdue,
+		 FROM Purchase AS purch
+		 WHERE
+		 DATEDIFF(current_date, purch.duedate) >= :duevar*/
+
+		//(total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – date of first inventory updation/DATE OF PURCHASE) >(Expected life time – 2years)/(total number equipment with STATUS = (Operational; Partially operational, Under maintenance))
+		DataLocation location=DataLocation.findById("16")
+		def session = sessionFactory.getCurrentSession()
+		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and (((equ.expectedLifeTime.numberOfMonths-24)*30)<(DATEDIFF(:currentDate,equ.purchaseDate))) and equ.dataLocation=16").setParameter("currentDate", new Date());
+
+
+
+
+
+		def results = query.list()
+
+		println" nomgeyenoibimenyetso grater than in two years ok *30 :"+results
+		println" added location start date ooooooo count is  :"+results.size()
 	}
 
 	public def getIndicators(){

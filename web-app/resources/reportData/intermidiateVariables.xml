@@ -1,16 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<langs type="current" >
+<intermediateVariables>
 
-    <language>
-Java
-    </language>
+    <intermediateVariable intermediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS" >
 
-    <language>
-Groovy
-    </language>
+        <name><!-- Being used ok -->
+          TOTAL NUMBER OF EQUIPEMENTS AT A FACILITY
+        </name>
 
-    <language>
-JavaScript
-    </language>
+        <executableScript>
+          select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
+        </executableScript>
 
-</langs>
+        <computedValue>
+            
+        </computedValue>
+    </intermediateVariable>
+
+    <intermediateVariable intermediateVariableCode="TOTAL_NUMBER_SPARE_PARTS" >
+
+        <name><!-- Not yet used -->
+            TOTAL NUMBER OF SPARE PARTS  AT A FACILITY
+        </name>
+
+        <executableScript>
+          select sp.code from SparePart as sp
+        </executableScript>
+
+        <computedValue>
+          
+        </computedValue>
+    </intermediateVariable>
+
+    <intermediateVariable intermediateVariableCode="TOTAL_NUMBER_WORK_ORDERS" >
+
+        <name><!-- Not yet used -->
+            TOTAL NUMBER WORK ORDERS AT A FACILITY
+        </name>
+
+        <executableScript>
+             select wo.id from WorkOrder as wo
+        </executableScript>
+
+        <computedValue>
+            
+        </computedValue>
+    </intermediateVariable>
+
+   
+</intermediateVariables>

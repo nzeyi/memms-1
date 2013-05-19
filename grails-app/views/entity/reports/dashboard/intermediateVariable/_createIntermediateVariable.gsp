@@ -19,8 +19,6 @@
   		<g:input name="code" label="${message(code:'entity.code.label')}" bean="${intermediateVariable}" field="code"/>
   		<g:i18nInput name="names" label="${message(code:'entity.names.label')}" bean="${intermediateVariable}" field="names"/>
   		<g:textarea name="executableScript" bean="${intermediateVariable}" label="${message(code:'entity.executableScript.label')}" field="executableScript" height="150" width="300" maxHeight="150" />
-  		<g:selectFromList id="indicator" label="${message(code:'indicator.label')}" name="indicator.id"  bean="${indicator}"
-  			from="${org.chai.memms.report.Indicator.list()}" value="${indicator?.id}" values="${org.chai.memms.report.Indicator.list().collect{it.names}}" optionKey="id"/>
   		
   		
   		<g:if test="${intermediateVariable.id != null}">

@@ -10,7 +10,7 @@ class Indicator {
 	String type
 	static i18nFields = ["names"]
 	static belongsTo = [indicatorCategory:IndicatorCategory]
-	static hasMany = [internediateValuess:IntermediateVariable,indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
+	static hasMany = [indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]
 	
 	static mapping ={
 		table "memms_report_indicator"

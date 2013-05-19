@@ -3,7 +3,7 @@
 		<tr>
 			<th/>
 			<g:sortableColumn property="code"  title="${message(code: 'intermediate.variable.code.label')}" params="[q:q]" />
-			<g:sortableColumn property="name"  title="${message(code: 'intermediate.variable.name.label')}" params="[q:q]" />
+			<g:sortableColumn property="names"  title="${message(code: 'intermediate.variable.name.label')}" params="[q:q]" />
 			<g:sortableColumn property="executableScript"  title="${message(code: 'intermediate.variable.executable.script.label')}" params="[q:q]" />
 			
 		</tr>
@@ -31,7 +31,7 @@
 					</ul>
 				</td>
 				<td>${intermediateVariable.code}</td>
-				<td>${intermediateVariable.name}</td>
+				<td>${intermediateVariable.names}</td>
 				<td>${intermediateVariable.executableScript}</td>
 				
 			</tr>

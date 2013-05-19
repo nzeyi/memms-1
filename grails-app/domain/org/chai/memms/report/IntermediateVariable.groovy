@@ -7,12 +7,13 @@ public class IntermediateVariable {
 	String code
 	String names
 	String executableScript
+	Double computedValue
 
-	Double executionResult
+	
 
 	static i18nFields = ["names"]
-	static belongsTo =Indicator
-	static hasMany = [indicators:Indicator]
+	
+	static hasMany = [queryParserHelpers:QueryParserHelper]
 
 	static mapping ={
 		table "memms_report_int_vble"
@@ -21,7 +22,8 @@ public class IntermediateVariable {
 	}
 	static constraints = {
 		code (blank:false, nullable:true)
-		names (blank:true, nullable:true,size:3..100)
+		names (blank:true, nullable:true,size:3..200)
+		computedValue (blank:true, nullable:true)
 		executableScript(blank:true, nullable:true,size:3..500)
 		/*intermediateVariables (validator: {value, obj, errors->
 			if(value!=null)
@@ -33,6 +35,6 @@ public class IntermediateVariable {
 
 	@Override
 	public String toString() {
-		return "IntermediateVariable[id="+id+"code=" + code + "]";
+		return "IntermediateVariable[id="+id+" code=" + code + "]";
 	}
 }

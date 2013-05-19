@@ -9,12 +9,12 @@
 			<g:sortableColumn property="followOperand"  title="${message(code: 'indicato.followOperand.label')}" params="[q:q]" />
 			<g:sortableColumn property="isDenominator"  title="${message(code: 'queryParserHelpert.isDenominator.label')}" params="[q:q]" />
 			<g:sortableColumn property="useCountFunction"  title="${message(code: 'queryParserHelper.useCountFunction.label')}" params="[q:q]" />
-			
 			<g:sortableColumn property="isIntermidiateVariable"  title="${message(code: 'queryParserHelper.isIntermidiateVariable.label')}" params="[q:q]" />
 			<g:sortableColumn property="isCriteria"  title="${message(code: 'indicato.isCriteria.label')}" params="[q:q]" />
 			<g:sortableColumn property="isDynamicFinder"  title="${message(code: 'queryParserHelpert.isDynamicFinder.label')}" params="[q:q]" />
 		<g:sortableColumn property="type"  title="${message(code: 'queryParserHelpert.type.label')}" params="[q:q]" />
-		
+		<th><g:message code="indicator.label" /></th>
+		<th><g:message code="queryParserHelper.intermediate.variable.label" /></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -50,6 +50,8 @@
 				<td>${queryParserHelper.isCriteria}</td>
 				<td>${queryParserHelper.isDynamicFinder}</td>
 				<td>${queryParserHelper.type}</td>
+				<td><g:stripHtml field="${queryParserHelper.indicator?.names}" chars="10"/></td>
+				<td><g:stripHtml field="${queryParserHelper.intermediateVariable?.names}" chars="7"/></td>
 			</tr>
 		</g:each>
 </tbody>
