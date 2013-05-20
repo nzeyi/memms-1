@@ -53,11 +53,11 @@ class IndicatorCategoryController extends AbstractEntityController{
 		adaptParamsForList()
 		
 		
-		def types = IndicatorCategory.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc");
+		def categories = IndicatorCategory.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc");
 		if(request.xhr)
-			this.ajaxModel(types,"")
+			this.ajaxModel(categories,"")
 		else{
-			render(view:"/entity/list",model:model(types) << [
+			render(view:"/entity/list",model:model(categories) << [
 				template:"/reports/dashboard/indicatorCategory/indicatorCategoryList",
 				listTop:"/reports/dashboard/indicatorCategory/listTop",
 				

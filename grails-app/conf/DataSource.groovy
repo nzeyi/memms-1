@@ -27,10 +27,9 @@
  */
 dataSource {
     pooled = true
-    //driverClassName = "org.h2.Driver"
-	driverClassName = "com.mysql.jdbc.Driver"
-    username = "root"
-    password = "MYSQLnpf2020."
+    driverClassName = "org.h2.Driver"
+    username = "sa"
+    password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -42,16 +41,14 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-          //  url = "jdbc:h2:mem:devDb;MVCC=TRUE"
-			 url="jdbc:mysql://localhost/memms_db"
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:h2:mem:devDb;MVCC=TRUE"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-           // url = "jdbc:h2:mem:testDb;MVCC=TRUE"
-			 url="jdbc:mysql://localhost/memms_db"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE"
         }
     }
     production {

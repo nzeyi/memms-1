@@ -43,6 +43,7 @@ class IndicatorService {
 
 	def dataSource  //Auto Injected
 	def intermediateVariableService
+	def indicatorCategoryService
 
 	public void reportingEngine(){
 		try{
@@ -142,18 +143,7 @@ class IndicatorService {
 						def scripts=currentIndicator.queryParserHelpers
 
 						for(QueryParserHelper helper:scripts){
-							//scripts.excutableScript.each{
 
-							//QueryParserHelper helper=new QueryParserHelper()
-
-							//helper.executableScript=it.text()
-							//helper.classDomaine=it.attribute("classDomaine")
-							//helper.useCountFunction=Boolean.parseBoolean(it.attribute("useCountFunction"))
-							//helper.followOperand=it.attribute("followOperand")
-							//helper.isDenominator=Boolean.parseBoolean(it.attribute("isDenominator"))
-							//helper.isIntermidiateVariable=Boolean.parseBoolean(it.attribute("isIntermidiateVariable"))
-							//helper.isDynamicFinder=Boolean.parseBoolean(it.attribute("isDynamicFinder"))
-							//helper.type=indType
 							if(helper.isDenominator){
 								denominatorQueries.add(helper)
 							}else if(!helper.isDenominator){
@@ -308,17 +298,17 @@ class IndicatorService {
 		int totalAtDenominator=0
 
 		try{
-			
+
 			for(QueryParserHelper denominator:denominatorHelpers){
 				int uniqueDenom=0
 
 
-				
+
 				if(denominator.classDomaine!=null&& denominator.executableScript!=null){
-					
+
 					if(!denominator.isIntermidiateVariable){
 						className = finder.findClassByName(denominator.classDomaine)
-						
+
 
 						if(className!=null){
 							def session = sessionFactory.getCurrentSession()
@@ -367,9 +357,9 @@ class IndicatorService {
 							println"Can't find the class name to query"
 						}
 					}else if(denominator.isIntermidiateVariable){
-						
+
 						def intermediateId=denominator.intermediateVariable.id
-						
+
 						for(IntermediateVariable intermVal:intermediateVariables)
 							if(intermVal.id==intermediateId){
 								uniqueDenom=intermVal.computedValue
@@ -519,31 +509,10 @@ class IndicatorService {
 		dataLocations=DataLocation.findAll()
 		return dataLocations
 	}
-	public  void newIndicatorCategory(Map<String,String> names,def code,def minYellowValue,def maxYellowValue){
-		try{
-			def category = new IndicatorCategory(code:code,minYellowValue:minYellowValue,maxYellowValue:maxYellowValue)
-			Utils.setLocaleValueInMap(category,names,"Names")
-			category.save(failOnError:true,flush:true)
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace()
 
-		}
-	}
 	public void indicatorWriterFromXml(){
 
-		if(!IndicatorCategory.count()){
-			String indicatorCategoryFileContent = new File('web-app/resources/reportData/indicatorCategories.xml').text
-			def categories = new XmlParser().parseText(indicatorCategoryFileContent)
-			categories.category.each{
-
-				Map<String,String> names=new HashMap<String,String>()
-				names.put('en', it.name.text())
-				names.put('fr', "To be added later")
-				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
-
-			}
-		}
+		indicatorCategoryService.indicatorCategoryWritter()
 
 		intermediateVariableService.intermediateVariableWriter()
 
@@ -562,8 +531,11 @@ class IndicatorService {
 					String indTypeValue=it.type.text()
 					def scripts=it.scriptFormula
 					println"formula ok :"+it.formula.text()
-					def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
-
+					Map<String,String> names=new HashMap<String,String>()
+					names.put('en', it.name.text())
+					names.put('fr', it.name.text())
+					def indicator = new Indicator(code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
+					Utils.setLocaleValueInMap(indicator,names,"Names")
 					indicator.save(failOnError: true)
 
 					Indicator indicatorr=Indicator.findByCode(it.attribute("indicatorCode"))
@@ -606,8 +578,11 @@ class IndicatorService {
 					oldInd=Indicator.findByCode(it.attribute("indicatorCode"))
 					if(oldInd==null){
 
-						def indicator = new Indicator(names:it.name.text(),code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
-
+						def indicator = new Indicator(code:it.attribute("indicatorCode"),indicatorCategory:category,formula:it.formula.text(),type:it.type.text())
+						Map<String,String> names=new HashMap<String,String>()
+						names.put('en', it.name.text())
+						names.put('fr', it.name.text())
+						Utils.setLocaleValueInMap(indicator,names,"Names")
 						indicator.save(failOnError: true)
 
 					}

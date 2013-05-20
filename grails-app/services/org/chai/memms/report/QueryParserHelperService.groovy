@@ -3,6 +3,19 @@ package org.chai.memms.report
 import java.util.Map;
 
 class QueryParserHelperService {
+
+
+
+	public void addQueryParser(String executableScript,String classDomaine,Boolean useCountFunction,String followOperand, Boolean isDenominator, Boolean isIntermidiateVariable,Boolean isDynamicFinder,Indicator indicator,String type,IntermediateVariable intermediateVariable){
+		def queryParserHelper=new QueryParserHelper(executableScript:executableScript,classDomaine:classDomaine
+		,useCountFunction:useCountFunction
+		,followOperand:followOperand
+		, isDenominator:isDenominator
+		, isIntermidiateVariable:isIntermidiateVariable
+		,isDynamicFinder:it.attribute("isDynamicFinder"),indicator:indicatorr,type:indTypeValue,intermediateVariable:intermediateVariable)
+		queryParserHelper.save(failOnError: true)
+	}
+
 	public def getQueryParserHelpers(){
 		return QueryParserHelper.findAll()
 	}
@@ -16,7 +29,6 @@ class QueryParserHelperService {
 			ilike("classDomaine","%"+text+"%")
 			ilike("executableScript","%"+text+"%")
 			ilike("type","%"+text+"%")
-
 		}
 	}
 }

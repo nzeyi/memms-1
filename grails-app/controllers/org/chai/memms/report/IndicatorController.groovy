@@ -99,7 +99,7 @@ class IndicatorController  extends AbstractEntityController{
 
 		//indicatorService.testQuery()
 		//intermediateVariableService.intermediateVariableWriter()
-		//indicatorService.indicatorWriterFromXml()
+		indicatorService.indicatorWriterFromXml()
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
 		//
