@@ -17,6 +17,6 @@
 
 </head>
 <body>
-	<g:render template="${template}"/>in reports outside ok
+	<g:render template="${template}"/>
 </body>
 </html>

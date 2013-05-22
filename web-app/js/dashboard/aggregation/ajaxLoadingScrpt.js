@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+
+$('.managementLoader').click(function(e){
+//alert("nanone");
+
+e.preventDefault();
+//First level of hierachie
+
+ //$(".v-tabs-name v-tabs-fold-toggle").load($(this).attr('href'));
+//second level of hierachie
+    $("#equipment").load($(this).attr('href'));
+
+ 
+});
   $('.v-tabs-nested-nav').children('li').children('a').click(function(e) {
     var tabs = $(this).parents('div').children('.v-tabs-nested-nav').children('li').children('a');
     var clicked_tab = $(this);

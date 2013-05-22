@@ -15,6 +15,7 @@ import org.chai.memms.report.utils.ExecutorProvider;
 class IndicatorController  extends AbstractEntityController{
 	def indicatorService
 	def intermediateVariableService
+	def indicatorValueService
 	def getLabel() {
 		return "indicator.label"
 	}
@@ -95,10 +96,11 @@ class IndicatorController  extends AbstractEntityController{
 		//}
 
 
-
+ 
 
 		//indicatorService.testQuery()
-		//intermediateVariableService.intermediateVariableWriter()
+//intermediateVariableService.intermediateVariableWriter()
+		//indicatorValueService.getIndicatorValueByIndIcatorCategory("CORRECTIVE_MAINTENANCE")
 		indicatorService.indicatorWriterFromXml()
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)

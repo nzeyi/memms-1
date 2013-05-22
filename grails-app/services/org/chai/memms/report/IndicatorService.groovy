@@ -156,7 +156,7 @@ class IndicatorService {
 
 
 						// execute numerators against the db  by applying mathematical operators
-						totalAtNumerator=getSumOfNumerators(numeratorQueries,location)
+						totalAtNumerator=getSumOfNumerators(numeratorQueries,location,listOfComputedIntermidiateVariables)
 
 
 						// execute denominators against the db  by applying mathematical operators
@@ -203,7 +203,7 @@ class IndicatorService {
 			println"the location is null"
 
 	}
-	public int getSumOfNumerators(List<QueryParserHelper> numeratorHelpers,DataLocation location){
+	public int getSumOfNumerators(List<QueryParserHelper> numeratorHelpers,DataLocation location,List<IntermediateVariable> intermediateVariables){
 		ClassFinder finder=new ClassFinder()
 		Class className = null
 
@@ -216,71 +216,82 @@ class IndicatorService {
 				if(numerator.classDomaine!=null&& numerator.executableScript!=null){
 					className = finder.findClassByName(numerator.classDomaine)
 
-
-					if(className!=null){
-						def session = sessionFactory.getCurrentSession()
-						//DataLocation location=DataLocation.findById(18)
-						int locationidentifier=location.id
-						String validQueryLocation=numerator.executableScript.replace('locationidentifier',""+locationidentifier+"")
-						String validQueryLessThanOperatorAdded=""
-						if(validQueryLocation.contains("lessthan"))
-							validQueryLessThanOperatorAdded=validQueryLocation.replace('lessthan','<')
-						else
-							validQueryLessThanOperatorAdded=validQueryLocation
-						if(numerator.type.equalsIgnoreCase("Normal")){
-							if(!numerator.isDynamicFinder){
-
-
-								def query=null
-								if(validQueryLessThanOperatorAdded.contains("currentDate")){
-									//println"numerator query here is :"+validQueryLocation
-									query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
-									//println"numerator query here is :"+validQueryLessThanOperatorAdded
-								}
-								else
-									query = session.createQuery(validQueryLessThanOperatorAdded)
-
-								def results = query.list()
+					if(!numerator.isIntermidiateVariable){
+						if(className!=null){
+							def session = sessionFactory.getCurrentSession()
+							//DataLocation location=DataLocation.findById(18)
+							int locationidentifier=location.id
+							String validQueryLocation=numerator.executableScript.replace('locationidentifier',""+locationidentifier+"")
+							String validQueryLessThanOperatorAdded=""
+							if(validQueryLocation.contains("lessthan"))
+								validQueryLessThanOperatorAdded=validQueryLocation.replace('lessthan','<')
+							else
+								validQueryLessThanOperatorAdded=validQueryLocation
+							if(numerator.type.equalsIgnoreCase("Normal")){
+								if(!numerator.isDynamicFinder){
 
 
+									def query=null
+									if(validQueryLessThanOperatorAdded.contains("currentDate")){
 
+										query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
 
-								if(!numerator.useCountFunction){
+									}
+									else
+										query = session.createQuery(validQueryLessThanOperatorAdded)
 
+									def results = query.list()
 
+									if(!numerator.useCountFunction){
 
+										uniqueNum=results[0]
 
-									uniqueNum=results[0]
+									}else{
 
+										uniqueNum=results.size()
 
+									}
 
-								}else{
-
-
-									uniqueNum=results.size()
-									//println"result from count:"+results.size()
-
-
+								}else if(numerator.isDynamicFinder){
+									uniqueNum=className.findAll(numerator.executableScript).size()
 								}
 
+							}else if(numerator.type.equalsIgnoreCase("Special")){
 
-							}else if(numerator.isDynamicFinder){
-								uniqueNum=className.findAll(numerator.executableScript).size()
+								println" i will call the factory to process this special indicator"
 							}
+							// update the sum after query excution in all possible cases
 
-						}else if(numerator.type.equalsIgnoreCase("Special")){
-
-							println" i will call the factory to process this special indicator"
+						}else{
+							println"Can't find the class name to query"
 						}
-						// update the sum after query excution in all possible cases
-						totalAtNumerator=totalAtNumerator+uniqueNum
-					}else{
-						println"Can't find the class name to query"
+					}else if(numerator.isIntermidiateVariable){
+
+						def intermediateId=numerator.intermediateVariable.id
+
+						for(IntermediateVariable intermVal:intermediateVariables){
+							if(intermVal.id==intermediateId){
+								uniqueNum=intermVal.computedValue
+								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
+
+								break
+							}
+						}
 					}
+
+
+
 
 				}else{
 					println" numerator invalid query passed"
 				}
+
+				if(numerator.followOperand.equals("add"))
+					totalAtNumerator=totalAtNumerator+uniqueNum
+				else if(numerator.followOperand.equals("subb"))
+					totalAtNumerator=totalAtNumerator-uniqueNum
+				else if(numerator.followOperand.equals("mult"))
+					totalAtNumerator=totalAtNumerator*uniqueNum
 				uniqueNum=0
 			}
 		}catch (Exception e) {
@@ -360,21 +371,28 @@ class IndicatorService {
 
 						def intermediateId=denominator.intermediateVariable.id
 
-						for(IntermediateVariable intermVal:intermediateVariables)
+						for(IntermediateVariable intermVal:intermediateVariables){
 							if(intermVal.id==intermediateId){
 								uniqueDenom=intermVal.computedValue
 								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
 
 								break
 							}
+						}
 					}
 				}else{
 					println" invalid query passed"
 				}
 
 
-
+				if(denominator.followOperand.equals("add"))
+					totalAtDenominator=totalAtDenominator+uniqueDenom
+				else if(denominator.followOperand.equals("subb"))
+					totalAtDenominator=totalAtDenominator-uniqueDenom
+				else if(denominator.followOperand.equals("mult"))
+					totalAtDenominator=totalAtDenominator*uniqueDenom
 				totalAtDenominator=totalAtDenominator+uniqueDenom
+				uniqueDenom=0
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -511,11 +529,11 @@ class IndicatorService {
 	}
 
 	public void indicatorWriterFromXml(){
-
+println"helooooooooooooooooooo 1"
 		indicatorCategoryService.indicatorCategoryWritter()
-
+		println"helooooooooooooooooooo 2"
 		intermediateVariableService.intermediateVariableWriter()
-
+		println"helooooooooooooooooooo 3"
 		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
 
 		def indicators = new XmlParser().parseText(indicatorFileContent)

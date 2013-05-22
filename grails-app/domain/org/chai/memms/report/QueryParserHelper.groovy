@@ -15,7 +15,7 @@ class QueryParserHelper {
 	String executableScript
 	String classDomaine
 	Boolean useCountFunction=false
-	String followOperand="add"
+	String followOperand
 	Boolean isDenominator
 	Boolean isIntermidiateVariable=false
 	Boolean isCriteria=false

@@ -4,7 +4,12 @@ import java.util.Map;
 import org.chai.location.DataLocationType
 import org.chai.location.DataLocation
 class IndicatorValueService {
+	static transactional = true
 
+	def sessionFactory
+
+
+	def dataSource  //Aut
 	def dataLocationReportService
 
 	public def getIndicatorValuesByDataLocation(DataLocation dataLocation){
@@ -36,6 +41,19 @@ class IndicatorValueService {
 			ilike("code","%"+text+"%")
 			ilike("indicatorValue","%"+text+"%")
 		}
+	}
+
+	public def getIndicatorValueByIndIcatorCategory(String indicatorCategoryCode) {
+		//"CORRECTIVE_MAINTENANCE"
+		def session = sessionFactory.getCurrentSession()
+		IndicatorCategory correctiveMaintenance=IndicatorCategory.findByCode(indicatorCategoryCode)
+		if(correctiveMaintenance!=null){
+			def query = session.createQuery("select indv.code from IndicatorValue indv join indv.indicator indc where indc.indicatorCategory="+correctiveMaintenance.id+"")
+
+			def result=query.list()
+			println"result ok okooooooooooooooooooooooooooooooooooooooo:"+result.size()
+		}
+
 	}
 
 	def getIndicatorValues(){

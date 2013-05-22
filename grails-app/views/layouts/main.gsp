@@ -147,7 +147,7 @@
 					
 					<shiro:hasPermission permission="menu:dashboard">
 							<li>
-								<a href="${createLink(controller:'reports', action:'dashboard')}">
+								<a href="${createLink(controller:'dataLocationReport', action:'dashboard')}">
 									<g:message code="header.navigation.reports.dashboard"/>
 								</a>
 							</li>
@@ -172,12 +172,6 @@
 		<shiro:hasPermission permission="menu:admin">
 			<li><a href="#"><g:message code="header.navigation.administration"/></a>
 	         	<ul class="submenu">
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
 	         	
 	         	<shiro:hasPermission permission="menu:dashboard">
 						<li><a href="#"><g:message code="report.config.label"/></a>
@@ -232,30 +226,7 @@
 							</div>
 						</li>
 					</shiro:hasPermission>
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
-	         	
+	     
 	         	
 	         		<shiro:hasPermission permission="menu:equipmentType">
 						<li>
@@ -306,7 +277,7 @@
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission permission="menu:managehelp">
-						<li><a href="#"><g:message code="header.manage.help.label"/></a></li>
+					
 					</shiro:hasPermission>
 					
 					

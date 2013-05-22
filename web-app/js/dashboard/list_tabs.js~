@@ -1,5 +1,8 @@
 $(document).ready(function(){
-
+$('.manager').click(function(e){
+alert("nanone");
+ 
+});
   $('.v-tabs-nested-nav').children('li').children('a').click(function(e) {
     var tabs = $(this).parents('div').children('.v-tabs-nested-nav').children('li').children('a');
     var clicked_tab = $(this);

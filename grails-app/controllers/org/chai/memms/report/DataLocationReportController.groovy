@@ -12,7 +12,14 @@ import org.apache.commons.lang.math.NumberUtils
 import org.springframework.dao.DataIntegrityViolationException
 
 class DataLocationReportController extends AbstractEntityController{
+	static transactional = true
+
+	def sessionFactory
+
+
+	def dataSource  //Aut
 	def dataLocationReportService
+	def indicatorValueService
 
 	def getLabel() {
 		return "dataLocationReport.label"
@@ -74,9 +81,9 @@ class DataLocationReportController extends AbstractEntityController{
 	}
 
 	def list = {
-		
+
 		adaptParamsForList()
-		
+
 		def dataLocationReports = DataLocationReport.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
 		if(request.xhr){
 			this.ajaxModel(dataLocationReports,"")
@@ -87,5 +94,60 @@ class DataLocationReportController extends AbstractEntityController{
 				listTop:"/reports/dashboard/dataLocationReport/listTop"
 			])
 		}
+	}
+
+	def getDataLocationReports={
+		println"in data location reports"
+		if(request.xhr)
+			this.ajaxModel(null,params['q'])
+		else {
+			render(view: '/entity/list',model:[
+				template:"/entity/reports/dashboard/dataLocationReport/aggragation/managMedEquipment"
+			])
+		}
+	}
+
+
+	def managementEquipment={
+
+
+		println"I am doing grails ok "
+
+		render (template:"/entity/reports/dashboard/dataLocationReport/dashboardEquipement",model:[locations:DataLocation.findAll()])
+	}
+
+	def dashboard ={
+		println"i am doing it men 1"
+		getdataLocationReportInCorrectiveMaintenance()
+		println"i am doing it men"
+
+
+		adaptParamsForList()
+
+		def dataLocationReports = DataLocationReport.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
+		if(request.xhr){
+			this.ajaxModel(dataLocationReports,"")
+		}
+		else{
+			render(view:"/entity/list",model:model(dataLocationReports) << [
+				template:"/reports/dashboard/dataLocationReport/dashboard",
+				listTop:"/reports/dashboard/dataLocationReport/listTop"
+			])
+		}
+		//		render(view: '/entity/reports',model: [
+		//				template:"/entity/reports/dashboard/aggragation/dashboardMenu"
+		//				])
+	}
+
+	def  getdataLocationReportInCorrectiveMaintenance(){
+		List<DataLocationReport> corrDatalocationReports=new ArrayList<DataLocationReport>()
+		IndicatorCategory correctiveMaintenance=IndicatorCategory.findByCode("CORRECTIVE_MAINTENANCE")
+		if(correctiveMaintenance!=null)
+			println" data locationsst :"+indicatorValueService.getIndicatorValueByIndIcatorCategory(correctiveMaintenance.code)
+	}
+
+
+	def getDataLocationReports(){
+		return DataLocationReport.findAll ()
 	}
 }

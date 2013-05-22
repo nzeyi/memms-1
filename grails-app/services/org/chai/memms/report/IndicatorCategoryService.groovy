@@ -24,6 +24,8 @@ class IndicatorCategoryService {
 				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
 
 			}
+		}else{
+		println"already there"
 		}
 
 
