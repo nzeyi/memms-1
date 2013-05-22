@@ -5,7 +5,7 @@ import org.chai.location.DataLocationType;
 
 import org.chai.location.DataLocation;
 
-class DataLocationReport {
+class DataLocationReport{
 	String code
 	DataLocation dataLocation
 	DataLocationType dataLocationType
@@ -24,5 +24,7 @@ class DataLocationReport {
 	public String toString() {
 		return code;
 	}
+	
+	
 }
 

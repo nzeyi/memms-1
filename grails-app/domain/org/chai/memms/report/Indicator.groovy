@@ -8,6 +8,7 @@ class Indicator {
 	String names
 	String formula
 	String type
+	
 	static i18nFields = ["names"]
 	static belongsTo = [indicatorCategory:IndicatorCategory]
 	static hasMany = [indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriteriaPerDataLocationType,queryParserHelpers:QueryParserHelper]

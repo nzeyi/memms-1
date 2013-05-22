@@ -118,18 +118,19 @@ class DataLocationReportController extends AbstractEntityController{
 
 	def dashboard ={
 		println"i am doing it men 1"
-		getdataLocationReportInCorrectiveMaintenance()
+		
 		println"i am doing it men"
 
 
 		adaptParamsForList()
 
 		def dataLocationReports = DataLocationReport.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")
+		List<DataLocationReport> reports=new ArrayList<DataLocationReport>()
 		if(request.xhr){
-			this.ajaxModel(dataLocationReports,"")
+			this.ajaxModel(reports,"")
 		}
 		else{
-			render(view:"/entity/list",model:model(dataLocationReports) << [
+			render(view:"/entity/list",model:model(reports) << [
 				template:"/reports/dashboard/dataLocationReport/dashboard",
 				listTop:"/reports/dashboard/dataLocationReport/listTop"
 			])
@@ -139,12 +140,7 @@ class DataLocationReportController extends AbstractEntityController{
 		//				])
 	}
 
-	def  getdataLocationReportInCorrectiveMaintenance(){
-		List<DataLocationReport> corrDatalocationReports=new ArrayList<DataLocationReport>()
-		IndicatorCategory correctiveMaintenance=IndicatorCategory.findByCode("CORRECTIVE_MAINTENANCE")
-		if(correctiveMaintenance!=null)
-			println" data locationsst :"+indicatorValueService.getIndicatorValueByIndIcatorCategory(correctiveMaintenance.code)
-	}
+	
 
 
 	def getDataLocationReports(){

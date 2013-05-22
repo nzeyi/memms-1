@@ -3,6 +3,10 @@ package org.chai.memms.report
 import org.chai.location.DataLocation;
 
 class IndicatorValue {
+	
+	
+	public IndicatorValue(){}
+	
 	String code 
 	Date generatedAt
 	Double computedValue

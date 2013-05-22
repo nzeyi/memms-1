@@ -529,7 +529,8 @@ class IndicatorService {
 	}
 
 	public void indicatorWriterFromXml(){
-println"helooooooooooooooooooo 1"
+		
+        println"helooooooooooooooooooo 1"
 		indicatorCategoryService.indicatorCategoryWritter()
 		println"helooooooooooooooooooo 2"
 		intermediateVariableService.intermediateVariableWriter()

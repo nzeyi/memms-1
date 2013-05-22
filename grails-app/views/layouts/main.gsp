@@ -147,7 +147,7 @@
 					
 					<shiro:hasPermission permission="menu:dashboard">
 							<li>
-								<a href="${createLink(controller:'dataLocationReport', action:'dashboard')}">
+								<a href="${createLink(controller:'aggregatedDataLocationReport', action:'dashboard')}">
 									<g:message code="header.navigation.reports.dashboard"/>
 								</a>
 							</li>

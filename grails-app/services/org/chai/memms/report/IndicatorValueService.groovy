@@ -3,6 +3,7 @@ package org.chai.memms.report
 import java.util.Map;
 import org.chai.location.DataLocationType
 import org.chai.location.DataLocation
+import org.grails.datastore.mapping.query.Query
 class IndicatorValueService {
 	static transactional = true
 
@@ -44,16 +45,24 @@ class IndicatorValueService {
 	}
 
 	public def getIndicatorValueByIndIcatorCategory(String indicatorCategoryCode) {
-		//"CORRECTIVE_MAINTENANCE"
-		def session = sessionFactory.getCurrentSession()
-		IndicatorCategory correctiveMaintenance=IndicatorCategory.findByCode(indicatorCategoryCode)
-		if(correctiveMaintenance!=null){
-			def query = session.createQuery("select indv.code from IndicatorValue indv join indv.indicator indc where indc.indicatorCategory="+correctiveMaintenance.id+"")
+		//println" retrive indicators ok---------------------------by category--"+indicatorCategoryCode
+		List<IndicatorValue> indicatorValues=new ArrayList<IndicatorValue>()
 
-			def result=query.list()
-			println"result ok okooooooooooooooooooooooooooooooooooooooo:"+result.size()
+		IndicatorCategory indicatorCategory=IndicatorCategory.findByCode(indicatorCategoryCode)
+		if(indicatorCategory!=null){
+			def indicators =Indicator.findAllByIndicatorCategory(indicatorCategory)
+
+			//println" all total indicators in a category========================="+indicators.size()
+
+			for(Indicator indicator:indicators){
+				def indicatorVls=IndicatorValue.findAllByIndicator(indicator)
+				if(indicatorVls!=null){
+					indicatorValues.addAll(indicatorVls)
+				}
+			}
 		}
-
+		println"Total number of indicator values :"+indicatorValues.size()+" for category :"+indicatorCategory
+		return indicatorValues
 	}
 
 	def getIndicatorValues(){
