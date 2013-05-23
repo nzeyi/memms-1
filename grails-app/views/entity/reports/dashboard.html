@@ -188,21 +188,95 @@
 			</div>
 			<div id="corrective">
 				<ul class="v-tabs-list">
+					<!--initialise for corective marking -->
 					<g:each
 						in="${entities.correctiveMaintenanceReports}"
 						status="i"
 						var="dataLocationReport"
 					>
+						<g:set
+							var="markercorrective"
+							value="${0}"
+						/>
+						<g:set
+							var="totalCorectiveMarks"
+							value="${0}"
+						/>
+						<g:set
+							var="totalcorrective"
+							value="${0}"
+						/>
 						<li class="v-tabs-row">
 							<p>
 								<a class="v-tabs-name v-tabs-fold-toggle"> <span
 									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
+								><img src="${resource(dir:'images',file:'arrow.png')}" />
+								
+								
+								${dataLocationReport?.dataLocation?.names}
+								<g:each
+										in=" ${dataLocationReport?.indicatorValues.getAt('indicator').indicatorCategory}"
+										status="k"
+										var="categoryCodeVar"
+									>
+										<g:if test="${categoryCodeVar.code =='CORRECTIVE_MAINTENANCE'">
+											<g:set
+												var="categoryCode"
+												value="${categoryCodeVar.code}"
+											/>
+									ok:${categoryCode}</g:if>
+									</g:each>
+								
+								
+								</span> 
 								</a> <span
 									class="tooltip v-tabs-formula "
 									original-title="Enter text here!"
-								>${dataLocationReport?.generatedAt}</span> <span class="v-tabs-value">${dataLocationReport.indicatorValues?.size()}</span>
+								> <g:each
+										in="${dataLocationReport?.indicatorValues}"
+										status="j"
+										var="indicatorValue"
+									>
+										<g:if test="${indicatorValue?.computedValue <0.25}">
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+0}"
+											/>
+										</g:if>
+										<g:if
+											test="${indicatorValue?.computedValue <0.55&&indicatorValue?.computedValue >=0.25}"
+										>
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+1}"
+											/>
+										</g:if>
+										<g:if test="${indicatorValue?.computedValue >=0.55}">
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+2}"
+											/>
+										</g:if>
+										<g:set
+											var="totalcorrective"
+											value="${totalcorrective+1}"
+										/>
+									</g:each> <g:set
+										var="totalCorectiveMarks"
+										value="${markercorrective/totalcorrective}"
+									/>
+								</span> <span class="v-tabs-value"> <g:if
+										test="${totalCorectiveMarks<=0.25}"
+									> 
+								Red
+									</g:if> <g:if
+										test="${totalCorectiveMarks>0.25&&totalCorectiveMarks<0.55}"
+									> 
+								Yellow
+									</g:if> <g:if test="${totalCorectiveMarks>=0.55}"> 
+								Green
+									</g:if> ${totalCorectiveMarks}
+								</span>
 							</p>
 							<div class="v-tabs-fold-container">
 								<ul class="v-tabs-nested-nav">
@@ -240,7 +314,18 @@
 												<li class="v-tabs-row"><span class="v-tabs-name">
 														${indicatorValue?.indicator?.names}</span> <span
 													class="v-tabs-formula"
-												></span> <span class="v-tabs-value">${indicatorValue?.computedValue}%</span></li>
+												></span> <span class="v-tabs-value"> <g:if
+															test="${indicatorValue?.computedValue<=0.25}"
+														> 
+								Red
+									</g:if> <g:if
+															test="${indicatorValue?.computedValue>0.25&&indicatorValue?.computedValue<0.55}"
+														> 
+								Yellow
+									</g:if> <g:if test="${indicatorValue?.computedValue>=0.55}"> 
+								Green
+									</g:if>${indicatorValue?.computedValue}%
+												</span></li>
 											</div>
 											<div id="comparison">
 												<li class="v-tabs-row"><span class="v-tabs-name">Lorem

@@ -7,7 +7,7 @@ class ClassFinder {
 	  public Class findClassByName(String className) {
 		  Class classname = null
 		  try{
-			classname = Class.forName('org.chai.memms.inventory.'+className, true, Thread.currentThread().contextClassLoader)
+			classname = Class.forName(className, true, Thread.currentThread().contextClassLoader)
 		  } catch (ClassNotFoundException e){
 			e.printStackTrace()
 		  e.printStackTrace()

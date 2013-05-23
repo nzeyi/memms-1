@@ -124,8 +124,8 @@ class IndicatorService {
 					if(currentIndicator!=null){
 						numeratorQueries=new ArrayList<QueryParserHelper>()
 						denominatorQueries=new ArrayList<QueryParserHelper>()
-						int totalAtNumerator=0
-						int totalAtDenominator=0
+						double totalAtNumerator=0.0
+						double totalAtDenominator=0.0
 						double indicatorValue=0.0
 
 
@@ -216,11 +216,11 @@ class IndicatorService {
 		ClassFinder finder=new ClassFinder()
 		Class className = null
 
-		int totalAtNumerator=0
+		double totalAtNumerator=0.0
 
 		try{
 			for(QueryParserHelper numerator:numeratorHelpers){
-				int uniqueNum=0
+				double uniqueNum=0.0
 
 				if(numerator.classDomaine!=null&& numerator.executableScript!=null){
 					className = finder.findClassByName(numerator.classDomaine)
@@ -253,8 +253,11 @@ class IndicatorService {
 									def results = query.list()
 
 									if(!numerator.useCountFunction){
-
-										uniqueNum=results[0]
+										if(results[0]!=null)
+											uniqueNum=results[0]
+										else{
+											println" indicator result is null"+validQueryLessThanOperatorAdded
+										}
 
 									}else{
 
@@ -273,7 +276,7 @@ class IndicatorService {
 							// update the sum after query excution in all possible cases
 
 						}else{
-							println"Can't find the class name to query"
+							println"Can't find the class name to query"+numerator.indicator.code
 						}
 					}else if(numerator.isIntermidiateVariable){
 
@@ -315,17 +318,17 @@ class IndicatorService {
 		//println"Total numerators:"+totalAtNumerator
 		return totalAtNumerator
 	}
-	public int getSumOfDenominators(List<QueryParserHelper> denominatorHelpers,DataLocation location,List<IntermediateVariable> intermediateVariables){
+	public double getSumOfDenominators(List<QueryParserHelper> denominatorHelpers,DataLocation location,List<IntermediateVariable> intermediateVariables){
 		//println"twinjiyemo ok :"+intermediateVariables
 		ClassFinder finder=new ClassFinder()
 		Class className = null
 
-		int totalAtDenominator=0
+		double totalAtDenominator=0
 
 		try{
 
 			for(QueryParserHelper denominator:denominatorHelpers){
-				int uniqueDenom=0
+				double uniqueDenom=0
 
 
 
@@ -377,7 +380,7 @@ class IndicatorService {
 							// update the sum after query excution in all possible cases
 
 						}else{
-							println"Can't find the class name to query"
+							println"Can't find the class name to query"+denominator.indicator.code
 						}
 					}else if(denominator.isIntermidiateVariable){
 
@@ -664,11 +667,11 @@ class IndicatorService {
 
 	public void testQuery(){
 		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
-//avg(wo.travelTime.numberOfMinutes)
-		String queryOk="select wo.id from WorkOrder wo join wo.equipment as equ where wo.failureReason='MISUSE' and equ.dataLocation=locationidentifier"
+		//avg(wo.travelTime.numberOfMinutes)
+		String queryOk="select avg(wo.travelTime.numberOfMinutes) from WorkOrder wo join wo.equipment as equ where wo.currentStatus='CLOSEDFIXED' and equ.dataLocation=locationidentifier"
 		//
 		//String queryOk="select wos.workOrder.id from WorkOrderStatus wos where wos.status='OPENATMMC'"
-		
+
 		DataLocation location=DataLocation.findById("16")
 		if(location!=null){
 			String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
@@ -681,7 +684,7 @@ class IndicatorService {
 
 			def results = query.list()
 
-			println" misuse :"+results
+			println" avg tester ok :"+results
 			//println" work order count is  :"+results.size()
 		}
 	}

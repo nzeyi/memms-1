@@ -20,7 +20,7 @@
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -31,7 +31,7 @@ select equ.code from Equipment as equ where equ.currentStatus='OPERATIONAL' and 
             </excutableScript>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
@@ -63,7 +63,7 @@ total number of equipment with status For disposal
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -96,7 +96,7 @@ total number of equipment with status IN STOCK
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -151,7 +151,7 @@ select equ.code from Equipment as equ where equ.currentStatus='INSTOCK' and equ.
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -162,7 +162,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
             </excutableScript>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
@@ -195,7 +195,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -206,7 +206,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or
             </excutableScript>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
@@ -239,7 +239,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -250,7 +250,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             </excutableScript>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
@@ -283,7 +283,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -294,7 +294,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
             </excutableScript>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_EQUIPEMENTS"
                 isDenominator="true"
@@ -327,7 +327,7 @@ select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or 
         <scriptFormula>
 
             <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -446,7 +446,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
       
         <scriptFormula>
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="false"
@@ -475,7 +475,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
          <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -485,7 +485,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
                 select wo.id from WorkOrder wo join wo.equipment as equ where wo.currentStatus='CLOSEDFIXED' and equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
@@ -516,7 +516,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
          <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -526,7 +526,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
               select wo.id from WorkOrder wo join wo.equipment as equ where wo.failureReason='RE-INCIDENCE' or wo.failureReason='MISUSE' and equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
@@ -558,7 +558,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
          <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -568,7 +568,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
               select wo.id from WorkOrder wo join wo.equipment as equ where wo.failureReason='RE-INCIDENCE' or wo.failureReason='MISUSE' and equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
@@ -599,7 +599,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
        <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -609,7 +609,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
               select sum(wo.estimatedCost) from WorkOrder wo join wo.equipment as equ where equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="Equipment"
+                classDomaine="org.chai.memms.inventory.Equipment" 
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="true"
@@ -640,7 +640,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
         <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -650,7 +650,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
                 select wo.id from WorkOrder wo join wo.equipment as equ where wo.currentStatus='OPENATMMC' and equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
@@ -737,7 +737,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
 <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -768,7 +768,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
        <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -801,7 +801,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
        <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -872,7 +872,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
         <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -883,7 +883,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
 		
             </excutableScript>
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
@@ -934,7 +934,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
         <scriptFormula>
 
             <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="NA"
                 isDenominator="false"
@@ -944,7 +944,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
               select wo.id from WorkOrder wo join wo.equipment as equ where wo.failureReason='MISUSE' and equ.dataLocation=locationidentifier
             </excutableScript>
              <excutableScript
-                classDomaine="WorkOrder"
+                classDomaine="org.chai.memms.corrective.maintenance.WorkOrder"
                 followOperand="add"
                 internediateVariableCode="TOTAL_NUMBER_WORK_ORDERS"
                 isDenominator="true"
