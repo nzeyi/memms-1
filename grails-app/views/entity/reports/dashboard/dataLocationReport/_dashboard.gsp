@@ -198,7 +198,7 @@
 								<a class="v-tabs-name v-tabs-fold-toggle"> <span
 									class="v-tabs-switch"
 								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
+									${dataLocationReport?.dataLocation?.names}||${dataLocationReport?.dataLocation?.id}
 								</a> <span
 									class="tooltip v-tabs-formula "
 									original-title="Enter text here!"

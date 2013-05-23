@@ -169,9 +169,18 @@ class IndicatorService {
 
 						if(totalAtDenominator>0)
 							indicatorValue=totalAtNumerator/totalAtDenominator
-						else
-							indicatorValue=totalAtNumerator
+						else if(totalAtDenominator<=0){
+							if(totalAtNumerator>0)
+								indicatorValue=totalAtNumerator/totalAtNumerator
+							else
+								indicatorValue=0
+						}
 
+						if(currentIndicator.code.equals("MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS")){
+							println" total numerators :"+totalAtNumerator
+							println" total denominators :"+totalAtDenominator
+							println"indicator value :"+indicatorValue
+						}
 						//println" ===================================total of numerators:"+totalAtNumerator
 						//println" =================total of denominators:"+totalAtDenominator
 						//println" ===============================Indicator value is :"+indicatorValue
@@ -232,6 +241,7 @@ class IndicatorService {
 
 
 									def query=null
+									//println" the query is numerator :"+validQueryLessThanOperatorAdded
 									if(validQueryLessThanOperatorAdded.contains("currentDate")){
 
 										query = session.createQuery(validQueryLessThanOperatorAdded).setParameter("currentDate", new Date())
@@ -272,11 +282,13 @@ class IndicatorService {
 						for(IntermediateVariable intermVal:intermediateVariables){
 							if(intermVal.id==intermediateId){
 								uniqueNum=intermVal.computedValue
-								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
+								//println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueNum
 
 								break
 							}
 						}
+					}else{
+						println"unclassified ok"
 					}
 
 
@@ -286,8 +298,10 @@ class IndicatorService {
 					println" numerator invalid query passed"
 				}
 
-				if(numerator.followOperand.equals("add"))
+				if(numerator.followOperand.equals("add")){
+					//println"in========================================================================= adition"
 					totalAtNumerator=totalAtNumerator+uniqueNum
+				}
 				else if(numerator.followOperand.equals("subb"))
 					totalAtNumerator=totalAtNumerator-uniqueNum
 				else if(numerator.followOperand.equals("mult"))
@@ -327,6 +341,7 @@ class IndicatorService {
 							int locationidentifier=location.id
 
 							String validQueryLocation=denominator.executableScript.replace('locationidentifier',""+locationidentifier+"")
+							//println" query denom:"+validQueryLocation
 							if(denominator.type.equalsIgnoreCase("Normal")){
 								if(!denominator.isDynamicFinder){
 
@@ -334,9 +349,6 @@ class IndicatorService {
 									def query = session.createQuery(validQueryLocation)
 
 									def results = query.list()
-
-
-
 
 									if(!denominator.useCountFunction){
 
@@ -355,7 +367,7 @@ class IndicatorService {
 
 									}
 
-
+									println"number 1:"+uniqueDenom
 								}else if(denominator.isDynamicFinder){
 									uniqueDenom=className.findAll(denominator.executableScript).size()
 								}
@@ -374,12 +386,13 @@ class IndicatorService {
 						for(IntermediateVariable intermVal:intermediateVariables){
 							if(intermVal.id==intermediateId){
 								uniqueDenom=intermVal.computedValue
-								println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
+								//println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueDenom
 
 								break
 							}
 						}
 					}
+					println"number 2:"+uniqueDenom
 				}else{
 					println" invalid query passed"
 				}
@@ -392,6 +405,7 @@ class IndicatorService {
 				else if(denominator.followOperand.equals("mult"))
 					totalAtDenominator=totalAtDenominator*uniqueDenom
 				totalAtDenominator=totalAtDenominator+uniqueDenom
+				println"number total den:"+totalAtDenominator
 				uniqueDenom=0
 			}
 		}catch (Exception e) {
@@ -399,7 +413,7 @@ class IndicatorService {
 			e.printStackTrace()
 		}
 		//println"Total numerators:"+totalAtDenominator
-
+		//println"number total den:"+totalAtDenominator
 		return totalAtDenominator
 	}
 
@@ -529,12 +543,12 @@ class IndicatorService {
 	}
 
 	public void indicatorWriterFromXml(){
-		
-        println"helooooooooooooooooooo 1"
+
+
 		indicatorCategoryService.indicatorCategoryWritter()
-		println"helooooooooooooooooooo 2"
+
 		intermediateVariableService.intermediateVariableWriter()
-		println"helooooooooooooooooooo 3"
+
 		String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
 
 		def indicators = new XmlParser().parseText(indicatorFileContent)
@@ -549,7 +563,7 @@ class IndicatorService {
 
 					String indTypeValue=it.type.text()
 					def scripts=it.scriptFormula
-					println"formula ok :"+it.formula.text()
+
 					Map<String,String> names=new HashMap<String,String>()
 					names.put('en', it.name.text())
 					names.put('fr', it.name.text())
@@ -650,35 +664,26 @@ class IndicatorService {
 
 	public void testQuery(){
 		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
-		//		def c = Equipment.createCriteria()
-		//		DataLocation location=DataLocation.findById("16")
-		//		String queryOk="select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL'  or equ.currentStatus='UNDERMAINTENANCE'  or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.obsolete='1' and dateDiff(equ.purchaseDate,NOW()) and equ.dataLocation=locationidentifier"
-		//		println"location id :"+location.id
-		//		String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
-		//		def session = sessionFactory.getCurrentSession()
-		//		def query = session.createQuery(validQueryLocation)
-
-		/*SELECT purch.customer.company AS name,
-		 purch.duedate AS duedate,
-		 current_date AS today,
-		 DATEDIFF(current_date, purch.duedate) AS overdue,
-		 FROM Purchase AS purch
-		 WHERE
-		 DATEDIFF(current_date, purch.duedate) >= :duevar*/
-
-		//(total number equipment with STATUS=(Operational; Partially operational, Under maintenance) and (Current Date – date of first inventory updation/DATE OF PURCHASE) >(Expected life time – 2years)/(total number equipment with STATUS = (Operational; Partially operational, Under maintenance))
+//avg(wo.travelTime.numberOfMinutes)
+		String queryOk="select wo.id from WorkOrder wo join wo.equipment as equ where wo.failureReason='MISUSE' and equ.dataLocation=locationidentifier"
+		//
+		//String queryOk="select wos.workOrder.id from WorkOrderStatus wos where wos.status='OPENATMMC'"
+		
 		DataLocation location=DataLocation.findById("16")
-		def session = sessionFactory.getCurrentSession()
-		def query = session.createQuery("select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and (((equ.expectedLifeTime.numberOfMonths-24)*30)<(DATEDIFF(:currentDate,equ.purchaseDate))) and equ.dataLocation=16").setParameter("currentDate", new Date());
+		if(location!=null){
+			String validQueryLocation=queryOk.replace('locationidentifier',""+location.id+"")
+			def session = sessionFactory.getCurrentSession()
+			def query = session.createQuery(validQueryLocation);
 
 
 
 
 
-		def results = query.list()
+			def results = query.list()
 
-		println" nomgeyenoibimenyetso grater than in two years ok *30 :"+results
-		println" added location start date ooooooo count is  :"+results.size()
+			println" misuse :"+results
+			//println" work order count is  :"+results.size()
+		}
 	}
 
 	public def getIndicators(){

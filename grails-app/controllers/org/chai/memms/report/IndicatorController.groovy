@@ -76,6 +76,8 @@ class IndicatorController  extends AbstractEntityController{
 	}
 
 	def list = {
+		// <g:set var="total" value="${total+(m.q*m.sts.uf)}"/>
+		//http://grails.org/doc/2.2.0/ref/Tags/set.html
 
 		//indicatorService.testQuery()
 		//		Date today=new Date()
@@ -99,14 +101,14 @@ class IndicatorController  extends AbstractEntityController{
  
 
 		//indicatorService.testQuery()
-        // intermediateVariableService.intermediateVariableWriter()
+     intermediateVariableService.intermediateVariableWriter()
 		//indicatorValueService.getIndicatorValueByIndIcatorCategory("CORRECTIVE_MAINTENANCE")
-		//indicatorService.indicatorWriterFromXml()
+		indicatorService.indicatorWriterFromXml()
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
 		//
 		//		println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
-		//indicatorService.reportingEngine()
+	indicatorService.reportingEngine()
 		adaptParamsForList()
 
 		def indicators = Indicator.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")

@@ -7,7 +7,7 @@
         </name>
 
         <executableScript>
-          select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL') and equ.dataLocation=locationidentifier
+          select equ.code from Equipment as equ where (equ.currentStatus='OPERATIONAL' or equ.currentStatus='UNDERMAINTENANCE' or equ.currentStatus='PARTIALLYOPERATIONAL' or equ.currentStatus='INSTOCK') and equ.dataLocation=locationidentifier
         </executableScript>
 
         <computedValue>
@@ -32,12 +32,12 @@
 
     <intermediateVariable intermediateVariableCode="TOTAL_NUMBER_WORK_ORDERS" >
 
-        <name><!-- Not yet used -->
+        <name><!-- time period missing ok -->
             TOTAL NUMBER WORK ORDERS AT A FACILITY
         </name>
 
         <executableScript>
-             select wo.id from WorkOrder as wo
+             select wo.id from WorkOrder wo join wo.equipment as equ where equ.dataLocation=locationidentifier
         </executableScript>
 
         <computedValue>
