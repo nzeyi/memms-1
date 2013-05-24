@@ -1,13 +1,13 @@
 <div class="entity-list">
 	<!-- List Top Header Template goes here -->
 	<div class="heading1-bar">
-		<h1>Reports Dashboard Testing started</h1>
+		<h1>Title</h1>
 	</div>
 	<!-- End of template -->
 	<!-- Filter template if any goes here -->
-	<g:if test="${filterTemplate!=null}">
+	<!-- <g:if test="${filterTemplate!=null}">
 		<g:render template="/entity/${filterTemplate}" />
-	</g:if>
+	</g:if> -->
 	<!-- End of template -->
 	<!-- List Template goes here -->
 	<div
@@ -399,7 +399,7 @@
 											>
 												<li class="v-tabs-row"><span class="v-tabs-name">
 														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
+													class=""
 												>${indicatorValue?.indicator?.formula}</span> <span
 													class="v-tabs-value"
 												>${indicatorValue?.computedValue}%</span></li>
