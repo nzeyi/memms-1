@@ -1043,7 +1043,7 @@ Average equipments (cumulative cost of  preventive maintenance maintenance for a
         indicatorCode="MANA_SPARE_AVERAGE__TIME_BETWEEN_REQUEST_AND_ARRIVAL_OF_SPAREPARTS" >
 
         <name>
-          AVERAGE_ TIME BETWEEN REQUEST AND ARRIVAL OF SPARE PARTS
+          AVERAGE_TIME BETWEEN REQUEST AND ARRIVAL OF SPARE PARTS
         </name>
 
         <formula>

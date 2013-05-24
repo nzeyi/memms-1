@@ -1,715 +1,340 @@
-<div class="entity-list">
-	<!-- List Top Header Template goes here -->
-	<div class="heading1-bar">
-		<h1>Title</h1>
-	</div>
-	<!-- End of template -->
-	<!-- Filter template if any goes here -->
-	<!-- <g:if test="${filterTemplate!=null}">
-		<g:render template="/entity/${filterTemplate}" />
-	</g:if> -->
-	<!-- End of template -->
-	<!-- List Template goes here -->
-	<div
-		id="list-grid"
-		class="v-tabs"
-	>
-		<!-- <div class="spinner-container">
-<img src="${resource(dir:'images',file:'list-spinner.gif')}" class="ajax-big-spinner"/>
-</div> -->
-		<ul
-			id='top_tabs'
-			class="v-tabs-nav left"
-		>
-			<li><a
-				class="active"
-				id="#corrective"
-			>Corrective Maintenance</a></li>
-			<li><a id="#preventive">Preventive Maintenance</a></li>
-			<li><a
-				id="#equipment"
-				class=""
-				href="${createLinkWithTargetURI(controller: 'account', action:'editAccount')}"
-			>Management Medical Equipment</a></li>
-			<li><a id="#spare_parts">Management Of Spare Parts</a></li>
-			<li><a id="#monitoring">Monitoring Of MEMMS Use</a></li>
-		</ul>
-		<div class="v-tabs-content right">
-			<a
-				id="showhide"
-				class="right"
-				href="#"
-			>Show / Hide filters</a>
-			<ul class="v-tabs-filters">
-				<li><input type="checkbox" /><label>option 1</label></li>
-				<li><input type="checkbox" /><label>option 2</label></li>
-				<li><input type="checkbox" /><label>option 3</label></li>
+<%@ page import="org.apache.shiro.SecurityUtils" %>
+<%@ page import="org.chai.memms.security.User" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title><g:layoutTitle /></title>
+	<link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+	<g:layoutHead />
+	<r:require module="core"/>
+	<r:layoutResources/>
+</head>
+<body>
+  <div id="header">
+    <div class="wrapper">
+      
+      <h1 id="logo">
+        <a href="${createLink(controller:'home', action:'index')}"><g:message code="title.memms"/></a>
+      </h1>
+      
+      <ul class="locales" id="switcher">
+				<% def languageService = grailsApplication.mainContext.getBean('languageService') %>
+				<g:each in="${languageService.availableLanguages}" var="language" status="i">
+					<% params['lang'] = language %>
+					<li><a class="${languageService.currentLanguage.language==language? 'no-link':''}" href="${createLink(controller: controllerName, action: actionName, params: params)}">${language}</a></li>
+				</g:each>
 			</ul>
-			<div class="filters main">
-				<script
-					src="/memms/static/js/form_init.js"
-					type="text/javascript"
-				></script>
-				<script
-					src="/memms/static/js/dashboard/foldable.js"
-					type="text/javascript"
-				></script>
-				<script
-					src="/memms/static/js/dashboard/list_tabs.js"
-					type="text/javascript"
-				></script>
-				<script
-					src="/memms/static/js/dashboard/aggregation/ajaxLoadingScrpt.js"
-					type="text/javascript"
-				></script>
-				<!-- Load & initialize Tipsy -->
-				<script
-					src="/memms/static/js/jquery/tipsy/src/javascripts/jquery.tipsy.js"
-					type="text/javascript"
-				></script>
-				<script
-					src="/memms/static/js/tipsy_init.js"
-					type="text/javascript"
-				></script>
-				<form
-					class="filters-box"
-					method="get"
-					action="/memms/equipmentView/filter"
-					style="display: none;"
-				>
-					<ul class="filters-list third">
+      
+      <ul id="top_nav">
+				<shiro:user>
+					<% def user = User.findByUuid(SecurityUtils.subject.principal, [cache: true])%>
+					<li>
+						<a href="${createLinkWithTargetURI(controller: 'account', action:'editAccount')}">
+							<g:message code="header.navigation.myaccount"/> : ${user.names}
+						</a>
+					</li>
+				</shiro:user>
+				<shiro:user>
+					<li>
+						<a href="${createLink(controller: 'auth', action: 'signOut')}" class="no-link"><g:message code="header.labels.logout"/></a>
+					</li>
+				</shiro:user>
+				<shiro:notUser>
+					<g:if test="${controllerName != 'auth' || actionName != 'login'}">
 						<li>
-							<div class="row ">
-								<label for="equipmentType.id">Equipment Type :</label> <select
-									name="obsolete"
-								>
-									<option value="">Please select</option>
-									<option value="true">obsolete</option>
-									<option value="false">not obsolete</option>
-								</select>
-							</div>
+							<a href="${createLink(controller: 'auth', action: 'login')}"><g:message code="header.labels.login"/></a>
 						</li>
+					</g:if>
+					<g:if test="${controllerName != 'auth' || actionName != 'register'}">
 						<li>
-							<div class="row ">
-								<label for="serviceProvider.id">Service Provider :</label> <select
-									name="obsolete"
-								>
-									<option value="">Please select</option>
-									<option value="true">obsolete</option>
-									<option value="false">not obsolete</option>
-								</select>
-							</div>
+							<a href="${createLink(controller: 'auth', action: 'register')}"><g:message code="header.labels.register"/></a>
 						</li>
-						<li>
-							<div class="row ">
-								<label for="purchaser">Purchaser :</label> <select
-									name="purchaser"
-								>
-									<option value="NONE">Please select</option>
-									<option value="BYMOH">Ministry of Health</option>
-									<option value="BYFACILITY">Facility</option>
-									<option value="BYDONOR">Donor</option>
-								</select>
-								<div class="error-list"></div>
-							</div>
-						</li>
-					</ul>
-					<ul class="filters-list third">
-						<li>
-							<div class="row ">
-								<label for="manufacturer.id">Manufacturer :</label> <select
-									name="obsolete"
-								>
-									<option value="">Please select</option>
-									<option value="true">obsolete</option>
-									<option value="false">not obsolete</option>
-								</select>
-							</div>
-						</li>
-						<li><label>Obsolete</label> <select name="obsolete">
-								<option value="">Please select</option>
-								<option value="true">obsolete</option>
-								<option value="false">not obsolete</option>
-						</select></li>
-						<li>
-							<div class="row ">
-								<label for="donor">Donor :</label> <select name="donor">
-									<option value="NONE">Please select</option>
-									<option value="MOHPARTNER">MoH Partner</option>
-									<option value="OTHERNGO">Other NGO</option>
-									<option value="INDIVIDUAL">Individual</option>
-									<option value="OTHERS">Others</option>
-								</select>
-								<div class="error-list"></div>
-							</div>
-						</li>
-					</ul>
-					<ul class="filters-list third">
-						<li>
-							<div class="row ">
-								<label for="supplier.id">Supplier :</label> <select
-									name="obsolete"
-								>
-									<option value="">Please select</option>
-									<option value="true">obsolete</option>
-									<option value="false">not obsolete</option>
-								</select>
-							</div>
-						</li>
-						<li>
-							<div class="row ">
-								<label for="status">Status :</label> <select name="status">
-									<option value="NONE">Please select</option>
-									<option value="OPERATIONAL">Operational</option>
-									<option value="PARTIALLYOPERATIONAL">Partially
-										Operational</option>
-									<option value="INSTOCK">In Stock</option>
-									<option value="UNDERMAINTENANCE">Under Maintenance</option>
-									<option value="FORDISPOSAL">For Disposal</option>
-									<option value="DISPOSED">Disposed</option>
-								</select>
-								<div class="error-list"></div>
-							</div>
-						</li>
-					</ul>
-					<div class="clear-left">
-						<input
-							type="hidden"
-							value="13"
-							name="dataLocation.id"
-						>
-						<button type="submit">Filter</button>
-						<a
-							class="clear-form"
-							href="#"
-						>Clear</a>
-					</div>
-				</form>
-			</div>
-			<div id="corrective">
-				<ul class="v-tabs-list">
-					<!--initialise for corective marking -->
-					<g:each
-						in="${entities.correctiveMaintenanceReports}"
-						status="i"
-						var="dataLocationReport"
-					>
-						<g:set
-							var="markercorrective"
-							value="${0}"
-						/>
-						<g:set
-							var="totalCorectiveMarks"
-							value="${0}"
-						/>
-						<g:set
-							var="totalcorrective"
-							value="${0}"
-						/>
-						<li class="v-tabs-row">
-							<p>
-								<a class="v-tabs-name v-tabs-fold-toggle"> <span
-									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}||${dataLocationReport?.dataLocation?.id}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								> 
-								${dataLocationReport?.indicatorValues.getAt('indicator')}
-								
-								<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if test="${indicatorValue?.computedValue <0.25}">
-											<g:set
-												var="markercorrective"
-												value="${markercorrective+0}"
-											/>
-										</g:if>
-										<g:if
-											test="${indicatorValue?.computedValue <0.55&&indicatorValue?.computedValue >=0.25}"
-										>
-											<g:set
-												var="markercorrective"
-												value="${markercorrective+1}"
-											/>
-										</g:if>
-										<g:if test="${indicatorValue?.computedValue >=0.55}">
-											<g:set
-												var="markercorrective"
-												value="${markercorrective+2}"
-											/>
-										</g:if>
-										<g:set
-											var="totalcorrective"
-											value="${totalcorrective+1}"
-										/>
-									</g:each> <g:set
-										var="totalCorectiveMarks"
-										value="${markercorrective/totalcorrective}"
-									/>
-								</span> <span class="v-tabs-value"> <g:if
-										test="${totalCorectiveMarks<=0.25}"
-									> 
-								Red
-									</g:if> <g:if
-										test="${totalCorectiveMarks>0.25&&totalCorectiveMarks<0.55}"
-									> 
-								Yellow
-									</g:if> <g:if test="${totalCorectiveMarks>=0.55}"> 
-								Green
-									</g:if> ${totalCorectiveMarks}
-								</span>
-							</p>
-							<div class="v-tabs-fold-container">
-								<ul class="v-tabs-nested-nav">
-									<li><a
-										id='historic_trend'
-										class='active'
-										href="#"
-									>Historic Trend </a></li>
-									<li><a
-										id='comparison'
-										href="#"
-									>Comparison To Other Facilities</a></li>
-									<li><a
-										id='geo_trend'
-										href="#"
-									>Geographic Trend</a></li>
-									<li><a
-										id='info_facility'
-										href="#"
-									>Information By Facility</a></li>
-								</ul>
-								<ul class="v-tabs-nested">
-									<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if
-											test="${indicatorValue?.indicator?.indicatorCategory?.code == 'CORRECTIVE_MAINTENANCE'}"
-										>
-											<div
-												id="historic_trend"
-												class='toggled_tab'
-											>
-												<li class="v-tabs-row"><span class="v-tabs-name">
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												></span> <span class="v-tabs-value"> <g:if
-															test="${indicatorValue?.computedValue<=0.25}"
-														> 
-								Red
-									</g:if> <g:if
-															test="${indicatorValue?.computedValue>0.25&&indicatorValue?.computedValue<0.55}"
-														> 
-								Yellow
-									</g:if> <g:if test="${indicatorValue?.computedValue>=0.55}"> 
-								Green
-									</g:if>${indicatorValue?.computedValue}%
-												</span></li>
-											</div>
-											<div id="comparison">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="geo_trend">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="info_facility">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-										</g:if>
-									</g:each>
-								</ul>
-							</div>
-						</li>
-					</g:each>
+					</g:if>
+				</shiro:notUser>
+		</ul>
+      
+      <h2>
+        <span class="right">
+          <img src="${resource(dir:'images',file:'rwanda.png')}" alt="Rwanda coat of arms" width="33" />
+        </span>
+        <span><g:message code="header.labels.moh"/></span>
+				<g:message code="header.labels.memms"/>
+      </h2>
+      
+      <ul id="logout">
+				<shiro:hasPermission permission="admin">
+					<li>
+						<a class="redmine follow" target="_blank" href="http://www.districthealth.moh.gov.rw/redmine/projects/memms">
+						<g:message code="header.labels.redmine"/></a>
+	   			</li>
+				</shiro:hasPermission>
+				<li>
+					<a href="#">
+					<g:message code="header.labels.helpdesk"/></a>
+				</li>
+			</ul>
+      
+    </div>
+    
+  </div>
+  <% def user = User.findByUuid(SecurityUtils.subject.principal, [cache: true]) %>
+  <div id="navigation">
+    <div class="wrapper">
+      <ul id="main-menu" class="menu">
+    	<shiro:hasPermission permission="menu:home">
+			<li>
+				<a class="${controllerName=='home'?'active':''}" href="${createLink(controller:'home', action:'index')}">
+					<g:message code="header.navigation.home"/>
+				</a>
+			</li>
+		</shiro:hasPermission>
+		<shiro:hasPermission permission="menu:inventory">
+			<li>
+				<a class="${controllerName=='equipment' || controllerName=='equipmentView' || controllerName=='notificationEquipment' ?'active':''}" href="#">
+					<g:message code="header.navigation.inventory"/>
+				</a>
+				<ul class="submenu">
+					<li>
+						<a class="${controllerName=='equipment' || controllerName=='equipmentView' ?'active':''}" href="${createLink(controller:'equipmentView', action:'summaryPage')}">
+							<g:message code="header.navigation.inventory"/>
+						</a>
+					</li>
+					<li>
+						<a class="${controllerName=='notificationEquipment' ?'active':''}" href="${createLink(controller:'notificationEquipment', action:'list')}">
+							<g:message code="header.navigation.notification.equipment"/>
+						</a>
+					</li>
 				</ul>
-			</div>
-			<!-- end of Corrective Maintenance -->
-			<div id="preventive">
-				<ul class="v-tabs-list">
-					<g:each
-						in="${entities.privantiveMaintenanceReports}"
-						status="i"
-						var="dataLocationReport"
-					>
-						<li class="v-tabs-row">
-							<p>
-								<a class="v-tabs-name v-tabs-fold-toggle"> <span
-									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								>${dataLocationReport?.generatedAt}</span> <span class="v-tabs-value">${dataLocationReport.indicatorValues?.size()}</span>
-							</p>
-							<div class="v-tabs-fold-container">
-								<ul class="v-tabs-nested-nav">
-									<li><a
-										id='historic_trend'
-										class='active'
-										href="#"
-									>Historic Trend </a></li>
-									<li><a
-										id='comparison'
-										href="#"
-									>Comparison To Other Facilities</a></li>
-									<li><a
-										id='geo_trend'
-										href="#"
-									>Geographic Trend</a></li>
-									<li><a
-										id='info_facility'
-										href="#"
-									>Information By Facility</a></li>
-								</ul>
-								<ul class="v-tabs-nested">
-									<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if
-											test="${indicatorValue?.indicator?.indicatorCategory?.code == 'PRIVENTIVE_MAINTENANCE'}"
-										>
-											<div
-												id="historic_trend"
-												class='toggled_tab'
-											>
-												<li class="v-tabs-row"><span class="v-tabs-name">
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="comparison">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="geo_trend">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="info_facility">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-										</g:if>
-									</g:each>
+	         </li>
+		</shiro:hasPermission>
+		<shiro:hasPermission permission="menu:sparePart">
+			<li>
+				<a class="${controllerName=='sparePart' || controllerName=='sparePartView' ?'active':''}" href="${createLink(controller: 'sparePartView', action:'list')}">
+					<g:message code="spare.part.label"/>
+				</a>
+			</li>
+		</shiro:hasPermission>
+		<shiro:hasPermission permission="menu:maintenance">
+			<li><a class="${controllerName=='workOrder' || controllerName=='workOrderView' || controllerName=='preventiveOrder' || controllerName=='preventiveOrderView' || controllerName=='notificationWorkOrder' ?'active':''}" href="#"><g:message code="header.navigation.maintenance"/></a>
+				<ul class="submenu">
+					<shiro:hasPermission permission="menu:correctivemaintenance">
+						<li>
+							<a class="${controllerName=='workOrder' || controllerName=='workOrderView' ?'active':''}" href="${createLink(controller:'workOrderView', action:'summaryPage')}">
+								<g:message code="header.navigation.corrective.maintenance"/>
+							</a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:preventivemaintenance">
+						<li>
+							<a class="${controllerName=='preventiveOrder' || controllerName=='preventiveOrderView' ?'active':''}" href="${createLink(controller:'preventiveOrderView', action:'summaryPage')}">
+								<g:message code="header.navigation.preventive.maintenance"/>
+							</a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:notificationWorkOrder">
+						<li>
+							<a class="${controllerName=='notificationWorkOrder' ?'active':''}" href="${createLink(controller: 'notificationWorkOrder', action:'list')}">
+								<g:message code="notification.work.order.label"/>
+							</a>
+						</li>
+					</shiro:hasPermission>
+	         	</ul>
+         	</li>
+		</shiro:hasPermission>
+		<shiro:hasPermission permission="menu:reports">
+			<li><a class="${controllerName=='report'?'active':''}" href="#"><g:message code="header.navigation.reports"/></a>
+				<ul class="submenu">
+					
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+
+								<a href="${createLink(controller:'aggregatedDataLocationReport', action:'dashboard')}">
+
+								<a href="#${createLink(controller:'dashboardReport', action:'dashboard')}">
+
+									<g:message code="header.navigation.reports.dashboard"/>
+								</a>
+							</li>
+					</shiro:hasPermission>--}%
+					<shiro:hasPermission permission="menu:listing">
+							<li>
+								<a href="${createLink(controller:'listing', action:'view') }">
+									<g:message code="header.navigation.reports.listing"/>
+								</a>
+							</li>
+
+					</shiro:hasPermission>
+
+
+					<shiro:hasPermission permission="menu:equipmentExport">
+							<li>
+								<a href="${createLink(controller: 'equipmentView', action:'generalExport')}">
+									<g:message code="equipment.export.label"/>
+								</a>
+							</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:sparePartExport">
+							<li>
+								<a href="${createLink(controller: 'sparePartView', action:'generalExport')}">
+									<g:message code="spare.part.export.label"/>
+								</a>
+							</li>
+					</shiro:hasPermission>
+				</ul>
+			</li>
+		</shiro:hasPermission>
+		<shiro:hasPermission permission="menu:admin">
+			<li><a href="#"><g:message code="header.navigation.administration"/></a>
+	         	<ul class="submenu">
+	         	
+	         	<shiro:hasPermission permission="menu:dashboard">
+						<li><a href="#"><g:message code="report.config.label"/></a>
+							<div class="sub-submenu">
+								<ul class="submenu">
+									<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicator', action:'list')}">
+									<g:message code="header.navigation.indicator.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorCategory', action:'list')}">
+									<g:message code="header.navigation.indicatorCategory.reports.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorColorCriteriaPerDataLocationType', action:'list')}">
+									<g:message code="header.navigation.reports.indicatorColor.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li>
+								<a href="${createLink(controller:'indicatorValue', action:'list')}">
+									<g:message code="header.navigation.reports.indicatorValue.lebel"/>
+								</a>
+							</li>
+							</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard"><li>
+								<a href="${createLink(controller:'intermediateVariable', action:'list')}">
+									<g:message code="header.navigation.reports.intermediateVariable.lebel"/>
+								</a></li>
+								</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard"><li>
+								<a href="${createLink(controller:'queryParserHelper', action:'list')}">
+									<g:message code="header.navigation.reports.queryParserHelper.lebel"/>
+								</a>
+							</li></shiro:hasPermission>
+					<shiro:hasPermission permission="menu:dashboard">
+							<li><a href="${createLink(controller:'dataLocationReport', action:'list')}">
+									<g:message code="header.navigation.reports.dataLocationReport.lebel"/>
+								</a>
+							</li>
+							
+					</shiro:hasPermission>
 								</ul>
 							</div>
 						</li>
-					</g:each>
-				</ul>
-			</div>
-			<!-- end of Preventive Maintenance -->
-			<div id="equipment">
-				<ul class="v-tabs-list">
-					<g:each
-						in="${entities.manageMemmEquipmentRreports}"
-						status="i"
-						var="dataLocationReport"
-					>
-						<li class="v-tabs-row">
-							<p>
-								<a class="v-tabs-name v-tabs-fold-toggle"> <span
-									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								>${dataLocationReport?.generatedAt}</span> <span class="v-tabs-value">${dataLocationReport.indicatorValues?.size()}</span>
-							</p>
-							<div class="v-tabs-fold-container">
-								<ul class="v-tabs-nested-nav">
-									<li><a
-										id='historic_trend'
-										class='active'
-										href="#"
-									>Historic Trend </a></li>
-									<li><a
-										id='comparison'
-										href="#"
-									>Comparison To Other Facilities</a></li>
-									<li><a
-										id='geo_trend'
-										href="#"
-									>Geographic Trend</a></li>
-									<li><a
-										id='info_facility'
-										href="#"
-									>Information By Facility</a></li>
-								</ul>
-								<ul class="v-tabs-nested">
-									<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if
-											test="${indicatorValue?.indicator?.indicatorCategory?.code == 'MANAGEMENT_MEDICAL_EQUIPEMENT'}"
-										>
-											<div
-												id="historic_trend"
-												class='toggled_tab'
-											>
-												<li class="v-tabs-row"><span class="v-tabs-name">
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="comparison">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="geo_trend">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="info_facility">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-										</g:if>
-									</g:each>
+					</shiro:hasPermission>
+	     
+	         	
+	         		<shiro:hasPermission permission="menu:equipmentType">
+						<li>
+							<a href="${createLink(controller: 'equipmentType', action:'list')}">
+								<g:message code="equipment.type.label"/>
+							</a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:sparePartType">
+						<li>
+							<a href="${createLink(controller: 'sparePartType', action:'list')}">
+								<g:message code="spare.part.type.label"/>
+							</a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:location">
+						<li><a href="#"><g:message code="location.label"/></a>
+							<div class="sub-submenu">
+								<ul class="submenu">
+									<li><a href="${createLink(controller: 'location', action:'list')}"><g:message code="location.label"/></a></li>
+									<li><a href="${createLink(controller: 'locationLevel', action:'list')}"><g:message code="location.level.label"/></a></li>
+									<li><a href="${createLink(controller: 'dataLocation', action:'list')}"><g:message code="datalocation.label"/></a></li>
+									<li><a href="${createLink(controller: 'dataLocationType', action:'list')}"><g:message code="datalocation.type.label"/></a></li>
 								</ul>
 							</div>
 						</li>
-					</g:each>
-				</ul>
-			</div>
-			<!-- end of Management Medical Equipment -->
-			<!-- end of Management Medical Equipment -->
-			<div id="spare_parts">
-				<ul class="v-tabs-list">
-					<g:each
-						in="${entities.manageSparePartsReports}"
-						status="i"
-						var="dataLocationReport"
-					>
-						<li class="v-tabs-row">
-							<p>
-								<a class="v-tabs-name v-tabs-fold-toggle"> <span
-									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								>${dataLocationReport?.generatedAt}</span> <span class="v-tabs-value">${dataLocationReport.indicatorValues?.size()}</span>
-							</p>
-							<div class="v-tabs-fold-container">
-								<ul class="v-tabs-nested-nav">
-									<li><a
-										id='historic_trend'
-										class='active'
-										href="#"
-									>Historic Trend </a></li>
-									<li><a
-										id='comparison'
-										href="#"
-									>Comparison To Other Facilities</a></li>
-									<li><a
-										id='geo_trend'
-										href="#"
-									>Geographic Trend</a></li>
-									<li><a
-										id='info_facility'
-										href="#"
-									>Information By Facility</a></li>
-								</ul>
-								<ul class="v-tabs-nested">
-									<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if
-											test="${indicatorValue?.indicator?.indicatorCategory?.code == 'MANAGEMENT_OF_SPARE_PARTS'}"
-										>
-											<div
-												id="historic_trend"
-												class='toggled_tab'
-											>
-												<li class="v-tabs-row"><span class="v-tabs-name">
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="comparison">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="geo_trend">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="info_facility">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-										</g:if>
-									</g:each>
+					</shiro:hasPermission>
+					
+					<shiro:hasPermission permission="menu:department">
+						<li><a href="${createLink(controller: 'department', action:'list')}"><g:message code="department.label"/></a></li>
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:provider">
+						<li><a href="${createLink(controller: 'provider', action:'list')}"><g:message code="header.navigation.manufacturer.and.supplier"/></a></li>
+					</shiro:hasPermission>
+		
+					<shiro:hasPermission permission="menu:user">
+						<li><a href="#"><g:message code="user.manage.users.label"/></a>
+							<div class="sub-submenu">
+								<ul class="submenu">
+									<shiro:hasPermission permission="menu:role">
+										<li><a href="${createLink(controller: 'role', action:'list')}"><g:message code="roles.label" /></a></li>
+									</shiro:hasPermission>
+									<shiro:hasPermission permission="menu:user">
+										<li><a href="${createLink(controller: 'user', action:'list')}"><g:message code="users.label" /></a></li>
+									</shiro:hasPermission>
 								</ul>
 							</div>
 						</li>
-					</g:each>
-				</ul>
-			</div>
-			<!-- end of Spare parts -->
-			<div id="monitoring">
-				<ul class="v-tabs-list">
-					<g:each
-						in="${entities.manageMemmsUseReports}"
-						status="i"
-						var="dataLocationReport"
-					>
-						<li class="v-tabs-row">
-							<p>
-								<a class="v-tabs-name v-tabs-fold-toggle"> <span
-									class="v-tabs-switch"
-								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
-									${dataLocationReport?.dataLocation?.names}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								>${dataLocationReport?.generatedAt}</span> <span class="v-tabs-value">${dataLocationReport.indicatorValues?.size()}</span>
-							</p>
-							<div class="v-tabs-fold-container">
-								<ul class="v-tabs-nested-nav">
-									<li><a
-										id='historic_trend'
-										class='active'
-										href="#"
-									>Historic Trend </a></li>
-									<li><a
-										id='comparison'
-										href="#"
-									>Comparison To Other Facilities</a></li>
-									<li><a
-										id='geo_trend'
-										href="#"
-									>Geographic Trend</a></li>
-									<li><a
-										id='info_facility'
-										href="#"
-									>Information By Facility</a></li>
-								</ul>
-								<ul class="v-tabs-nested">
-									<g:each
-										in="${dataLocationReport?.indicatorValues}"
-										status="j"
-										var="indicatorValue"
-									>
-										<g:if
-											test="${indicatorValue?.indicator?.indicatorCategory?.code == 'MANAGEMENT_MEMMS_USERS'}"
-										>
-											<div
-												id="historic_trend"
-												class='toggled_tab'
-											>
-												<li class="v-tabs-row"><span class="v-tabs-name">
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="comparison">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="geo_trend">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-											<div id="info_facility">
-												<li class="v-tabs-row"><span class="v-tabs-name">Lorem
-														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
-												>${indicatorValue?.indicator?.formula}</span> <span
-													class="v-tabs-value"
-												>${indicatorValue?.computedValue}%</span></li>
-											</div>
-										</g:if>
-									</g:each>
-								</ul>
-							</div>
-						</li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
-		<!-- End of template -->
+					</shiro:hasPermission>
+					<shiro:hasPermission permission="menu:managehelp">
+					
+					</shiro:hasPermission>
+					
+					
+					
+					
+					
+					
+					
+					
+	         	</ul>
+        	 </li>
+		</shiro:hasPermission>
+      </ul>
+    </div>
+  </div>
+  
+  	<div class="flash-message">
+		<g:if test="${flash.message}">
+      		<p>${flash.message}</p>
+		</g:if>	
 	</div>
+
+	<div id="content">
+	  <div class="wrapper">
+		  <g:layoutBody />
+		</div>
+	</div>
+
+	<div id="footer">
+	    <div class="wrapper">
+	      &copy;<g:message code="footer.labels.chai"/>
+	      <br>
+	      <a href="#"><g:message code="footer.labels.about"/></a>
+	      |
+	      <a href="#"><g:message code="footer.labels.contact"/></a>
+	      |
+	      <a href="#"><g:message code="footer.labels.helpdesk"/></a>
+	    </div>
+  	</div>
+	<div class="build-info">
+        <build:buildInfo/>
+    </div>
+<r:layoutResources/>
+
+</body>
+</html>
