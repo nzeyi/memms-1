@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- MAN_EQU -->
+<colororCroteria>
+	<indicatorColor code="MAN_EQU1"
+		indicatorCode="MANA_EQUIPMENT_SHARE_OF_OPERATIONAL_EQUIPMENT">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU2"
+		indicatorCode="MANA_EQUIPMENT_QUANTITY_OF_EQUIPMENT__FOR_DISPOSAL">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+		code
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU3"
+		indicatorCode="MANA_EQUIPMENT_QUANTITY_OF_EQUIPMENT__IN_STOCK">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU4"
+		indicatorCode="MANA_EQUIPMENT_DEGREE_OF_EQUIPMENT__STANDARDIZATION">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU5"
+		indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT__DONATED">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU6"
+		indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_THAT_IS_OBSOLETE">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU7"
+		indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_UNDER_ACTIVE_WARRANTY_OR_UNDER_ACTIVE_SERVICE_PROVIDER_CONTRACT">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_EQU8"
+		indicatorCode="MANA_EQUIPMENT_SHARE_OF_EQUIPMENT_WITH_LIFETIME_EXPIRING_IN_LESS_THAN_2YEARS">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+	<!-- End -->
+
+
+	<!-- Corrective maintenance : -->
+
+	<indicatorColor code="CORR_MCE1"
+		indicatorCode="CORRE_MAINT_TOTAL_NO_OF_WORK_ORDERS_PER_QUARTER">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE1"
+		indicatorCode="CORRE_MAINT_DEGREE_OF_CORRECTIVE_MAINTENANCE_EXECUTION_ACCORDING_TO_BENCHMARK">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+
+
+	<indicatorColor code="CORR_MCE3"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_WITNESSING_REINCIDENCE_IN_A_PERIOD_OF_TIME_USERDEFINED">
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE4"
+		indicatorCode="CORRE_MAINT_COST_EFFECTIVENESS_OF_CORRECTIVE_MAINTENANCE">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE5"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_ESCALETED_T_OMMC">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE6"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_OUTSOURCED_TO_3RDPARTIES">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE7"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_UNDER_WARRANTY_SERVICE_PROVIDER_CONTRACTS">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE8"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_EXECUTED_UNDERWARRANTY_SERVICE_PROVIDER_CONTRACTS">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE9"
+		indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE10"
+		indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYDHTECHNICIAN">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE11"
+		indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYMMC">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+
+	<indicatorColor code="CORR_MCE12"
+		indicatorCode="CORRE_MAINT_AVERAGE_TIME_TO_FIX_EQUIPMENT_BYWARRANTY_SERVICE_PROVIDER">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE13"
+		indicatorCode="CORRE_MAINT_SHARE_OF_WORK_ORDERS_REQUIRING_NEW_SPAREPARTS">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE14"
+		indicatorCode="CORRE_MAINT_AVERAGE_TIME_WAITING_FOR_SPAREPARTS">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="CORR_MCE15"
+		indicatorCode="CORRE_MAINT_SHARE_OF_PROBLEMS_CAUSED_BY_MISUSE">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+	<!-- End of corrective maintenance -->
+
+	<!-- Preventive maintenance : -->
+
+
+	<indicatorColor code="PRIVE_MAIT1"
+		indicatorCode="PRIV_MAINT_COST_EFFECTIVENESS_OF_PREVENTIVE_MAINTENANCE">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="PRIV_MAIT2" indicatorCode="PRIV_MAINT_DEGREE_EXECUTION">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="PRIVE_MAIT3"
+		indicatorCode="PRIV_MAINT_SHARE_OF_MAINTENANCE_EXECUTED_AT_THE_FACILITY">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="PRIVE_MAIT4"
+		indicatorCode="PRIV_MAINT_DEVIATION_AGAINST_SCHEDULED_DATE">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<!-- end of priventive maintenance -->
+	<!-- Management of spare parts: -->
+
+	<indicatorColor code="MAN_NU_SP1"
+		indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_ABOUT_TO_BE_DISCONTINUED_IN_AYEAR">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_NU_SP2"
+		indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_ABOUT_TO_STOCKOUT_IN_AGIVEN_TIME_PERIOD">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_NU_SP3"
+		indicatorCode="MANA_SPARE_NUMBER_OF_TYPES_OF_SPAREPARTS_WITH_STOCK_MORE_THAN_A_GIVEN_TIME_PERIOD">
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_NU_SP4" indicatorCode="MANA_SPARE_AVERAGE__STOCK_TIME">
+
+
+
+
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAN_NU_SP5"
+		indicatorCode="MANA_SPARE_AVERAGE__TIME_BETWEEN_REQUEST_AND_ARRIVAL_OF_SPAREPARTS">
+
+
+
+
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+	<!-- End -->
+	<!-- Monitoring of MEMMS use -->
+
+	<indicatorColor code="MAM_US1"
+		indicatorCode="MON_MEMMS_AVERAGE_NUMBER_OF_EQUIPMENT_PER_FACILITY">
+
+		<minYellowValueHc>
+			60.0
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			80.0
+		</maxYellowValueHc>
+
+
+
+		<minYellowValueDh>
+			80.0
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			100.0
+		</maxYellowValueDh>
+
+
+
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAM_US2"
+		indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NUMBER_OF_INVENTORYSTATUSCHANGE_SLESS_THAN_10INAYEAR">
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAM_US3"
+		indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NUMBER_OF_WORKORDERS_LESSTHAN_10INAYEAR">
+
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAM_US4"
+		indicatorCode="MON_MEMMS_AVERAGE_PERCENTAGE_OF_EQUIPMENTS_PER_FACILITY_HAVING_A_PREVENTIVE_MAINTENANCE_PLAN">
+
+
+
+
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAM_US5"
+		indicatorCode="MON_MEMMS_SHARE_OF_FACILITIES_WITH_NO_PREVENTIVE_MAINTENANCE_PLAN_FOR_MORE_THAN10_OF_THE_EQUIPMENT">
+
+
+
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+	<indicatorColor code="MAM_US6"
+		indicatorCode="MON_MEMMS_SHARE_OF_WAREHOUSES_WITH_NUMBER_OF_SPAREPART_INVENTORYSTATUS_CHANGE_SLESSTHAN_20INAMONTH">
+
+		<minYellowValueHc>
+			0.25
+		</minYellowValueHc>
+
+		<maxYellowValueHc>
+			0.65
+		</maxYellowValueHc>
+		<minYellowValueDh>
+			NULL
+		</minYellowValueDh>
+
+		<maxYellowValueDh>
+			NULL
+		</maxYellowValueDh>
+		<isIncreasing>
+			true
+		</isIncreasing>
+	</indicatorColor>
+
+</colororCroteria>

@@ -44,6 +44,8 @@ class IndicatorService {
 	def dataSource  //Auto Injected
 	def intermediateVariableService
 	def indicatorCategoryService
+	//def indicatorColorCriterionService
+	def memmsReportService
 
 	public void reportingEngine(){
 		try{
@@ -56,19 +58,23 @@ class IndicatorService {
 			println"======= Data Location Report Executor Engine Started At :"+startTime+"================="
 			println"========================================================================================"
 			println"========================================================================================"
+			String memmsReportCode=ExecutorProvider.idGenerator(""+startTime.toString())
 
+			MemmsReport memmsReport=new MemmsReport(code:memmsReportCode,createdAt:startTime)
+			MemmsReport memmsReportS=memmsReport.save(failOnError: true)
+			if(memmsReportS!=null){
 			List<DataLocation> dataLocations=getDataLications()
 			List<IntermediateVariable> intermidiateValiables
 			if(dataLocations!=null){
 
 				for(DataLocation location:dataLocations){
 					if(location!=null){
-						if(ExecutorProvider.isLong(""+location.id)){
-							intermidiateValiables=intermediateVariableService.intermediateVariableValueCalculator(location)
 
-							indicatorValueCalculator(intermidiateValiables,location)
-						}else
-							println"Invalid location"
+						intermidiateValiables=intermediateVariableService.intermediateVariableValueCalculator(location)
+						for(IndicatorCategory category:indicatorCategoryService.getIndicatorCategories()){
+							if(category!=null)
+								indicatorValueCalculator(intermidiateValiables,location,category,memmsReportS)
+						}
 
 
 					}else{
@@ -85,6 +91,10 @@ class IndicatorService {
 			println"======= Data Location Report Executor Engine Terminated At :"+enddTime+"==================="
 			println"========================================================================================"
 			println"========================================================================================"
+			}else{
+			
+			println"failed to create the report object!"
+			}
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace()
@@ -93,7 +103,7 @@ class IndicatorService {
 	}
 
 
-	public void indicatorValueCalculator(List<IntermediateVariable> listOfComputedIntermidiateVariables,DataLocation location){
+	public void indicatorValueCalculator(List<IntermediateVariable> listOfComputedIntermidiateVariables,DataLocation location,IndicatorCategory catory,MemmsReport memmsReport){
 
 
 
@@ -102,9 +112,8 @@ class IndicatorService {
 		List<QueryParserHelper> denominatorQueries=null
 
 
-		//String indicatorFileContent = new File('web-app/resources/reportData/indicators.xml').text
-		//def indicators = new XmlParser().parseText(indicatorFileContent)
-		def indicators = getIndicators()
+
+		def indicators = getIndicatorsByCategory(catory)
 		if(location!=null){
 			if(location.id>0){
 
@@ -113,7 +122,9 @@ class IndicatorService {
 				String reportCod=ExecutorProvider.idGenerator(""+today.toString())
 
 				DataLocationType type=location.type
-				DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today)
+				DataLocationReport facilityReport=new DataLocationReport(code:reportCod,dataLocation:location,dataLocationType:type,generatedAt:today,indicatorCategory:catory,memmsReport:memmsReport)
+
+
 				facilityReport.save(failOnError: true)
 
 				for(Indicator currentIndicator:indicators){
@@ -226,7 +237,7 @@ class IndicatorService {
 					className = finder.findClassByName(numerator.classDomaine)
 
 					if(!numerator.isIntermidiateVariable){
-						if(className!=null){
+						if(className!=null|| className.equals("DataLocation")){
 							def session = sessionFactory.getCurrentSession()
 							//DataLocation location=DataLocation.findById(18)
 							int locationidentifier=location.id
@@ -285,8 +296,7 @@ class IndicatorService {
 						for(IntermediateVariable intermVal:intermediateVariables){
 							if(intermVal.id==intermediateId){
 								uniqueNum=intermVal.computedValue
-								//println"resultttttttttttttttttttttdbid:"+intermVal.id+"ttttiname "+intermVal.names+"nmemid"+intermediateId+"tttttttt:"+uniqueNum
-
+								
 								break
 							}
 						}
@@ -661,14 +671,14 @@ class IndicatorService {
 
 			}
 		}
-
+		//indicatorColorCriterionService.indicatorColorCriterionrwiter()
 	}
 
 
 	public void testQuery(){
 		println"heloooooooooooooooooooooooooooooooooooooooooooooooooooo"
 		//avg(wo.travelTime.numberOfMinutes)
-		String queryOk="select avg(wo.travelTime.numberOfMinutes) from WorkOrder wo join wo.equipment as equ where wo.currentStatus='CLOSEDFIXED' and equ.dataLocation=locationidentifier"
+		String queryOk="select fac.id from DataLocation as fac"
 		//
 		//String queryOk="select wos.workOrder.id from WorkOrderStatus wos where wos.status='OPENATMMC'"
 
@@ -684,14 +694,22 @@ class IndicatorService {
 
 			def results = query.list()
 
-			println" avg tester ok :"+results
+			println" location :"+results
 			//println" work order count is  :"+results.size()
 		}
 	}
 
+	public def getIndicatorByCode(String code){
+		return Indicator.findByCode(code)
+	}
+	public def getIndicatorsByCategory(IndicatorCategory category){
+		return Indicator.findAllByIndicatorCategory(category)
+	}
 	public def getIndicators(){
 		return Indicator.findAll()
 	}
+
+
 
 	public def searchIndicator(String text,Map<String, String> params) {
 		text = text.trim()

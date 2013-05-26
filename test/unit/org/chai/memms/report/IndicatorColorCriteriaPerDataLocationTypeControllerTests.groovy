@@ -5,8 +5,8 @@ package org.chai.memms.report
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(IndicatorColorCriteriaPerDataLocationTypeController)
-@Mock(IndicatorColorCriteriaPerDataLocationType)
+@TestFor(IndicatorColorCriterionController)
+@Mock(IndicatorColorCriterion)
 class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
 
     def populateValidParams(params) {
@@ -47,7 +47,7 @@ class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
 
         assert response.redirectedUrl == '/indicatorColorCriteriaPerDataLocationType/show/1'
         assert controller.flash.message != null
-        assert IndicatorColorCriteriaPerDataLocationType.count() == 1
+        assert IndicatorColorCriterion.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
         assert response.redirectedUrl == '/indicatorColorCriteriaPerDataLocationType/list'
 
         populateValidParams(params)
-        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriteriaPerDataLocationType(params)
+        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriterion(params)
 
         assert indicatorColorCriteriaPerDataLocationType.save() != null
 
@@ -75,7 +75,7 @@ class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
         assert response.redirectedUrl == '/indicatorColorCriteriaPerDataLocationType/list'
 
         populateValidParams(params)
-        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriteriaPerDataLocationType(params)
+        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriterion(params)
 
         assert indicatorColorCriteriaPerDataLocationType.save() != null
 
@@ -95,7 +95,7 @@ class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriteriaPerDataLocationType(params)
+        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriterion(params)
 
         assert indicatorColorCriteriaPerDataLocationType.save() != null
 
@@ -139,17 +139,17 @@ class IndicatorColorCriteriaPerDataLocationTypeControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriteriaPerDataLocationType(params)
+        def indicatorColorCriteriaPerDataLocationType = new IndicatorColorCriterion(params)
 
         assert indicatorColorCriteriaPerDataLocationType.save() != null
-        assert IndicatorColorCriteriaPerDataLocationType.count() == 1
+        assert IndicatorColorCriterion.count() == 1
 
         params.id = indicatorColorCriteriaPerDataLocationType.id
 
         controller.delete()
 
-        assert IndicatorColorCriteriaPerDataLocationType.count() == 0
-        assert IndicatorColorCriteriaPerDataLocationType.get(indicatorColorCriteriaPerDataLocationType.id) == null
+        assert IndicatorColorCriterion.count() == 0
+        assert IndicatorColorCriterion.get(indicatorColorCriteriaPerDataLocationType.id) == null
         assert response.redirectedUrl == '/indicatorColorCriteriaPerDataLocationType/list'
     }
 }

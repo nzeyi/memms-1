@@ -143,7 +143,5 @@ class DataLocationReportController extends AbstractEntityController{
 	
 
 
-	def getDataLocationReports(){
-		return DataLocationReport.findAll ()
-	}
+	
 }

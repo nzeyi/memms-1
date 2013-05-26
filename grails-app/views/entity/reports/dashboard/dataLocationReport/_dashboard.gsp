@@ -1,13 +1,13 @@
 <div class="entity-list">
 	<!-- List Top Header Template goes here -->
 	<div class="heading1-bar">
-		<h1>Reports Dashboard Testing started</h1>
+		<h1>Title</h1>
 	</div>
 	<!-- End of template -->
 	<!-- Filter template if any goes here -->
-	<g:if test="${filterTemplate!=null}">
+	<!-- <g:if test="${filterTemplate!=null}">
 		<g:render template="/entity/${filterTemplate}" />
-	</g:if>
+	</g:if> -->
 	<!-- End of template -->
 	<!-- List Template goes here -->
 	<div
@@ -212,32 +212,28 @@
 									class="v-tabs-switch"
 								><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
 									${dataLocationReport?.dataLocation?.names}||${dataLocationReport?.dataLocation?.id}
-								</a> <span
-									class="tooltip v-tabs-formula "
-									original-title="Enter text here!"
-								> 
-								${dataLocationReport?.indicatorValues.getAt('indicator')}
+								</a> 
 								
 								<g:each
 										in="${dataLocationReport?.indicatorValues}"
 										status="j"
 										var="indicatorValue"
 									>
-										<g:if test="${indicatorValue?.computedValue <0.25}">
+										<g:if test="${indicatorValue?.computedValue <=dataLocationReport.indicatorCategory.minYellowValue}">
 											<g:set
 												var="markercorrective"
 												value="${markercorrective+0}"
 											/>
 										</g:if>
 										<g:if
-											test="${indicatorValue?.computedValue <0.55&&indicatorValue?.computedValue >=0.25}"
+											test="${indicatorValue?.computedValue <dataLocationReport.indicatorCategory.maxYellowValue&&dataLocationReport.indicatorCategory.minYellowValue >0.25}"
 										>
 											<g:set
 												var="markercorrective"
 												value="${markercorrective+1}"
 											/>
 										</g:if>
-										<g:if test="${indicatorValue?.computedValue >=0.55}">
+										<g:if test="${indicatorValue?.computedValue >=dataLocationReport.indicatorCategory.maxYellowValue}">
 											<g:set
 												var="markercorrective"
 												value="${markercorrective+2}"
@@ -251,17 +247,32 @@
 										var="totalCorectiveMarks"
 										value="${markercorrective/totalcorrective}"
 									/>
-								</span> <span class="v-tabs-value"> <g:if
-										test="${totalCorectiveMarks<=0.25}"
+									
+									
+								</span>
+								<g:if
+										test="${totalCorectiveMarks<dataLocationReport.indicatorCategory.minYellowValue}"
 									> 
-								Red
+								<span
+									class="tooltip v-tabs-formula_red"
+									original-title="Enter text here!"
+								> </span>
 									</g:if> <g:if
-										test="${totalCorectiveMarks>0.25&&totalCorectiveMarks<0.55}"
+										test="${totalCorectiveMarks>=dataLocationReport.indicatorCategory.minYellowValue&&totalCorectiveMarks<dataLocationReport.indicatorCategory.maxYellowValue}"
 									> 
-								Yellow
-									</g:if> <g:if test="${totalCorectiveMarks>=0.55}"> 
-								Green
-									</g:if> ${totalCorectiveMarks}
+								<span
+									class="tooltip v-tabs-formula_yellow"
+									original-title="Enter text here!"
+								> </span>
+									</g:if> <g:if test="${totalCorectiveMarks>=dataLocationReport.indicatorCategory.maxYellowValue}"> 
+								<span
+									class="tooltip v-tabs-formula_green"
+									original-title="Enter text here!"
+								> </span>
+									</g:if>
+									
+									
+								 <span class="v-tabs-value">  ${totalCorectiveMarks}
 								</span>
 							</p>
 							<div class="v-tabs-fold-container">
@@ -399,7 +410,7 @@
 											>
 												<li class="v-tabs-row"><span class="v-tabs-name">
 														${indicatorValue?.indicator?.names}</span> <span
-													class="v-tabs-formula"
+													class=""
 												>${indicatorValue?.indicator?.formula}</span> <span
 													class="v-tabs-value"
 												>${indicatorValue?.computedValue}%</span></li>

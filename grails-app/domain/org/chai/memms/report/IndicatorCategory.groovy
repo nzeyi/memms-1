@@ -6,13 +6,13 @@ import groovy.transform.EqualsAndHashCode;
 class IndicatorCategory {
 	String code
 	String names
-	//color not yet decided
+	
 	Double minYellowValue
 	Double maxYellowValue
 
-	//*indicatorTypes
+	
 	static i18nFields = ["names"]
-	static hasMany = [indicators:Indicator]
+	static hasMany = [indicators:Indicator,dataLocationReports:DataLocationReport]
 	static mapping ={
 		table "memms_report_indicator_category"
 		version false

@@ -18,7 +18,7 @@ class IntermediateVariableService {
 		List<IntermediateVariable> computedIntermediateVariables=new ArrayList<IntermediateVariable>()
 
 		def intermediateVariables=getIntermediateVariables()
-		
+
 		for(IntermediateVariable intermVar:intermediateVariables){
 			intermVar.computedValue=computeIntermediateVariableValue(intermVar,location)
 			computedIntermediateVariables.add(intermVar)
@@ -28,7 +28,7 @@ class IntermediateVariableService {
 
 
 
-	public int computeIntermediateVariableValue(IntermediateVariable IntermediateVariable,DataLocation location){
+	public int computeIntermediateVariableValue(IntermediateVariable intermediateVariable,DataLocation location){
 
 
 		int intermidiateValue=0
@@ -36,10 +36,12 @@ class IntermediateVariableService {
 		try{
 
 			def session = sessionFactory.getCurrentSession()
-
+			String validQueryLocation=""
 			int locationidentifier=location.id
-
-			String validQueryLocation=IntermediateVariable.executableScript.replace('locationidentifier',""+locationidentifier+"")
+			if(intermediateVariable.executableScript.contains("locationidentifier"))
+				validQueryLocation=intermediateVariable.executableScript.replace('locationidentifier',""+locationidentifier+"")
+			else
+				validQueryLocation=intermediateVariable.executableScript
 
 
 			def query = session.createQuery(validQueryLocation)
@@ -52,7 +54,7 @@ class IntermediateVariableService {
 			// TODO: handle exception
 			e.printStackTrace()
 		}
-		
+
 
 		return intermidiateValue
 	}

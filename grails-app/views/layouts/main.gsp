@@ -147,7 +147,7 @@
 					
 					<shiro:hasPermission permission="menu:dashboard">
 							<li>
-								<a href="${createLink(controller:'aggregatedDataLocationReport', action:'dashboard')}">
+								<a href="${createLink(controller:'memmsReport', action:'dashboard')}">
 									<g:message code="header.navigation.reports.dashboard"/>
 								</a>
 							</li>
@@ -193,7 +193,7 @@
 							</shiro:hasPermission>
 					<shiro:hasPermission permission="menu:dashboard">
 							<li>
-								<a href="${createLink(controller:'indicatorColorCriteriaPerDataLocationType', action:'list')}">
+								<a href="${createLink(controller:'indicatorColorCriterion', action:'list')}">
 									<g:message code="header.navigation.reports.indicatorColor.lebel"/>
 								</a>
 							</li>

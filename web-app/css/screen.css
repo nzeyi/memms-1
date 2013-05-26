@@ -1340,7 +1340,7 @@ table.nice-table .cell { cursor: default; }
 .v-tabs-nested-nav li:last-child { border-right: none; }
 
 /* line 330, ../../src/stylesheets/partials/_report.sass */
-.v-tabs-switch, .v-tabs-name, .v-tabs-formula, .v-tabs-value { float: left; }
+.v-tabs-switch, .v-tabs-name, .v-tabs-formula,.v-tabs-formula_red,.v-tabs-formula_yellow,.v-tabs-formula_green,.v-tabs-value { float: left; }
 
 /* line 332, ../../src/stylesheets/partials/_report.sass */
 .v-tabs-switch { margin: 1px 10px 0 10px; }
@@ -1350,6 +1350,9 @@ table.nice-table .cell { cursor: default; }
 
 /* line 337, ../../src/stylesheets/partials/_report.sass */
 .v-tabs-formula { background: #65c029; height: 12px; margin: 10px 20px; overflow: hidden; text-indent: -9999em; width: 12px; -webkit-border-radius: 6px; -moz-border-radius: 6px; -ms-border-radius: 6px; -o-border-radius: 6px; border-radius: 6px; }
+.v-tabs-formula_red { background: red; height: 12px; margin: 10px 20px; overflow: hidden; text-indent: -9999em; width: 12px; -webkit-border-radius: 6px; -moz-border-radius: 6px; -ms-border-radius: 6px; -o-border-radius: 6px; border-radius: 6px; }
+.v-tabs-formula_yellow { background: yellow; height: 12px; margin: 10px 20px; overflow: hidden; text-indent: -9999em; width: 12px; -webkit-border-radius: 6px; -moz-border-radius: 6px; -ms-border-radius: 6px; -o-border-radius: 6px; border-radius: 6px; }
+.v-tabs-formula_green { background: green; height: 12px; margin: 10px 20px; overflow: hidden; text-indent: -9999em; width: 12px; -webkit-border-radius: 6px; -moz-border-radius: 6px; -ms-border-radius: 6px; -o-border-radius: 6px; border-radius: 6px; }
 
 /* line 346, ../../src/stylesheets/partials/_report.sass */
 .v-tabs-value { border-left: 1px solid rgba(0, 0, 0, 0.2); font-size: 15px; font-weight: bold; padding: 10px 0 8px 20px; width: 180px; }

@@ -14,16 +14,20 @@ class IndicatorCategoryService {
 	public void indicatorCategoryWritter(){
 
 		if(!IndicatorCategory.count()){
+			println" hello1"
 			String indicatorCategoryFileContent = new File('web-app/resources/reportData/indicatorCategories.xml').text
+			println" hello2"
 			def categories = new XmlParser().parseText(indicatorCategoryFileContent)
+			println" hello3"
 			categories.category.each{
-
+				println" hello4"
 				Map<String,String> names=new HashMap<String,String>()
 				names.put('en', it.name.text())
 				names.put('fr', "To be added later")
 				newIndicatorCategory(names,it.attribute("categoryCode"),it.minYellowValue.text(),it.maxYellowValue.text())
 
 			}
+			println" hello5"
 		}else{
 		println"already there"
 		}
@@ -57,7 +61,10 @@ class IndicatorCategoryService {
 
 		}
 	}
-	def getIndicatorCategories(){
+	public def getIndicatorCategoryByCode(String code){
+		return IndicatorCategory.findByCode(code)
+	}
+	public def getIndicatorCategories(){
 		return IndicatorCategory.findAll()
 	}
 }

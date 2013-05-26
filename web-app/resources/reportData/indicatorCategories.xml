@@ -7,11 +7,11 @@
         </name>
 
         <minYellowValue>
-            20
+            0.25
         </minYellowValue>
 
         <maxYellowValue>
-             35
+             0.65
         </maxYellowValue>
     </category>
 
@@ -21,12 +21,12 @@
             PRIVENTIVE MAINTENANCE
         </name>
 
-        <minYellowValue>
-            25
+         <minYellowValue>
+            0.25
         </minYellowValue>
 
         <maxYellowValue>
-            50
+             0.65
         </maxYellowValue>
     </category>
 
@@ -37,11 +37,11 @@
         </name>
 
         <minYellowValue>
-            25
+            0.25
         </minYellowValue>
 
         <maxYellowValue>
-            60
+             0.65
         </maxYellowValue>
     </category>
 
@@ -51,12 +51,12 @@
             MANAGEMENT OF SPARE PARTS
         </name>
 
-        <minYellowValue>
-            30
+         <minYellowValue>
+            0.25
         </minYellowValue>
 
         <maxYellowValue>
-            50
+             0.65
         </maxYellowValue>
     </category>
 
@@ -67,11 +67,11 @@
         </name>
 
         <minYellowValue>
-            25
+            0.25
         </minYellowValue>
 
         <maxYellowValue>
-            55
+             0.65
         </maxYellowValue>
     </category>
 

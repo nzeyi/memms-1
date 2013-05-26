@@ -40,9 +40,9 @@
 					</ul>
 				</td>
 				
-				<td>${queryParserHelper.classDomaine}</td>
+				<td><g:stripHtml field="${queryParserHelper.classDomaine}" chars="15"/></td>
 				
-				<td><g:stripHtml field="${queryParserHelper.executableScript}" chars="20"/></td>
+				<td><g:stripHtml field="${queryParserHelper.executableScript}" chars="15"/></td>
 				<td>${queryParserHelper.followOperand}</td>
 				<td>${queryParserHelper.isDenominator}</td>
 				<td>${queryParserHelper.useCountFunction}</td>

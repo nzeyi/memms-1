@@ -10,6 +10,7 @@ class DataLocationReport{
 	DataLocation dataLocation
 	DataLocationType dataLocationType
 	Date generatedAt
+	static belongsTo = [indicatorCategory:IndicatorCategory,memmsReport:MemmsReport]
 	static hasMany = [indicatorValues:IndicatorValue]
 	static mapping ={
 		table "memms_report_data_location"

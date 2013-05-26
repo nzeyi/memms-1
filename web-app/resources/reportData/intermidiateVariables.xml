@@ -44,6 +44,20 @@
             
         </computedValue>
     </intermediateVariable>
+    <intermediateVariable intermediateVariableCode="TOTAL_NUMBER_FACILITIES" >
+
+        <name><!-- time period missing ok -->
+            TOTAL NUMBER OF FACILITIES
+        </name>
+
+        <executableScript>
+            select fac.id from DataLocation as fac
+        </executableScript>
+
+        <computedValue>
+            
+        </computedValue>
+    </intermediateVariable>
 
    
 </intermediateVariables>

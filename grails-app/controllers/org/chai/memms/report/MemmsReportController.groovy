@@ -6,29 +6,29 @@ import java.util.Map
 
 import org.apache.commons.lang.math.NumberUtils
 import org.springframework.dao.DataIntegrityViolationException
-class AggregatedDataLocationReportController  extends AbstractEntityController {
+class MemmsReportController  extends AbstractEntityController {
 	static transactional = true
 
 	def sessionFactory
 	def dataSource  //Aut
-	def aggregatedDataLocationReportService
+	def memmsReportService
 	def indicatorValueService
 
 	def getLabel() {
-		return "aggregatedDataLocationReport.label"
+		return "memmsReport.label"
 	}
 
 	def getEntityClass() {
-		return AggregatedDataLocationReport.class
+		return MemmsReport.class
 	}
 
 
 	def getEntity(def id) {
-		return AggregatedDataLocationReport.get(id)
+		return MemmsReport.get(id)
 	}
 
 	def createEntity() {
-		return new AggregatedDataLocationReport()
+		return new MemmsReport()
 	}
 
 	def getTemplate() {
@@ -41,7 +41,7 @@ class AggregatedDataLocationReportController  extends AbstractEntityController {
 
 	def getModel(def entity) {
 		[
-			aggregatedDataLocationReport: entity
+			memmsReport: entity
 		]
 	}
 
@@ -98,27 +98,27 @@ class AggregatedDataLocationReportController  extends AbstractEntityController {
 
 		adaptParamsForList()
 
-		AggregatedDataLocationReport aggregatedDataLocationReport=new AggregatedDataLocationReport()
+		MemmsReport memmsReport=new MemmsReport()
 
-		aggregatedDataLocationReport.correctiveMaintenanceReports.addAll(aggregatedDataLocationReportService.getCorrectiveMaintenanceReports())
-		aggregatedDataLocationReport.privantiveMaintenanceReports.addAll(aggregatedDataLocationReportService.getPreventiveMaintenanceReports())
-		aggregatedDataLocationReport.manageMemmEquipmentRreports.addAll(aggregatedDataLocationReportService.getManageMemmsEquipmentReports())
-		aggregatedDataLocationReport.manageMemmsUseReports.addAll(aggregatedDataLocationReportService.getMemmsParePartReports())
-		aggregatedDataLocationReport.manageSparePartsReports.addAll(aggregatedDataLocationReportService.getManageMemmsUseReports())
+		memmsReport.correctiveMaintenanceReports.addAll(memmsReportService.getCorrectiveMaintenanceReports())
+		memmsReport.privantiveMaintenanceReports.addAll(memmsReportService.getPreventiveMaintenanceReports())
+		memmsReport.manageMemmEquipmentRreports.addAll(memmsReportService.getManageMemmsEquipmentReports())
+		memmsReport.manageMemmsUseReports.addAll(memmsReportService.getMemmsParePartReports())
+		memmsReport.manageSparePartsReports.addAll(memmsReportService.getManageMemmsUseReports())
 
 
-		println"beforer corre :"+aggregatedDataLocationReportService.getCorrectiveMaintenanceReports().size()
-		println"corre :"+aggregatedDataLocationReport.correctiveMaintenanceReports.size()
-		println"maintenance :"+aggregatedDataLocationReport.privantiveMaintenanceReports.size()
+		println"beforer corre :"+memmsReportService.getCorrectiveMaintenanceReports().size()
+		println"corre :"+memmsReport.correctiveMaintenanceReports.size()
+		println"maintenance :"+memmsReport.privantiveMaintenanceReports.size()
 		//List<AggregatedDataLocationReport> repors=new ArrayList<AggregatedDataLocationReport>()
 		//def aggretions=AggregatedDataLocationReport.findAll ()
-		//repors.add(aggregatedDataLocationReport)
-		//aggretions.addAll(aggregatedDataLocationReportService.getCorrectiveMaintenanceReports())
+		//repors.add(memmsReport)
+		//aggretions.addAll(memmsReportService.getCorrectiveMaintenanceReports())
 		if(request.xhr){
-			this.ajaxModel(aggregatedDataLocationReport,"")
+			this.ajaxModel(memmsReport,"")
 		}
 		else{
-			render(view:"/entity/list",model:model(aggregatedDataLocationReport) << [
+			render(view:"/entity/list",model:model(memmsReport) << [
 				template:"/reports/dashboard/dataLocationReport/dashboard",
 				listTop:"/reports/dashboard/dataLocationReport/listTop"
 			])
