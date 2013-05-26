@@ -888,8 +888,11 @@ Formula for this case will be : No. Of spare part types at a facility with stock
         categoryCode="MANAGEMENT_OF_SPARE_PARTS"
         indicatorCode="MANA_SPARE_AVERAGE__TIME_BETWEEN_REQUEST_AND_ARRIVAL_OF_SPAREPARTS" >
 
+
         <name> <!-- slide 33 -->
           AVERAGE TIME BETWEEN REQUEST AND ARRIVAL OF SPARE PARTS
+
+       
         </name>
 
         <formula>

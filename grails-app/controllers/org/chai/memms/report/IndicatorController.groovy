@@ -103,14 +103,24 @@ class IndicatorController  extends AbstractEntityController{
 
 		//indicatorService.testQuery()
 
+
 		//indicatorValueService.getIndicatorValueByIndIcatorCategory("CORRECTIVE_MAINTENANCE")
 		indicatorService.indicatorWriterFromXml()
 		indicatorColorCriterionService.indicatorColorCriterionrwiter()
+
+     //intermediateVariableService.intermediateVariableWriter()
+		//indicatorValueService.getIndicatorValueByIndIcatorCategory("CORRECTIVE_MAINTENANCE")
+		//indicatorService.indicatorWriterFromXml()
+
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
 		//
 		//		println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
+
 		indicatorService.reportingEngine()
+
+	//indicatorService.reportingEngine()
+
 		adaptParamsForList()
 
 		def indicators = Indicator.list(offset:params.offset,max:params.max,sort:params.sort ?:"id",order: params.order ?:"desc")

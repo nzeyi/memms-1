@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <projectSuggestions/>
+=======
+<projectSuggestions>
+<declaringtype type="org.chai.memms.report.listing.EquipmentGeneralReportParameters">
+<property isActive="true" isStatic="false" name="EquipmentType" type="java.lang.Object">
+<doc/>
+</property>
+</declaringtype>
+</projectSuggestions>
+>>>>>>> 20fb6be113401ed3bc27818826486156c6502c78
