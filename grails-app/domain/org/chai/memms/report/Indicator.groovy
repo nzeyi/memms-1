@@ -8,11 +8,12 @@ class Indicator {
 	String names
 	String formula
 	String type
+	String unit
 	
 	static i18nFields = ["names"]
-	static belongsTo = [indicatorCategory:IndicatorCategory]
-	static hasMany = [indicatorValues:IndicatorValue,indicatorColors:IndicatorColorCriterion,queryParserHelpers:QueryParserHelper]
-	
+	static belongsTo = [indicatorCategory:IndicatorCategory,indicatorColorCriterion:IndicatorColorCriterion]
+	static hasMany = [indicatorValues:IndicatorValue,queryParserHelpers:QueryParserHelper]
+
 	static mapping ={
 		table "memms_report_indicator"
 		version false

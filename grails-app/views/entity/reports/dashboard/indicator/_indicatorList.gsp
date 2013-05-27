@@ -8,6 +8,7 @@
 			<g:sortableColumn property="formula"  title="${message(code: 'indicato.formula.label')}" params="[q:q]" />
 			<g:sortableColumn property="type"  title="${message(code: 'indicatort.indicator.type.label')}" params="[q:q]" />
 			<th>  <g:message code="indicator.category.label"/></th>
+			<th>  <g:message code="indicator.colorCriterion.label"/></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,6 +33,7 @@
 				<td><g:stripHtml field="${indicator.formula}" chars="35"/></td>
 				<td>${indicator.type}</td>
 				<td>${indicator?.indicatorCategory?.code}</td>
+				<td><g:stripHtml field="${indicator?.indicatorColorCriterion?.code}" chars="10"/></td>
 			</tr>
 		</g:each>
 	</tbody>	

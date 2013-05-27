@@ -1,0 +1,304 @@
+<div class="entity-list">
+	<!-- List Top Header Template goes here -->
+	<div class="heading1-bar">
+		<h1>Title</h1>
+	</div>
+	<!-- End of template -->
+	<!-- Filter template if any goes here -->
+	<!-- <g:if test="${filterTemplate!=null}">
+		<g:render template="/entity/${filterTemplate}" />
+	</g:if> -->
+	<!-- End of template -->
+	<!-- List Template goes here -->
+	<div
+		id="list-grid"
+		class="v-tabs"
+	>
+		<!-- <div class="spinner-container">
+<img src="${resource(dir:'images',file:'list-spinner.gif')}" class="ajax-big-spinner"/>
+</div> -->
+		<ul
+			id='top_tabs'
+			class="v-tabs-nav left"
+		>
+			<li><a
+				class="active"
+				id="#category0"
+			>Corrective Maintenance</a></li>
+			<li><a id="#category1">Preventive Maintenance</a></li>
+			<li><a
+				id="#category2"
+				class="equipment"
+				href="${createLinkWithTargetURI(controller: 'memmsReport', action:'dashboard', params:['q':'checkedBoxName'])}"
+			>Management Medical Equipment</a></li>
+			<li><a id="#category3">Management Of Spare Parts</a></li>
+			<li><a id="#category4">Monitoring Of MEMMS Use</a></li>
+		</ul>
+		<div class="v-tabs-contenhttp://stackoverflow.com/questions/5807387/grails-a-previous-call-to-redirect-has-already-redirectedt right">
+			<a
+				id="showhide"
+				class="right"
+				href="#"
+			>By Facility Types</a>
+			<ul class="v-tabs-filters">
+				<li><input
+					type="checkbox"
+					name="red"
+				/><label>Red</label></li>
+				<li><input
+					type="checkbox"
+					name="yellow"
+				/><label>Yellow</label></li>
+				<li><input
+					type="checkbox"
+					name="green"
+				/><label><g:remoteLink action="dashboard">Green</g:remoteLink></label></li>
+			</ul>
+			<div class="filters main">
+				<!--<script
+					src="/memms/static/js/form_init.js"
+					type="text/javascript"
+				></script>-->
+				<script
+					src="/memms/static/js/dashboard/foldable.js"
+					type="text/javascript"
+				></script>
+				<script
+					src="/memms/static/js/dashboard/list_tabs.js"
+					type="text/javascript"
+				></script>
+				<script
+					src="/memms/static/js/dashboard/ajaxLoadingScrpt.js"
+					type="text/javascript"
+				></script>
+				<!-- Load & initialize Tipsy -->
+				<!--<script
+					src="/memms/static/js/jquery/tipsy/src/javascripts/jquery.tipsy.js"
+					type="text/javascript"
+				></script>
+				<script
+					src="/memms/static/js/tipsy_init.js"
+					type="text/javascript"
+				></script>-->
+				<form
+					class="filters-box"
+					id="locationFilliter"
+				>
+					<ul class="v-tabs-filters">
+						<li>
+							<div class="row ">
+								<label>Apply Filters</label>
+								<ul>
+									<li><input
+										type="checkbox"
+										name="referralHospital"
+										id="referralHospital"
+									/><label>Referral Hospital</label></li>
+									<li><input
+										type="checkbox"
+										name="District Hospital"
+										id="districtHospital"
+									/><label>District Hospital</label></li>
+									<li><input
+										type="checkbox"
+										name="Health Center"
+										id="healthCenter"
+									/><label>Health Center</label></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+					<div class="clear-left">
+						<button type="submit">Filter</button>
+						<a
+							class="clear-form"
+							href="#"
+						>Clear</a>
+					</div>
+				</form>
+			</div>
+			<g:each
+				in="${entities.categories}"
+				status="cat"
+				var="category"
+			>
+				<div id="corrective${cat}">
+					<ul class="v-tabs-list">
+						<!--initialise for corective marking -->
+						<g:each
+							in="${entities.correctiveMaintenanceReports}"
+							status="i"
+							var="dataLocationReport"
+						>
+							<g:set
+								var="markercorrective"
+								value="${0}"
+							/>
+							<g:set
+								var="totalCorectiveMarks"
+								value="${0}"
+							/>
+							<g:set
+								var="totalcorrective"
+								value="${0}"
+							/>
+							<li class="v-tabs-row">
+								<p>
+									<a class="v-tabs-name v-tabs-fold-toggle"> <span
+										class="v-tabs-switch"
+									><img src="${resource(dir:'images',file:'arrow.png')}" /></span>
+										${dataLocationReport?.dataLocation?.names}
+									</a>
+									<g:each
+										in="${dataLocationReport?.indicatorValues}"
+										status="j"
+										var="indicatorValue"
+									>
+										<g:if
+											test="${indicatorValue?.computedValue < dataLocationReport.indicatorCategory.minYellowValue}"
+										>
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+0}"
+											/>
+										</g:if>
+										<g:if
+											test="${indicatorValue?.computedValue < dataLocationReport.indicatorCategory.maxYellowValue&&indicatorValue?.computedValue>=dataLocationReport.indicatorCategory.minYellowValue}"
+										>
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+1}"
+											/>
+										</g:if>
+										<g:if
+											test="${indicatorValue?.computedValue >=dataLocationReport.indicatorCategory.maxYellowValue}"
+										>
+											<g:set
+												var="markercorrective"
+												value="${markercorrective+2}"
+											/>
+										</g:if>
+										<g:set
+											var="totalcorrective"
+											value="${totalcorrective+1}"
+										/>
+									</g:each>
+									<g:if test="${totalcorrective>0}">
+										<g:set
+											var="totalCorectiveMarks"
+											value="${markercorrective/totalcorrective}"
+										/>
+									</g:if>
+									</span>
+									<g:if
+										test="${totalCorectiveMarks<dataLocationReport.indicatorCategory.minYellowValue}"
+									>
+										<span
+											class="tooltip v-tabs-formula_red"
+											original-title="Enter text here!"
+										> </span>
+									</g:if>
+									<g:if
+										test="${totalCorectiveMarks>=dataLocationReport.indicatorCategory.minYellowValue&&totalCorectiveMarks<dataLocationReport.indicatorCategory.maxYellowValue}"
+									>
+										<span
+											class="tooltip v-tabs-formula_yellow"
+											original-title="Enter text here!"
+										> </span>
+									</g:if>
+									<g:if
+										test="${totalCorectiveMarks>=dataLocationReport.indicatorCategory.maxYellowValue}"
+									>
+										<span
+											class="tooltip v-tabs-formula_green"
+											original-title="Enter text here!"
+										> </span>
+									</g:if>
+									<span class="v-tabs-value"> ${totalCorectiveMarks} </span>
+								</p>
+								<div class="v-tabs-fold-container">
+									<ul class="v-tabs-nested-nav">
+										<li><a
+											id='historic_trend'
+											class='active'
+											href="#"
+										>Historic Trend </a></li>
+										<li><a
+											id='comparison'
+											href="#"
+										>Comparison To Other Facilities</a></li>
+										<li><a
+											id='geo_trend'
+											href="#"
+										>Geographic Trend</a></li>
+										<li><a
+											id='info_facility'
+											href="#"
+										>Information By Facility</a></li>
+									</ul>
+									<ul class="v-tabs-nested">
+										<g:each
+											in="${dataLocationReport?.indicatorValues}"
+											status="j"
+											var="indicatorValue"
+										>
+											<g:if
+												test="${indicatorValue?.indicator?.indicatorCategory?.code == 'CORRECTIVE_MAINTENANCE'}"
+											>
+												<div
+													id="historic_trend"
+													class='toggled_tab'
+												>
+													<li class="v-tabs-row"><span class="v-tabs-name">
+															${indicatorValue?.indicator?.names}</span> <!-- Indicator color configurations here -->
+														<g:if
+															test="${indicatorValue?.computedValue<indicatorValue?.indicator?.indicatorColorCriterion?.minYellowHc}"
+														>
+															<span class="v-tabs-formula_red"></span>
+														</g:if> <g:if
+															test="${indicatorValue?.computedValue>=indicatorValue?.indicator?.indicatorColorCriterion?.minYellowHc&&indicatorValue?.computedValue<indicatorValue?.indicator?.indicatorColorCriterion?.maxYellowHc}"
+														>
+															<span class="v-tabs-formula_yellow"></span>
+														</g:if> <g:if
+															test="${indicatorValue?.computedValue>=indicatorValue?.indicator?.indicatorColorCriterion?.maxYellowHc}"
+														>
+															<span class="v-tabs-formula_green"></span>
+														</g:if> <span class="v-tabs-value">
+															${indicatorValue?.computedValue}% </span></li>
+												</div>
+												<div id="comparison">
+													<li class="v-tabs-row"><span class="v-tabs-name">Lorem
+															${indicatorValue?.indicator?.names}</span> <span
+														class="v-tabs-formula"
+													>${indicatorValue?.indicator?.formula}</span> <span
+														class="v-tabs-value"
+													>${indicatorValue?.computedValue}%</span></li>
+												</div>
+												<div id="geo_trend">
+													<li class="v-tabs-row"><span class="v-tabs-name">Lorem
+															${indicatorValue?.indicator?.names}</span> <span
+														class="v-tabs-formula"
+													>${indicatorValue?.indicator?.formula}</span> <span
+														class="v-tabs-value"
+													>${indicatorValue?.computedValue}%</span></li>
+												</div>
+												<div id="info_facility">
+													<li class="v-tabs-row"><span class="v-tabs-name">Lorem
+															${indicatorValue?.indicator?.names}</span> <span
+														class="v-tabs-formula"
+													>${indicatorValue?.indicator?.formula}</span> <span
+														class="v-tabs-value"
+													>${indicatorValue?.computedValue}%</span></li>
+												</div>
+											</g:if>
+										</g:each>
+									</ul>
+								</div>
+							</li>
+						</g:each>
+					</ul>
+				</div>
+			</g:each>
+		</div>
+		<!-- End of template -->
+	</div>

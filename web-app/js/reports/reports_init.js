@@ -1,6 +1,17 @@
 $(document).ready(function(){
   // load dashboard stuff here
-  
+
+  $('.equipment').click(function(e){
+//alert("nanone");
+
+e.preventDefault();
+//First level of hierachie
+ //$(".v-tabs-name v-tabs-fold-toggle").load($(this).attr('href'));
+//second level of hierachie
+    $("#equipment").load($(this).attr('href'));
+
+ 
+});
   // filters show/hide
   $('#js-filters-toggle').click(function(e) {
     e.preventDefault();

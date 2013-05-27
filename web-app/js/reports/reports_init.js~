@@ -1,9 +1,17 @@
 $(document).ready(function(){
-
-<<<<<<< HEAD
-=======
   // load dashboard stuff here
-  
+alert("heloo guys !!")
+  $('.equipment').click(function(e){
+//alert("nanone");
+
+e.preventDefault();
+//First level of hierachie
+ //$(".v-tabs-name v-tabs-fold-toggle").load($(this).attr('href'));
+//second level of hierachie
+    $("#equipment").load($(this).attr('href'));
+
+ 
+});
   // filters show/hide
   $('#js-filters-toggle').click(function(e) {
     e.preventDefault();
@@ -30,7 +38,7 @@ $(document).ready(function(){
     li.children('.v-tabs-fold-container').toggle(500);
   });
 
->>>>>>> 20fb6be113401ed3bc27818826486156c6502c78
+
   $('.v-tabs-nested-nav').children('li').children('a').click(function(e) {
     var tabs = $(this).parents('div').children('.v-tabs-nested-nav').children('li').children('a');
     var clicked_tab = $(this);

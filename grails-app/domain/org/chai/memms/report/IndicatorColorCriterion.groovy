@@ -10,8 +10,8 @@ class IndicatorColorCriterion {
 	Double maxYellowDh
 	Boolean isIncreasing
 	
+	static hasMany = [indicators:Indicator]
 	
-	static belongsTo = [indicator:Indicator]
 	static mapping ={
 		table "memms_report_indicator_color_criteria"
 		version false

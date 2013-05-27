@@ -29,22 +29,22 @@ public class IndicatorColorCriterionService {
 
 			colororCroteria.indicatorColor.each{
 
-				Indicator indicator=indicatorService.getIndicatorByCode(it.attribute("indicatorCode"))
-				if(indicator!=null){
+				//Indicator indicator=indicatorService.getIndicatorByCode(it.attribute("indicatorCode"))
+				//if(indicator!=null){
 
-					Double minYellowDh=0
-					Double maxYellowDh=0
-					if(ExecutorProvider.isDouble(it.minYellowValueDh.text())&&ExecutorProvider.isDouble(it.maxYellowValueDh.text())){
-						minYellowDh=Double.parseDouble(it.minYellowValueDh.text())
-						maxYellowDh=Double.parseDouble(it.maxYellowValueDh.text())
+				Double minYellowDh=0
+				Double maxYellowDh=0
+				if(ExecutorProvider.isDouble(it.minYellowValueDh.text())&&ExecutorProvider.isDouble(it.maxYellowValueDh.text())){
+					minYellowDh=Double.parseDouble(it.minYellowValueDh.text())
+					maxYellowDh=Double.parseDouble(it.maxYellowValueDh.text())
 					}
 
-					def colorCriterion = new IndicatorColorCriterion(code:it.attribute("code"),minYellowHc:it.minYellowValueHc.text(),maxYellowHc:it.maxYellowValueHc.text(),minYellowDh:minYellowDh,maxYellowDh:maxYellowDh,isIncreasing:Boolean.parseBoolean(it.isIncreasing.text()),indicator:indicator)
+					def colorCriterion = new IndicatorColorCriterion(code:it.attribute("indicatorCode"),minYellowHc:it.minYellowValueHc.text(),maxYellowHc:it.maxYellowValueHc.text(),minYellowDh:minYellowDh,maxYellowDh:maxYellowDh,isIncreasing:Boolean.parseBoolean(it.isIncreasing.text()))
 
 					colorCriterion.save(failOnError:true)
-				}
-				else
-					println"indicator was null:"+it.attribute("indicatorCode")
+				//}
+				//else
+					//println"indicator was null:"+it.attribute("indicatorCode")
 
 			}
 		}else{

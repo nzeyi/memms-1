@@ -9,7 +9,7 @@
 			<g:sortableColumn property="maxYellowDh"  title="${message(code: 'color.eval.max.yellowDh')}" params="[q:q]" />
 			<g:sortableColumn property="isIncreasing"  title="${message(code: 'color.eval.is.increasing')}" params="[q:q]" />
 			
-		    <th>  <g:message code="indicator.label" /></th>
+		   
 		
 		
 		</tr>
@@ -44,7 +44,7 @@
 				<td>${indicatorColorCriterion.maxYellowDh}</td>
 				<td>${indicatorColorCriterion.isIncreasing}</td>
 				
-				<td><g:stripHtml field="${indicatorColorCriterion.indicator?.names}" chars="15"/></td>
+				
 			</tr>
 		</g:each>
 </tbody>

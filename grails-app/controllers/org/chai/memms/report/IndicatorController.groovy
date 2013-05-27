@@ -108,18 +108,18 @@ class IndicatorController  extends AbstractEntityController{
 		//indicatorService.indicatorWriterFromXml()
 		indicatorColorCriterionService.indicatorColorCriterionRwiter()
 
-     //intermediateVariableService.intermediateVariableWriter()
+       // intermediateVariableService.intermediateVariableWriter()
 		//indicatorValueService.getIndicatorValueByIndIcatorCategory("CORRECTIVE_MAINTENANCE")
-		//indicatorService.indicatorWriterFromXml()
+	     indicatorService.indicatorWriterFromXml()
 
 		//		DataLocation dataLocation=DataLocation.findById("16")
 		//		int valuee=indicatorService.getIndicatorValueForActiveWarantOrServiceProviderContarct(dataLocation,)
 		//
 		//		println" the valuuuuuuuuuuuuuuuuuuuuuuuuu :"+valuee
 
-		//indicatorService.reportingEngine()
+		indicatorService.reportingEngine()
 
-	//indicatorService.reportingEngine()
+	
 
 		adaptParamsForList()
 

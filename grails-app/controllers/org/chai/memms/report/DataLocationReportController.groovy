@@ -117,7 +117,7 @@ class DataLocationReportController extends AbstractEntityController{
 	}
 
 	def dashboard ={
-		println"i am doing it men 1"
+		println"i am doing it men 1 ok okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
 		
 		println"i am doing it men"
 
@@ -135,9 +135,7 @@ class DataLocationReportController extends AbstractEntityController{
 				listTop:"/reports/dashboard/dataLocationReport/listTop"
 			])
 		}
-		//		render(view: '/entity/reports',model: [
-		//				template:"/entity/reports/dashboard/aggragation/dashboardMenu"
-		//				])
+		
 	}
 
 	

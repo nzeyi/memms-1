@@ -17,9 +17,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -48,9 +48,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -173,9 +173,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -200,9 +200,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -228,9 +228,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -256,9 +256,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -284,9 +284,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -316,9 +316,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -423,9 +423,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -451,9 +451,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -478,9 +478,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -506,9 +506,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -583,9 +583,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -615,9 +615,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -643,9 +643,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -697,9 +697,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -725,9 +725,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1000,9 +1000,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1028,9 +1028,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1056,9 +1056,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1084,9 +1084,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1112,9 +1112,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1140,9 +1140,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1168,9 +1168,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1196,9 +1196,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1224,9 +1224,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1252,9 +1252,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1280,9 +1280,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1308,9 +1308,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1338,9 +1338,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1366,9 +1366,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1394,9 +1394,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1421,9 +1421,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1449,9 +1449,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1504,9 +1504,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1532,9 +1532,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1567,9 +1567,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1595,9 +1595,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1621,9 +1621,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85
@@ -1649,9 +1649,9 @@
 	<maxYellowValueHc>
 		0.65
 	</maxYellowValueHc>
-	<minYellowValueDc>
+	<minYellowValueDh>minYellowValueDh
 		0.35
-	</minYellowValueDH>
+	</minYellowValueDh>
 
 		<maxYellowValueDH>
 			0.85

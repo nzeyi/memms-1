@@ -1,5 +1,6 @@
 package org.chai.memms.report
 
+import org.chai.location.DataLocationType;
 import org.chai.memms.AbstractEntityController
 import java.util.Set
 import java.util.Map
@@ -13,6 +14,7 @@ class MemmsReportController  extends AbstractEntityController {
 	def dataSource  //Aut
 	def memmsReportService
 	def indicatorValueService
+	def indicatorCategoryService
 
 	def getLabel() {
 		return "memmsReport.label"
@@ -32,7 +34,7 @@ class MemmsReportController  extends AbstractEntityController {
 	}
 
 	def getTemplate() {
-		return "/entity/reports/dashboard/dataLocationReport/createDataLocationReportt"
+		return "/entity/reports/dashboard/dataLocationReport/dashboard"
 	}
 
 	def bindParams(def entity) {
@@ -55,70 +57,57 @@ class MemmsReportController  extends AbstractEntityController {
 	}
 	def ajaxModel(def entities,def searchTerm) {
 		def model = model(entities) << [q:searchTerm]
-		def listHtml = g.render(template:"/entity/reports/dashboard/dataLocationReport/dataLocationReportList",model:model)
+		def listHtml = g.render(template:"/entity/reports/dashboard/dataLocationReport/dashboard",model:model)
 		render(contentType:"text/json") { results = [listHtml]}
 	}
 
 
 
-	//	def search = {
-	//		adaptParamsForList()
-	//		def dataLocationReports  =AggregatedDataLocationReport.findAll()
-	//
-	//		if(request.xhr)
-	//			this.ajaxModel(dataLocationReports,params['q'])
-	//		else {
-	//			render(view:"/entity/list",model:model(dataLocationReports) << [
-	//				template:"/reports/dashboard/dataLocationReport/dataLocationReportList",
-	//				listTop:"/reports/dashboard/dataLocationReport/listTop",
-	//
-	//			])
-	//		}
-	//	}
-	//
-	//	def list = {
-	//
-	//		adaptParamsForList()
-	//
-	//		def dataLocationReports = AggregatedDataLocationReport.findAll()
-	//		if(request.xhr){
-	//			this.ajaxModel(dataLocationReports,"")
-	//		}
-	//		else{
-	//			render(view:"/entity/list",model:model(dataLocationReports) << [
-	//				template:"/reports/dashboard/dataLocationReport/dataLocationReportList",
-	//				listTop:"/reports/dashboard/dataLocationReport/listTop"
-	//			])
-	//		}
-	//	}
+
 
 
 	def dashboard ={
 
+		
+		DataLocationType thisType=null
+		def indicatorCategories=indicatorCategoryService.getIndicatorCategories()
+		if(params['q']!=null&&params['q']!="")
+			thisType=DataLocationType.findByCode(params['q'])
 
-		adaptParamsForList()
+		//adaptParamsForList()
+		MemmsReport memmsReportFilliteled=new MemmsReport()
 
-		MemmsReport memmsReport=new MemmsReport()
+		MemmsReport memmsReportDefault=new MemmsReport()
 
-		memmsReport.correctiveMaintenanceReports.addAll(memmsReportService.getCorrectiveMaintenanceReports())
-		memmsReport.privantiveMaintenanceReports.addAll(memmsReportService.getPreventiveMaintenanceReports())
-		memmsReport.manageMemmEquipmentRreports.addAll(memmsReportService.getManageMemmsEquipmentReports())
-		memmsReport.manageMemmsUseReports.addAll(memmsReportService.getMemmsParePartReports())
-		memmsReport.manageSparePartsReports.addAll(memmsReportService.getManageMemmsUseReports())
+		List<DataLocationReport> filiterdReports=new ArrayList<DataLocationReport>()
 
+		memmsReportDefault.correctiveMaintenanceReports.addAll(memmsReportService.getCorrectiveMaintenanceReports())
+		memmsReportDefault.privantiveMaintenanceReports.addAll(memmsReportService.getPreventiveMaintenanceReports())
+		memmsReportDefault.manageMemmEquipmentRreports.addAll(memmsReportService.getManageMemmsEquipmentReports())
+		memmsReportDefault.manageMemmsUseReports.addAll(memmsReportService.getMemmsParePartReports())
+		memmsReportDefault.manageSparePartsReports.addAll(memmsReportService.getManageMemmsUseReports())
+		memmsReportDefault.categories.addAll(indicatorCategoryService.getIndicatorCategories())
+		if(thisType!=null){
 
-		println"beforer corre :"+memmsReportService.getCorrectiveMaintenanceReports().size()
-		println"corre :"+memmsReport.correctiveMaintenanceReports.size()
-		println"maintenance :"+memmsReport.privantiveMaintenanceReports.size()
-		//List<AggregatedDataLocationReport> repors=new ArrayList<AggregatedDataLocationReport>()
-		//def aggretions=AggregatedDataLocationReport.findAll ()
-		//repors.add(memmsReport)
-		//aggretions.addAll(memmsReportService.getCorrectiveMaintenanceReports())
+			for(DataLocationReport report:memmsReportDefault.correctiveMaintenanceReports){
+				if(report.dataLocationType!=null){
+
+					if(report.dataLocationType==thisType){
+						filiterdReports.add(report)
+					}
+				}
+			}
+			memmsReportFilliteled.categories.addAll(indicatorCategories)
+			memmsReportFilliteled.correctiveMaintenanceReports.addAll(filiterdReports)
+		}else
+			memmsReportFilliteled=memmsReportDefault
+
+		
 		if(request.xhr){
-			this.ajaxModel(memmsReport,"")
+			this.ajaxModel(memmsReportFilliteled,"")
 		}
 		else{
-			render(view:"/entity/list",model:model(memmsReport) << [
+			render(view:"/entity/list",model:model(memmsReportFilliteled) << [
 				template:"/reports/dashboard/dataLocationReport/dashboard",
 				listTop:"/reports/dashboard/dataLocationReport/listTop"
 			])

@@ -26,9 +26,7 @@
   		
   		<g:input name="isIncreasing" label="${message(code:'entity.isIncreasing.label')}" bean="${indicatorColorCriterion}" field="isIncreasing"/>
   	
-  			<g:selectFromList id="indicator" label="${message(code:'indicator.label')}" name="indicator.id"  bean="${indicator}"
-  			from="${org.chai.memms.report.Indicator.list()}" value="${indicator?.id}" values="${org.chai.memms.report.Indicator.list().collect{it.names}}" optionKey="id"/>
-  		
+  			
   		
   		<g:if test="${indicatorColorCriterion.id != null}">
   			<input type="hidden" name="id" value="${indicatorColorCriterion.id}"></input>

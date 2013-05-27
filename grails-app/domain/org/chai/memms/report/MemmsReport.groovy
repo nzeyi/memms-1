@@ -8,6 +8,7 @@ class MemmsReport {
 	List<DataLocationReport> manageMemmEquipmentRreports=new ArrayList<DataLocationReport>()
 	List<DataLocationReport> manageMemmsUseReports=new ArrayList<DataLocationReport>()
 	List<DataLocationReport> manageSparePartsReports=new ArrayList<DataLocationReport>()
+	List<IndicatorCategory> categories=new ArrayList<IndicatorCategory>()
 
 
 	static hasMany = [dataLocationReports:DataLocationReport]

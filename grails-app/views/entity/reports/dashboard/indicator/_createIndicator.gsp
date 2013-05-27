@@ -24,6 +24,10 @@
   		<g:selectFromList id="indicatorCategory" label="${message(code:'indicatorCategory.label')}" name="indicatorCategory.id"  bean="${indicatorCategory}"
   			from="${org.chai.memms.report.IndicatorCategory.list()}" value="${indicatorCategory?.id}" values="${org.chai.memms.report.IndicatorCategory.list().collect{it.names}}" optionKey="id"/>
   		
+  		
+  		<g:selectFromList id="indicatorColorCriterion" label="${message(code:'indicatorColorCriterion.label')}" name="indicatorColorCriterion.id"  bean="${indicatorColorCriterion}"
+  			from="${org.chai.memms.report.IndicatorColorCriterion.list()}" value="${indicatorColorCriterion?.id}" values="${org.chai.memms.report.IndicatorColorCriterion.list().collect{it.code}}" optionKey="id"/>
+  		
   		<g:if test="${indicator.id != null}">
   			<input type="hidden" name="id" value="${indicator.id}"></input>
   		</g:if>
