@@ -19,7 +19,7 @@ public class IndicatorColorCriterionService {
 
 
 
-	public void indicatorColorCriterionrwiter(){
+	public void indicatorColorCriterionRwiter(){
 
 		if(!IndicatorColorCriterion.count()){
 
